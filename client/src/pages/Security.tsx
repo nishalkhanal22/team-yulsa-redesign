@@ -108,23 +108,30 @@ export default function Security() {
             return (
               <div
                 key={m.title}
-                className="grid lg:grid-cols-12 gap-4 lg:gap-8 py-8 border-b border-[var(--border)] items-start reveal"
+                className="grid lg:grid-cols-12 gap-4 lg:gap-8 py-9 lg:py-10 items-start reveal"
+                style={{
+                  background: "color-mix(in oklch, var(--navy) " + (i % 2 === 1 ? "3%" : "0%") + ", white)",
+                  borderTop: "1px solid var(--border)",
+                  borderBottom: "1px solid var(--border)",
+                  marginTop: i === 0 ? 0 : -1,
+                }}
               >
-                <div className="lg:col-span-1">
-                  <p className="stat-num text-sm font-semibold text-[var(--muted-foreground)]">
-                    SEC 0{i + 1}
-                  </p>
+                <div className="lg:col-span-1 flex lg:block items-center">
+                  <span
+                    className="stat-num text-xs font-bold text-white h-11 w-11 rounded-md flex items-center justify-center shrink-0"
+                    style={{ background: "var(--navy)" }}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
                 <div className="lg:col-span-1">
                   <Icon className="h-6 w-6 text-[var(--meridian)]" />
                 </div>
-                <div className="lg:col-span-5">
-                  <h2 className="font-serif text-xl lg:text-2xl text-[var(--navy)]">{m.title}</h2>
+                <div className="lg:col-span-4">
+                  <h2 className="font-serif text-xl lg:text-2xl text-[var(--navy)] leading-snug">{m.title}</h2>
+                  <p className="mt-2 text-[0.9375rem] text-[var(--muted-foreground)] leading-relaxed">{m.text}</p>
                 </div>
-                <div className="lg:col-span-3">
-                  <p className="text-[0.9375rem] text-[var(--muted-foreground)] leading-relaxed">{m.text}</p>
-                </div>
-                <div className="lg:col-span-2 lg:justify-self-end">
+                <div className="lg:col-span-6 lg:justify-self-end">
                   <p className="stat-num text-3xl lg:text-4xl font-semibold text-[var(--meridian)]">
                     {m.stat}
                   </p>
@@ -155,10 +162,10 @@ export default function Security() {
             <div className="border border-[var(--border)] bg-white overflow-x-auto">
               <table className="w-full text-sm min-w-[480px]">
                 <thead>
-                  <tr className="border-b border-[var(--border)] bg-[var(--secondary)]">
-                    <th className="text-left font-mono text-[0.6875rem] uppercase tracking-wider text-[var(--muted-foreground)] font-semibold px-5 py-3.5">Control</th>
-                    <th className="text-left font-mono text-[0.6875rem] uppercase tracking-wider text-[var(--muted-foreground)] font-semibold px-5 py-3.5">Status</th>
-                    <th className="text-left font-mono text-[0.6875rem] uppercase tracking-wider text-[var(--muted-foreground)] font-semibold px-5 py-3.5">Scope</th>
+                  <tr className="border-b border-[var(--border)] text-white" style={{ background: "var(--navy)" }}>
+                    <th className="text-left font-mono text-[0.6875rem] uppercase tracking-wider text-white/85 font-semibold px-5 py-3.5">Control</th>
+                    <th className="text-left font-mono text-[0.6875rem] uppercase tracking-wider text-white/85 font-semibold px-5 py-3.5">Status</th>
+                    <th className="text-left font-mono text-[0.6875rem] uppercase tracking-wider text-white/85 font-semibold px-5 py-3.5">Scope</th>
                   </tr>
                 </thead>
                 <tbody>

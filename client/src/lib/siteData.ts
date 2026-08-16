@@ -341,7 +341,7 @@ export const PROCESS_STEPS = [
 export const FAQS = [
   {
     q: "How much does outsourced bookkeeping cost?",
-    a: "Most small businesses pay between $300 and $1,200 per month depending on transaction volume, number of accounts, and services included. We quote a fixed monthly fee after a free scoping call — you always know the exact number before we start, and it never changes mid-engagement without your approval.",
+    a: "We charge a single fixed monthly price — no hourly billing, no surprise add-ons. The fee is scoped after a free discovery call based on your transaction volume, number of accounts, and services included, and you receive the written quote before any work begins. It never changes mid-engagement without your approval.",
   },
   {
     q: "Do you work with US and Canadian businesses specifically?",

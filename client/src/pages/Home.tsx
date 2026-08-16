@@ -24,11 +24,12 @@ const HERO_IMG = "/manus-storage/hero-office_05c0bd7f.png";
 const PROCESS_IMG = "/manus-storage/process-workflow_66aa4f70.png";
 const LOGO = "/manus-storage/yulsa-logo_2bfeef45.png";
 const TEAM_PHOTOS = [
-  { name: "Sagun Jung Rana", role: "Founder · CA", photo: "/manus-storage/sarjan_f1cd7225.png" },
+  { name: "Sagun Jung Rana", role: "Founder · CA", photo: "/manus-storage/sagun_ca_0b9ac2f3.png" },
   { name: "Prabesh Bhusal", role: "Senior Associate", photo: "/manus-storage/prabesh_57af839c.png" },
   { name: "Nisha Khanal", role: "IFRS Consultant", photo: "/manus-storage/nisha_94569046.png" },
+  { name: "Aayush Shah", role: "Senior Associate", photo: "/manus-storage/aayush2_20008bc2.png" },
   { name: "Himal Ayman Karki", role: "Senior Associate", photo: "/manus-storage/himal_485516ec.png" },
-  { name: "Aayush Shah", role: "Senior Associate", photo: "/manus-storage/aayush_0beac206.png" },
+  { name: "Sarjan Jung Rana", role: "Tax Associate", photo: "/manus-storage/sarjan_f1cd7225.png" },
 ];
 
 const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
