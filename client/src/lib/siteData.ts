@@ -6,11 +6,11 @@
 
 export const BRAND = {
   email: "info@teamyulsa.com",
-  phone: "+1 (888) 555-0199",
-  phoneHref: "tel:+18885550199",
-  phoneDisplay: "+1 (888) 555-0199",
-  address: "Koteswor Setiop Marga, Kathmandu, Nepal",
-  hours: "Mon–Fri, 9:00 AM – 5:00 PM (NPT) · Coverage for US & Canada business hours",
+  phone: "", // no US number yet — client to provide a real one before enabling
+  phoneHref: "mailto:info@teamyulsa.com",
+  phoneDisplay: "",
+  address: "Kathmandu, Nepal · Serving clients across the US & Canada",
+  hours: "Mon–Fri, 9:00 AM – 5:00 PM (EST) · We work on your time zone",
   linkedin: "https://www.linkedin.com/company/team-yulsa/",
   facebook: "", // no verified profile yet — intentionally omitted from footer
   instagram: "",

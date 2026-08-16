@@ -93,11 +93,13 @@ export default function Contact() {
                 <Mail className="h-5 w-5 text-[var(--meridian)]" />
                 <span className="font-medium">{BRAND.email}</span>
               </a>
-              <a href={BRAND.phoneHref} className="flex items-center gap-3 text-sm text-[var(--ink)] hover:text-[var(--meridian)] transition-colors">
-                <Phone className="h-5 w-5 text-[var(--meridian)]" />
-                <span className="font-medium">{BRAND.phoneDisplay}</span>
-                <span className="text-xs text-[var(--muted-foreground)]">US &amp; Canada callers</span>
-              </a>
+              {BRAND.phoneDisplay && (
+                <a href={BRAND.phoneHref} className="flex items-center gap-3 text-sm text-[var(--ink)] hover:text-[var(--meridian)] transition-colors">
+                  <Phone className="h-5 w-5 text-[var(--meridian)]" />
+                  <span className="font-medium">{BRAND.phoneDisplay}</span>
+                  <span className="text-xs text-[var(--muted-foreground)]">US &amp; Canada callers</span>
+                </a>
+              )}
               <span className="flex items-center gap-3 text-sm text-[var(--muted-foreground)]">
                 <MapPin className="h-5 w-5 shrink-0" />
                 {BRAND.address}

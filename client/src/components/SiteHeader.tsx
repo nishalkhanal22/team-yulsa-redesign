@@ -68,13 +68,15 @@ export default function SiteHeader() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-4">
-          <a
-            href={BRAND.phoneHref}
-            className="flex items-center gap-1.5 text-[0.8125rem] font-mono font-medium text-[var(--navy)]"
-          >
-            <Phone className="h-3.5 w-3.5" />
-            {BRAND.phoneDisplay}
-          </a>
+          {BRAND.phoneDisplay && (
+            <a
+              href={BRAND.phoneHref}
+              className="flex items-center gap-1.5 text-[0.8125rem] font-mono font-medium text-[var(--navy)]"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              {BRAND.phoneDisplay}
+            </a>
+          )}
           <Link
             href="/contact"
             className="inline-flex items-center px-4 py-2 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
@@ -108,9 +110,11 @@ export default function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <a href={BRAND.phoneHref} className="py-2.5 text-sm font-mono text-[var(--navy)]">
-              {BRAND.phoneDisplay}
-            </a>
+            {BRAND.phoneDisplay && (
+              <a href={BRAND.phoneHref} className="py-2.5 text-sm font-mono text-[var(--navy)]">
+                {BRAND.phoneDisplay}
+              </a>
+            )}
             <Link
               href="/contact"
               className="mt-2 inline-flex justify-center px-4 py-3 text-sm font-semibold text-white"

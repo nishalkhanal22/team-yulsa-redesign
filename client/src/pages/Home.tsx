@@ -61,16 +61,7 @@ export default function Home() {
   return (
     <Layout path="/">
       {/* ── Hero: asymmetric 55/45 ── */}
-      <section className="pt-28 lg:pt-36 pb-14 lg:pb-20 relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.5]"
-          style={{
-            backgroundImage: `url(/manus-storage/hero-abstract_8a90b66d.png)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-          aria-hidden
-        />
+      <section className="pt-28 lg:pt-36 pb-14 lg:pb-20">
         <div className="container relative grid lg:grid-cols-12 gap-10 lg:gap-6 items-center">
           <div className="lg:col-span-7">
             <p className="folio-tag mb-4 reveal">Bookkeeping · Accounting · Virtual CFO · US &amp; Canada</p>

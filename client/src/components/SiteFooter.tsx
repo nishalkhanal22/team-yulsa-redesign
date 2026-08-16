@@ -27,10 +27,12 @@ export default function SiteFooter() {
                 <Mail className="h-4 w-4 shrink-0" />
                 {BRAND.email}
               </a>
-              <a href={BRAND.phoneHref} className="flex items-center gap-2 text-white/80 hover:text-[var(--meridian)] transition-colors">
-                <Phone className="h-4 w-4 shrink-0" />
-                {BRAND.phoneDisplay}
-              </a>
+              {BRAND.phoneDisplay && (
+                <a href={BRAND.phoneHref} className="flex items-center gap-2 text-white/80 hover:text-[var(--meridian)] transition-colors">
+                  <Phone className="h-4 w-4 shrink-0" />
+                  {BRAND.phoneDisplay}
+                </a>
+              )}
               <span className="flex items-center gap-2 text-white/60">
                 <MapPin className="h-4 w-4 shrink-0" />
                 {BRAND.address}
