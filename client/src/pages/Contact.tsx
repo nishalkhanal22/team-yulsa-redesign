@@ -5,9 +5,9 @@
 */
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Mail, Phone, MapPin, Clock, Send, Linkedin, Facebook, Instagram, MessageCircle, ArrowUpRight } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter } from "lucide-react";
 import Layout from "@/components/Layout";
-import { BRAND, FAQS, SOCIALS } from "@/lib/siteData";
+import { BRAND, FAQS } from "@/lib/siteData";
 import { useReveal } from "@/hooks/useReveal";
 
 const SERVICES_SELECT = [
@@ -69,13 +69,7 @@ export default function Contact() {
     <Layout path="/contact">
       <section className="pt-28 lg:pt-36 pb-12">
         <div className="container grid lg:grid-cols-12 gap-8 lg:gap-0">
-          <div className="hidden lg:flex lg:col-span-2 flex-col gap-6 border-r border-[var(--border)] pr-6 reveal">
-            <p className="folio-tag leading-relaxed">Contact<br />US &amp;<br />Canada</p>
-            <p className="text-[0.6875rem] font-mono text-[var(--muted-foreground)] leading-relaxed mt-auto">
-              REPLY SLA<br />1 US BIZ DAY
-            </p>
-          </div>
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-7">
             <p className="folio-tag mb-3 reveal">Contact · US &amp; Canada</p>
             <h1 className="font-serif text-4xl lg:text-5xl text-[var(--navy)] leading-tight reveal">
               Let's make your books
@@ -119,7 +113,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="lg:col-span-6 lg:pl-12 reveal">
+          <div className="lg:col-span-5 reveal">
           <div className="lg:flex lg:flex-col">
             <form
               onSubmit={onSubmit}
@@ -197,30 +191,13 @@ export default function Contact() {
               </p>
             </form>
 
-            <div className="grid sm:grid-cols-4 gap-6 border-t border-[var(--border)] pt-8 mt-8">
-              <div>
-                <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">30</p>
-                <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">min free discovery call</p>
-              </div>
-              <div>
-                <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">5</p>
-                <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">business-day close SLA</p>
-              </div>
-              <div>
-                <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">1</p>
-                <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">US biz day reply time</p>
-              </div>
-              <div>
-                <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">$0</p>
-                <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">health check cost — always</p>
-              </div>
-            </div>
+
           </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 lg:py-20 border-t border-[var(--border)]" style={{ background: "color-mix(in oklch, var(--navy) 4%, white)" }}>
+      <section className="pb-14 lg:pb-20 border-t border-[var(--border)]" style={{ background: "color-mix(in oklch, var(--navy) 4%, white)" }}>
         <div className="container">
           <div className="grid lg:grid-cols-12 gap-8 items-start">
             <div className="lg:col-span-7 reveal">
@@ -232,40 +209,57 @@ export default function Contact() {
                 Email us or book a free discovery call — we respond within 1 US business day and
                 always reply to a real human, not a chatbot.
               </p>
-              <a
-                href={`mailto:${BRAND.email}`}
-                className="mt-6 inline-flex items-center gap-3 px-6 py-4 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:opacity-90"
-                style={{ background: "var(--navy)" }}
-              >
-                <Mail className="h-4.5 w-4.5" />
-                {BRAND.email}
-              </a>
+              <div className="mt-6 flex flex-wrap items-center gap-4">
+                <a
+                  href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(BRAND.email)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-6 py-4 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:opacity-90"
+                  style={{ background: "var(--navy)" }}
+                >
+                  <Mail className="h-4.5 w-4.5" />
+                  {BRAND.email}
+                </a>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={BRAND.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Team Yulsa on LinkedIn"
+                    className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] bg-white text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </a>
+                  <a
+                    href={BRAND.x}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Team Yulsa on X"
+                    className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] bg-white text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
+                  >
+                    <Twitter className="h-5 w-5" />
+                  </a>
+                </div>
+              </div>
             </div>
             <div className="lg:col-span-5 reveal">
-              <div className="border border-[var(--border)] bg-white p-6">
-                <p className="folio-tag mb-4">Follow us</p>
-                <div className="flex items-center gap-3">
-                  {SOCIALS.map((s) => {
-                    const Icon = s.name === "WhatsApp" ? MessageCircle : s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
-                    return (
-                      <a
-                        key={s.name}
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Team Yulsa on ${s.name}`}
-                        className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
-                      >
-                        <Icon className="h-5 w-5" />
-                      </a>
-                    );
-                  })}
+              <div className="grid grid-cols-4 gap-6 border border-[var(--border)] bg-white p-6">
+                <div>
+                  <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">30</p>
+                  <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">min free discovery call</p>
                 </div>
-                <p className="mt-5 text-xs text-[var(--muted-foreground)] leading-relaxed">
-                  {BRAND.hours}
-                  <br />
-                  {BRAND.address}
-                </p>
+                <div>
+                  <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">5</p>
+                  <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">business-day close SLA</p>
+                </div>
+                <div>
+                  <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">1</p>
+                  <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">US biz day reply time</p>
+                </div>
+                <div>
+                  <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">$0</p>
+                  <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">health check cost — always</p>
+                </div>
               </div>
             </div>
           </div>
