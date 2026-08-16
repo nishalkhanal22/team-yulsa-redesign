@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
-import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS } from "@/lib/siteData";
-import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
+import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS, BRAND, SOCIALS } from "@/lib/siteData";
+import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark, Linkedin, Facebook, Instagram, ArrowUpRight as ArrowUpRightIcon } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useEffect, useRef, useState } from "react";
 
@@ -333,6 +333,65 @@ export default function Home() {
             className="mt-8 w-full max-w-3xl rounded-md border border-[var(--border)]"
             loading="lazy"
           />
+        </div>
+      </section>
+
+      {/* ── Contact section ── */}
+      <section className="py-16 lg:py-20 border-t border-[var(--border)]" style={{ background: "color-mix(in oklch, var(--navy) 4%, white)" }}>
+        <div className="container">
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-7 reveal">
+              <p className="folio-tag mb-3">Get in Touch</p>
+              <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
+                One email is all it takes.
+              </h2>
+              <p className="mt-4 text-base text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
+                Email us or book a free discovery call — we respond within 1 US business day and
+                always reply to a real human, not a chatbot.
+              </p>
+              <a
+                href={`mailto:${BRAND.email}`}
+                className="mt-6 inline-flex items-center gap-3 px-6 py-4 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:opacity-90"
+                style={{ background: "var(--navy)" }}
+              >
+                <Mail className="h-4.5 w-4.5" />
+                {BRAND.email}
+              </a>
+              <Link
+                href="/contact"
+                className="ml-0 lg:ml-4 mt-6 inline-flex items-center gap-2 px-6 py-4 text-sm font-semibold border border-[var(--navy)] text-[var(--navy)] transition-all duration-200 active:scale-[0.97] hover:bg-[var(--navy)] hover:text-white"
+              >
+                Book a discovery call <ArrowUpRightIcon className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="lg:col-span-5 reveal">
+              <div className="border border-[var(--border)] bg-white p-6">
+                <p className="folio-tag mb-4">Follow us</p>
+                <div className="flex items-center gap-3">
+                  {SOCIALS.map((s) => {
+                    const Icon = s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
+                    return (
+                      <a
+                        key={s.name}
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Team Yulsa on ${s.name}`}
+                        className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
+                      >
+                        <Icon className="h-5 w-5" />
+                      </a>
+                    );
+                  })}
+                </div>
+                <p className="mt-5 text-xs text-[var(--muted-foreground)] leading-relaxed">
+                  {BRAND.hours}
+                  <br />
+                  {BRAND.address}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

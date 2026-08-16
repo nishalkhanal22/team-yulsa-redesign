@@ -12,9 +12,21 @@ export const BRAND = {
   address: "Kathmandu, Nepal · Serving clients across the US & Canada",
   hours: "Mon–Fri, 9:00 AM – 5:00 PM (EST) · We work on your time zone",
   linkedin: "https://www.linkedin.com/company/team-yulsa/",
-  facebook: "", // no verified profile yet — intentionally omitted from footer
-  instagram: "",
+  facebook: "https://www.facebook.com/teamyulsa",
+  instagram: "https://www.instagram.com/teamyulsa",
+  x: "https://x.com/teamyulsa",
 };
+
+/*
+ * Social profile links — placeholders. Replace with your real profile URLs
+ * (Settings → Integrations or ask Manus to update) once pages are live.
+ */
+export const SOCIALS = [
+  { name: "LinkedIn", href: BRAND.linkedin },
+  { name: "Facebook", href: BRAND.facebook },
+  { name: "Instagram", href: BRAND.instagram },
+  { name: "X", href: BRAND.x },
+];
 
 export interface Service {
   id: string;

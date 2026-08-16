@@ -3,8 +3,8 @@
   Real contact details (valid email — audit fix), US phone, only verified social (LinkedIn).
 */
 import { Link } from "wouter";
-import { Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
-import { BRAND, SERVICES } from "@/lib/siteData";
+import { Linkedin, Facebook, Instagram, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { BRAND, SERVICES, SOCIALS } from "@/lib/siteData";
 
 const LOGO = "/manus-storage/yulsa-logo_2bfeef45.png";
 
@@ -68,19 +68,25 @@ export default function SiteFooter() {
             <p className="folio-tag mb-4">Working hours</p>
             <p className="text-sm text-white/70 leading-relaxed mb-5">{BRAND.hours}</p>
             <div className="flex items-center gap-3">
-              <a
-                href={BRAND.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Team Yulsa on LinkedIn"
-                className="inline-flex h-9 w-9 items-center justify-center border border-white/20 text-white/80 hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a href="/contact" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--meridian)] hover:gap-2.5 transition-all">
-                Book a discovery call <ArrowUpRight className="h-4 w-4" />
-              </a>
+              {SOCIALS.map((s) => {
+                const Icon = s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
+                return (
+                  <a
+                    key={s.name}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Team Yulsa on ${s.name}`}
+                    className="inline-flex h-9 w-9 items-center justify-center border border-white/20 text-white/80 hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
+                  >
+                    <Icon className="h-4 w-4" />
+                  </a>
+                );
+              })}
             </div>
+            <a href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--meridian)] hover:gap-2.5 transition-all">
+              Book a discovery call <ArrowUpRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
 
