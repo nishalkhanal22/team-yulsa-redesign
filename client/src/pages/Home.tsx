@@ -107,22 +107,17 @@ export default function Home() {
           </div>
           <div className="lg:col-span-5 reveal">
             <div className="relative">
-              <div
-                className="absolute -inset-3 border border-[var(--meridian)] opacity-40"
-                style={{ transform: "translate(10px, 10px)" }}
-                aria-hidden
-              />
               <img
                 src={HERO_IMG}
                 alt="Team Yulsa accountants reviewing financial dashboards with a client"
-                className="relative w-full rounded-md shadow-xl"
+                className="relative w-full aspect-[4/3] object-cover"
                 loading="eager"
               />
-              <div className="absolute -bottom-5 -left-5 bg-white rounded-md shadow-lg border border-[var(--border)] px-4 py-3 flex items-center gap-3">
+              <div className="absolute bottom-4 left-4 bg-[oklch(0.18_0.04_265)]/95 backdrop-blur-sm px-4 py-3 flex items-center gap-3">
                 <img src={LOGO} alt="" className="h-7 w-7" />
                 <div>
-                  <p className="stat-num text-lg font-semibold text-[var(--navy)] leading-none">98%</p>
-                  <p className="text-[0.6875rem] uppercase tracking-wider text-[var(--muted-foreground)]">on-time close rate</p>
+                  <p className="stat-num text-lg font-semibold text-white leading-none">98%</p>
+                  <p className="text-[0.6875rem] uppercase tracking-wider text-white/70">on-time close rate</p>
                 </div>
               </div>
             </div>
