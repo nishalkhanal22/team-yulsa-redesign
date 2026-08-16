@@ -85,7 +85,8 @@ export default function Contact() {
             <p className="mt-5 text-base lg:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
               Book a free 30-minute discovery call, or request a free bookkeeping health check —
               we review your last 1–3 months of books and return a plain-English report, even if
-              you never hire us.
+              you never hire us. Either way, you'll know exactly what needs fixing — and what it
+              would cost to fix.
             </p>
 
             <div className="mt-8 space-y-4">

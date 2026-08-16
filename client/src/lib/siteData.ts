@@ -295,7 +295,7 @@ export const TEAM = [
 
 export const STATS = [
   { value: 250, suffix: "+", label: "Financial records reconciled monthly across client engagements" },
-  { value: 98, suffix: "%", label: "On-time month-end close delivery rate" },
+  { value: 100, suffix: "%", label: "On-time delivery commitment — month-end closes land on schedule" },
   { value: 12, suffix: "h", label: "Average turnaround on priority requests during US business hours" },
   { value: 40, suffix: "%", label: "Typical cost saving vs. hiring in-house US bookkeeping staff" },
 ];

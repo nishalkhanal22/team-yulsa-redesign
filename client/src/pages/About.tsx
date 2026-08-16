@@ -40,14 +40,14 @@ const STANDARDS = [
 ];
 
 const TEAM = [
-  { name: "Sagun Jung Rana", role: "Founder · Chartered Accountant", note: "Client strategy & quality review", initials: "SR" },
-  { name: "Prabesh Bhusal", role: "Senior Associate", note: "Month-end close & management reporting", initials: "PB" },
-  { name: "Nisha Khanal", role: "IFRS Consultant", note: "Standards compliance & audit readiness", initials: "NK" },
-  { name: "Aayush Shah", role: "Senior Associate", note: "Tax-season workflows & filing support", initials: "AS" },
-  { name: "Himal Ayman Karki", role: "Senior Associate", note: "Software migrations & transitions", initials: "HK" },
-  { name: "Dinesh Puri", role: "Associate", note: "Reconciliations & AR/AP operations", initials: "DP" },
-  { name: "Sujal Aryal", role: "Associate", note: "Budgeting, forecasting & reporting", initials: "SA" },
-  { name: "Samrat Hamal", role: "IT Associate", note: "Data security, tooling & automation", initials: "SH" },
+  { name: "Sagun Jung Rana", role: "Founder · Chartered Accountant", note: "Client strategy & quality review", photo: "/manus-storage/team-sandesh_47d07124.png" },
+  { name: "Prabesh Bhusal", role: "Senior Associate", note: "Month-end close & management reporting", photo: "/manus-storage/team-bibek_5384e02b.png" },
+  { name: "Nisha Khanal", role: "IFRS Consultant", note: "Standards compliance & audit readiness", photo: "/manus-storage/team-priya_98dbbd26.png" },
+  { name: "Aayush Shah", role: "Senior Associate", note: "Tax-season workflows & filing support", photo: "/manus-storage/team-rabindra_9e5846c5.png" },
+  { name: "Himal Ayman Karki", role: "Senior Associate", note: "Software migrations & transitions", photo: "/manus-storage/team-sarita_16d9ef9e.png" },
+  { name: "Dinesh Puri", role: "Associate", note: "Reconciliations & AR/AP operations", photo: "" },
+  { name: "Sujal Aryal", role: "Associate", note: "Budgeting, forecasting & reporting", photo: "" },
+  { name: "Samrat Hamal", role: "IT Associate", note: "Data security, tooling & automation", photo: "" },
 ];
 
 export default function About() {
@@ -139,9 +139,18 @@ export default function About() {
                       <span className="stat-num text-xs font-semibold text-[var(--muted-foreground)]">{String(i + 1).padStart(2, "0")}</span>
                     </td>
                     <td className="px-3 py-4 w-16">
-                      <div className="h-10 w-10 rounded-full flex items-center justify-center font-mono text-xs font-bold text-white" style={{ background: "var(--navy)" }}>
-                        {m.initials}
-                      </div>
+                      {m.photo ? (
+                        <img
+                          src={m.photo}
+                          alt={m.name}
+                          className="h-12 w-12 rounded-full object-cover object-top ring-1 ring-[var(--border)]"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="h-12 w-12 rounded-full flex items-center justify-center font-mono text-xs font-bold text-white ring-1 ring-[var(--border)]" style={{ background: "var(--navy)" }}>
+                          {m.name.split(" ").map((n) => n[0]).join("")}
+                        </div>
+                      )}
                     </td>
                     <td className="px-5 py-4">
                       <p className="font-serif text-base text-[var(--navy)]">{m.name}</p>

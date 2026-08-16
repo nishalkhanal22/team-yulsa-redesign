@@ -107,8 +107,8 @@ export default function Home() {
               <div className="absolute bottom-4 left-4 bg-[oklch(0.18_0.04_265)]/95 backdrop-blur-sm px-4 py-3 flex items-center gap-3">
                 <img src={LOGO} alt="" className="h-7 w-7" />
                 <div>
-                  <p className="stat-num text-lg font-semibold text-white leading-none">98%</p>
-                  <p className="text-[0.6875rem] uppercase tracking-wider text-white/70">on-time close rate</p>
+                  <p className="stat-num text-lg font-semibold text-white leading-none">100%</p>
+                  <p className="text-[0.6875rem] uppercase tracking-wider text-white/70">on-time delivery</p>
                 </div>
               </div>
             </div>
@@ -255,6 +255,26 @@ export default function Home() {
             <Globe2 className="h-3.5 w-3.5 text-[var(--meridian)]" />
             Onboarding typically completes within 5 business days — secure, read-only, and guided by a kickoff checklist.
           </p>
+        </div>
+      </section>
+
+      {/* ── Software we work with ── */}
+      <section className="py-14 lg:py-18 border-t border-[var(--border)] bg-white">
+        <div className="container">
+          <p className="folio-tag mb-3 reveal">Tools · Certified Expertise</p>
+          <h2 className="font-serif text-2xl lg:text-3xl text-[var(--navy)] max-w-lg reveal">
+            Certified on the platforms your business already uses
+          </h2>
+          <p className="mt-3 text-sm text-[var(--muted-foreground)] max-w-xl leading-relaxed reveal">
+            We connect through your accounting software's official accountant channels — read-only
+            access, so you keep full control of your data.
+          </p>
+          <img
+            src="/manus-storage/software-logos_6c361e24.png"
+            alt="Software platforms Team Yulsa is certified in: QuickBooks Online, Xero, Zoho Books, FreshBooks, and Wave"
+            className="mt-8 w-full max-w-3xl rounded-md border border-[var(--border)]"
+            loading="lazy"
+          />
         </div>
       </section>
 
