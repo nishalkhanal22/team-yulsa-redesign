@@ -1,46 +1,23 @@
-# Team Yulsa Redesign — Fix Round
+# Team Yulsa Redesign — Current Round
 
-## 1. Photo/name alignment
-- [ ] Re-fetch teamyulsa.com About page HTML and extract photo URLs + names + roles in document order
-- [ ] Compare with current TEAM array photo assignments in siteData/About.tsx
-- [ ] Fix mismatches: correct photo for each name; update About page roster table + hero trust strip + photo band
-- [ ] Verify each photo actually matches the person visually (view images)
-
-## 2. Interior pages redesign (Services, Industries, Security, About)
-- [ ] About page: fix contrast (dark navy band text vs background), declutter team section, better spacing
-- [ ] Services page: cleaner layout, better contrast, less cramped
-- [ ] Industries hub: consistent card design, better contrast
-- [ ] Security page: better visual hierarchy and contrast
-- [ ] Check mobile for all
-
-## 3. Remove price range mentions
-- [ ] Remove "$300" / "$1,200" / price range mentions in FAQ, stats, pages
-- [ ] Replace with "fixed monthly pricing" language
-- [ ] Verify grep for $ amounts returns none (except currency examples if any)
-
-## 4. Verify & deliver
-- [ ] TypeScript clean
-- [ ] Screenshots of all pages
+## Tasks
+- [ ] Move "Get in Touch" contact section from Home.tsx (after software section, before CtaBand) to Contact.tsx
+- [ ] Build Software We Use section on Home styled like Services/Industries sections with original brand logos
+- [ ] Source official software logos (QuickBooks, Xero, FreshBooks, Wave, Power BI, ADP, Acumatica, Zoho Books)
+- [ ] TypeScript check + screenshots
 - [ ] Checkpoint + deliver
 
-## STATE (saved before compaction)
+## State
+- Contact section to move: Home.tsx (~after software section, before <CtaBand />) — "One email is all it takes."
+- Software tile grid currently Home.tsx (brand-color boxes) — replace with real logo images
+- Project path: /home/ubuntu/team-yulsa-redesign
+- Static assets dir: /home/ubuntu/webdev-static-assets/ (upload via manus-upload-file --webdev)
 
-### Verified photo mapping (from teamyulsa.com about page, in document order)
-| Photo file (in /home/ubuntu/webdev-static-assets/yulsa-team/) | Person |
-|---|---|
-| 1779820542_Photo.png | CA Sagun Jung Rana (arms crossed) → uploaded /manus-storage/sagun_ca_0b9ac2f3.png |
-| 1779820474_Prabesh Pic.png | Prabesh Bhusal → /manus-storage/prabesh_57af839c.png |
-| 1779820449_Nisha Pic.png | Nisha Khanal → /manus-storage/nisha_94569046.png |
-| 1779820567_..._qbl22l.png | Aayush Shah → /manus-storage/aayush2_20008bc2.png |
-| 1779820312_Himal Pic.png | Himal Ayman Karki → /manus-storage/himal_485516ec.png |
-| 1779466641_..._9hwlmw.png | Dinesh Puri → /manus-storage/dinesh_89398095.png |
-| 1779466616_..._x64e1b.png | Sujal Aryal → /manus-storage/sujal_429a0972.png |
-| 1757168919_Sarjan Jung Rana.png | Sarjan Jung Rana → /manus-storage/sarjan_f1cd7225.png (previously mislabeled as Sagun!) |
-| 1762074043_..._htrrznh.png | Samrat Hamal → /manus-storage/samrat_746a0552.png |
+## ROUND STATE (current task)
+DONE: contact section moved from Home.tsx to Contact.tsx (before FAQ section, at line ~223). Home imports cleaned (Mail kept for hero? check tsc). ArrowUpRight in first import block — verify tsc clean.
 
-DONE: About.tsx TEAM + Home.tsx TEAM_PHOTOS fixed. Sarjan photo now correctly points to sarjan_f1cd7225.png.
+REMAINING:
+1. Build Software We Use section on Home with OFFICIAL logos (user wants original software logos). Need to source/generate logo images for: QuickBooks (green), Xero (#13B5EA), FreshBooks (#3350DB), Wave (#014980), Power BI (#F2C811), ADP (#D0171E), Acumatica (#8B5CF6 or orange), Zoho Books (#E42527). Option: generate one image with official-style logos via generate_image, or build SVG/CSS text logos with brand colors (safer). Decide: use a generated image row like before but user wants "original logo" look → generate detailed image with accurate logos.
+2. tsc check, screenshots (Home, Contact), checkpoint, deliver.
 
-### Remaining TODO
-- Phase 2: redesign interior pages Services/Industries/Security/About (better contrast, less cramped)
-- Phase 3: remove price range ($300–$1,200) mentions — grep for "300" / "1,200" / "1200" across client/src + fix FAQ in siteData.ts (FAQ has "$300 and $1,200" in first answer)
-- Phase 4: tsc check, screenshots, checkpoint, deliver
+Note: previous software-tiles image (/manus-storage/software-tiles_42130be0.png) was replaced by brand-color boxes last round; user now wants real logo look.

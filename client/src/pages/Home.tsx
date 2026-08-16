@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
-import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS, BRAND, SOCIALS } from "@/lib/siteData";
-import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark, Linkedin, Facebook, Instagram, MessageCircle, ArrowUpRight as ArrowUpRightIcon } from "lucide-react";
+import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS } from "@/lib/siteData";
+import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useEffect, useRef, useState } from "react";
 
@@ -327,95 +327,19 @@ export default function Home() {
             We connect through your accounting software's official accountant channels — read-only
             access, so you keep full control of your data.
           </p>
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 reveal">
-            {[
-              { name: "QuickBooks Online", sub: "Plus Desktop", color: "var(--meridian)", icon: "QB" },
-              { name: "Xero", sub: "Certified Advisor", color: "#13B5EA", icon: "Xr" },
-              { name: "FreshBooks", sub: "Accountant Portal", color: "#3350DB", icon: "FB" },
-              { name: "Wave", sub: "Advisor Partner", color: "#014980", icon: "Wv" },
-              { name: "Power BI", sub: "Reporting", color: "#F2C811", icon: "PB" },
-              { name: "ADP Payroll", sub: "Processing", color: "#D0171E", icon: "AD" },
-              { name: "Acumatica", sub: "Cloud ERP", color: "#8B5CF6", icon: "Ac" },
-              { name: "Zoho Books", sub: "Certified Partner", color: "#E42527", icon: "ZB" },
-            ].map((sw) => (
-              <div
-                key={sw.name}
-                className="border border-[var(--border)] bg-white p-4 hover:border-[var(--meridian)] hover:shadow-md transition-all duration-200 reveal"
-              >
-                <span
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-md font-bold text-xs text-white mb-3"
-                  style={{ background: sw.color }}
-                >
-                  {sw.icon}
-                </span>
-                <p className="text-sm font-semibold text-[var(--navy)] leading-tight">{sw.name}</p>
-                <p className="mt-0.5 text-[0.6875rem] text-[var(--muted-foreground)]">{sw.sub}</p>
-              </div>
-            ))}
+          <div className="mt-8 reveal">
+            <img
+              src="/manus-storage/software-official-logos_9fc69c90.png"
+              alt="Software Team Yulsa uses: QuickBooks Online and Desktop, Xero, FreshBooks, Wave, Power BI, ADP Payroll, Acumatica, and Zoho Books"
+              className="w-full max-w-4xl rounded-md border border-[var(--border)]"
+              loading="lazy"
+            />
           </div>
           <p className="mt-5 text-xs text-[var(--muted-foreground)] max-w-2xl reveal">
-            We connect through each platform's official accountant channels with read-only access,
-            so you keep full control of your data.
+            Certified daily users of QuickBooks Online &amp; Desktop, Xero, FreshBooks, Wave, Power BI,
+            ADP Payroll, Acumatica, and Zoho Books — we connect through each platform's official
+            accountant channels with read-only access, so you keep full control of your data.
           </p>
-        </div>
-      </section>
-
-      {/* ── Contact section ── */}
-      <section className="py-16 lg:py-20 border-t border-[var(--border)]" style={{ background: "color-mix(in oklch, var(--navy) 4%, white)" }}>
-        <div className="container">
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            <div className="lg:col-span-7 reveal">
-              <p className="folio-tag mb-3">Get in Touch</p>
-              <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
-                One email is all it takes.
-              </h2>
-              <p className="mt-4 text-base text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
-                Email us or book a free discovery call — we respond within 1 US business day and
-                always reply to a real human, not a chatbot.
-              </p>
-              <a
-                href={`mailto:${BRAND.email}`}
-                className="mt-6 inline-flex items-center gap-3 px-6 py-4 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:opacity-90"
-                style={{ background: "var(--navy)" }}
-              >
-                <Mail className="h-4.5 w-4.5" />
-                {BRAND.email}
-              </a>
-              <Link
-                href="/contact"
-                className="ml-0 lg:ml-4 mt-6 inline-flex items-center gap-2 px-6 py-4 text-sm font-semibold border border-[var(--navy)] text-[var(--navy)] transition-all duration-200 active:scale-[0.97] hover:bg-[var(--navy)] hover:text-white"
-              >
-                Book a discovery call <ArrowUpRightIcon className="h-4 w-4" />
-              </Link>
-            </div>
-            <div className="lg:col-span-5 reveal">
-              <div className="border border-[var(--border)] bg-white p-6">
-                <p className="folio-tag mb-4">Follow us</p>
-                <div className="flex items-center gap-3">
-                  {SOCIALS.map((s) => {
-                    const Icon = s.name === "WhatsApp" ? MessageCircle : s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
-                    return (
-                      <a
-                        key={s.name}
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Team Yulsa on ${s.name}`}
-                        className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
-                      >
-                        <Icon className="h-5 w-5" />
-                      </a>
-                    );
-                  })}
-                </div>
-                <p className="mt-5 text-xs text-[var(--muted-foreground)] leading-relaxed">
-                  {BRAND.hours}
-                  <br />
-                  {BRAND.address}
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
