@@ -46,9 +46,8 @@ export const SERVICES: Service[] = [
   {
     id: "tax-filing",
     folio: "SERV 02",
-    title: "Tax Filing Support",
-    short:
-      "Year-round readiness for IRS and CRA deadlines — books organized so tax season takes days, not weeks.",
+    title: "Tax Filing",
+    short: "Accurate tax filing services to ensure compliance and maximize benefits.",
     detail:
       "We prepare complete, well-organized tax packages for US and Canadian filers: categorized P&Ls, balance sheets, depreciation schedules, sales tax workpapers, and T4/T5 and 1099-ready records. Your CPA or tax preparer gets exactly what they need, when they need it.",
     bullets: [
@@ -56,15 +55,15 @@ export const SERVICES: Service[] = [
       "1099, T4, and T5 preparation support",
       "Sales tax & VAT workpapers (state, provincial, and federal)",
       "Deadline calendar for IRS / CRA filings",
+      "Compliance-first filing that maximizes your benefits",
     ],
     icon: "FileCheck2",
   },
   {
     id: "ar-ap",
     folio: "SERV 03",
-    title: "Accounts Receivable & Payable",
-    short:
-      "Chase what's owed, pay what's due, and keep cash flowing — without adding headcount.",
+    title: "Accounts Receivable & Accounts Payable",
+    short: "Efficient invoicing and payment management to optimize cash flow.",
     detail:
       "Our AR/AP team handles invoicing, collections follow-up, vendor bill entry, and payment runs inside your accounting platform. Clients typically see faster collections and fewer late fees within the first 90 days.",
     bullets: [
@@ -158,7 +157,7 @@ export const SERVICES: Service[] = [
   {
     id: "budgeting",
     folio: "SERV 09",
-    title: "Budgeting & Forecasting",
+    title: "Budgeting and Forecasting",
     short:
       "Annual budgets, rolling forecasts, and scenario models that help you plan instead of react.",
     detail:
@@ -246,6 +245,22 @@ export const INDUSTRIES: Industry[] = [
       "Product-level & channel-level profitability",
       "Inventory & COGS tracking",
       "Ad spend, returns & refund accruals",
+    ],
+  },
+  {
+    id: "lifestyle",
+    name: "Lifestyle Services",
+    short: "Bookkeeping that keeps up with subscriptions, seasonality, and busy schedules.",
+    slug: "lifestyle",
+    pain:
+      "Lifestyle and wellness businesses — fitness studios, salons, coaching, memberships — live on recurring subscriptions, seasonal peaks, and high transaction volume from POS and booking platforms.",
+    solution:
+      "We reconcile POS, booking, and payment-platform data daily, track subscription and membership revenue correctly, manage vendor and contractor payments, and deliver clear monthly P&Ls so you can see which services actually profit.",
+    bullets: [
+      "Subscription, membership & package revenue tracking",
+      "POS & booking platform reconciliation",
+      "Contractor / 1099 payment management",
+      "Seasonal budgeting & cash-flow planning",
     ],
   },
   {

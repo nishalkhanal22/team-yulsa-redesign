@@ -21,6 +21,11 @@ export default function Services() {
             Outsourced accounting services, built for US &amp; Canadian businesses
           </h1>
           <p className="mt-5 text-base lg:text-lg text-[var(--muted-foreground)] max-w-2xl leading-relaxed reveal">
+            We help you increase the efficiency and efficacy of your bookkeeping, reporting,
+            forecasting, and customer relationship management — giving you a clear technological
+            advantage over your competitors.
+          </p>
+          <p className="mt-3 text-sm lg:text-base text-[var(--muted-foreground)] max-w-2xl leading-relaxed reveal">
             Every engagement runs on a fixed monthly fee, a defined scope, and a 5-business-day
             month-end close. Pick one service or bundle several — the scope follows your business,
             not the other way around.

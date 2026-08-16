@@ -17,7 +17,7 @@ export default function Industries() {
       <section className="pt-28 lg:pt-36 pb-12">
         <div className="container grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-8">
-            <p className="folio-tag mb-3 reveal">Industries · 5 Specializations</p>
+            <p className="folio-tag mb-3 reveal">Industries · 6 Specializations</p>
             <h1 className="font-serif text-4xl lg:text-5xl text-[var(--navy)] leading-tight reveal">
               Industry-specific books, built for how your business actually runs
             </h1>
@@ -30,7 +30,7 @@ export default function Industries() {
           <div className="lg:col-span-4 reveal">
             <img
               src="/manus-storage/industries-collage_3c29fe26.png"
-              alt="Collage representing staffing, restaurant, ecommerce, healthcare, and real estate industries served by Team Yulsa"
+              alt="Collage representing staffing, restaurant, ecommerce, lifestyle services, healthcare, and real estate industries served by Team Yulsa"
               className="w-full rounded-md shadow-md"
               loading="eager"
             />
