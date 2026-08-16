@@ -79,10 +79,10 @@ export default function SiteHeader() {
           )}
           <Link
             href="/contact"
-            className="inline-flex items-center px-4 py-2 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
+            className="inline-flex items-center px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
             style={{ background: "var(--navy)" }}
           >
-            Free Health Check
+            Contact Us
           </Link>
         </div>
 
@@ -117,10 +117,16 @@ export default function SiteHeader() {
             )}
             <Link
               href="/contact"
-              className="mt-2 inline-flex justify-center px-4 py-3 text-sm font-semibold text-white"
+              className="mt-3 inline-flex justify-center px-4 py-3 text-sm font-semibold text-white"
               style={{ background: "var(--navy)" }}
             >
-              Get Free Health Check
+              Contact Us
+            </Link>
+            <Link
+              href="/contact"
+              className="mt-1 mb-1 inline-flex justify-center px-4 py-3 text-sm font-semibold text-[var(--meridian)] border border-[var(--meridian)]"
+            >
+              Free Health Check
             </Link>
           </nav>
         </div>

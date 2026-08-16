@@ -327,12 +327,36 @@ export default function Home() {
             We connect through your accounting software's official accountant channels — read-only
             access, so you keep full control of your data.
           </p>
-          <img
-            src="/manus-storage/software-tiles_42130be0.png"
-            alt="Software platforms Team Yulsa is certified in: QuickBooks Online and Desktop, Xero, FreshBooks, Wave, Power BI, ADP Payroll, and Acumatica"
-            className="mt-8 w-full max-w-3xl rounded-md border border-[var(--border)]"
-            loading="lazy"
-          />
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 reveal">
+            {[
+              { name: "QuickBooks Online", sub: "Plus Desktop", color: "var(--meridian)", icon: "QB" },
+              { name: "Xero", sub: "Certified Advisor", color: "#13B5EA", icon: "Xr" },
+              { name: "FreshBooks", sub: "Accountant Portal", color: "#3350DB", icon: "FB" },
+              { name: "Wave", sub: "Advisor Partner", color: "#014980", icon: "Wv" },
+              { name: "Power BI", sub: "Reporting", color: "#F2C811", icon: "PB" },
+              { name: "ADP Payroll", sub: "Processing", color: "#D0171E", icon: "AD" },
+              { name: "Acumatica", sub: "Cloud ERP", color: "#8B5CF6", icon: "Ac" },
+              { name: "Zoho Books", sub: "Certified Partner", color: "#E42527", icon: "ZB" },
+            ].map((sw) => (
+              <div
+                key={sw.name}
+                className="border border-[var(--border)] bg-white p-4 hover:border-[var(--meridian)] hover:shadow-md transition-all duration-200 reveal"
+              >
+                <span
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-md font-bold text-xs text-white mb-3"
+                  style={{ background: sw.color }}
+                >
+                  {sw.icon}
+                </span>
+                <p className="text-sm font-semibold text-[var(--navy)] leading-tight">{sw.name}</p>
+                <p className="mt-0.5 text-[0.6875rem] text-[var(--muted-foreground)]">{sw.sub}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-5 text-xs text-[var(--muted-foreground)] max-w-2xl reveal">
+            We connect through each platform's official accountant channels with read-only access,
+            so you keep full control of your data.
+          </p>
         </div>
       </section>
 
