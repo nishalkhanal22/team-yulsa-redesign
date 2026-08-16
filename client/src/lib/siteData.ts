@@ -334,7 +334,7 @@ export const FAQS = [
   },
   {
     q: "Which accounting software do you support?",
-    a: "We are experts in QuickBooks Online, QuickBooks Desktop, and Xero, and we also work with FreshBooks, Wave, Acumatica, and Bill.com. We can migrate you from spreadsheets or a legacy system to any of these platforms.",
+    a: "We are experts in QuickBooks Online, QuickBooks Desktop, Xero, and FreshBooks, and we also work with Wave, Acumatica, ADP Payroll, and Power BI for reporting and dashboards. We can migrate you from spreadsheets or a legacy system to any of these platforms.",
   },
   {
     q: "How do you handle my financial data securely?",

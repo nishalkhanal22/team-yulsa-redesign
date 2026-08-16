@@ -270,8 +270,8 @@ export default function Home() {
             access, so you keep full control of your data.
           </p>
           <img
-            src="/manus-storage/software-logos_6c361e24.png"
-            alt="Software platforms Team Yulsa is certified in: QuickBooks Online, Xero, Zoho Books, FreshBooks, and Wave"
+            src="/manus-storage/software-tiles_42130be0.png"
+            alt="Software platforms Team Yulsa is certified in: QuickBooks Online and Desktop, Xero, FreshBooks, Wave, Power BI, ADP Payroll, and Acumatica"
             className="mt-8 w-full max-w-3xl rounded-md border border-[var(--border)]"
             loading="lazy"
           />
