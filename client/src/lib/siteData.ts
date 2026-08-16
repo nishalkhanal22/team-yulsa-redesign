@@ -15,6 +15,7 @@ export const BRAND = {
   facebook: "https://www.facebook.com/teamyulsa",
   instagram: "https://www.instagram.com/teamyulsa",
   x: "https://x.com/teamyulsa",
+  whatsapp: "https://wa.me/15555550100",
 };
 
 /*
@@ -26,6 +27,7 @@ export const SOCIALS = [
   { name: "Facebook", href: BRAND.facebook },
   { name: "Instagram", href: BRAND.instagram },
   { name: "X", href: BRAND.x },
+  { name: "WhatsApp", href: BRAND.whatsapp },
 ];
 
 export interface Service {

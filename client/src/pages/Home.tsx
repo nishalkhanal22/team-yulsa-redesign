@@ -16,7 +16,7 @@ import {
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
 import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS, BRAND, SOCIALS } from "@/lib/siteData";
-import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark, Linkedin, Facebook, Instagram, ArrowUpRight as ArrowUpRightIcon } from "lucide-react";
+import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark, Linkedin, Facebook, Instagram, MessageCircle, ArrowUpRight as ArrowUpRightIcon } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useEffect, useRef, useState } from "react";
 
@@ -369,7 +369,7 @@ export default function Home() {
                 <p className="folio-tag mb-4">Follow us</p>
                 <div className="flex items-center gap-3">
                   {SOCIALS.map((s) => {
-                    const Icon = s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
+                    const Icon = s.name === "WhatsApp" ? MessageCircle : s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
                     return (
                       <a
                         key={s.name}

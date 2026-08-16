@@ -3,7 +3,7 @@
   Real contact details (valid email — audit fix), US phone, only verified social (LinkedIn).
 */
 import { Link } from "wouter";
-import { Linkedin, Facebook, Instagram, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { Linkedin, Facebook, Instagram, Mail, MessageCircle, MapPin, ArrowUpRight } from "lucide-react";
 import { BRAND, SERVICES, SOCIALS } from "@/lib/siteData";
 
 const LOGO = "/manus-storage/yulsa-logo_2bfeef45.png";
@@ -29,7 +29,7 @@ export default function SiteFooter() {
               </a>
               {BRAND.phoneDisplay && (
                 <a href={BRAND.phoneHref} className="flex items-center gap-2 text-white/80 hover:text-[var(--meridian)] transition-colors">
-                  <Phone className="h-4 w-4 shrink-0" />
+                  <MessageCircle className="h-4 w-4 shrink-0" />
                   {BRAND.phoneDisplay}
                 </a>
               )}
@@ -69,7 +69,7 @@ export default function SiteFooter() {
             <p className="text-sm text-white/70 leading-relaxed mb-5">{BRAND.hours}</p>
             <div className="flex items-center gap-3">
               {SOCIALS.map((s) => {
-                const Icon = s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
+                const Icon = s.name === "WhatsApp" ? MessageCircle : s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
                 return (
                   <a
                     key={s.name}
