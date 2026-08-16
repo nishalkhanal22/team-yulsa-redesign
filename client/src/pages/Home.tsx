@@ -16,12 +16,33 @@ import {
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
 import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS } from "@/lib/siteData";
+import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useEffect, useRef, useState } from "react";
 
 const HERO_IMG = "/manus-storage/hero-office_05c0bd7f.png";
 const PROCESS_IMG = "/manus-storage/process-workflow_66aa4f70.png";
 const LOGO = "/manus-storage/yulsa-logo_2bfeef45.png";
+const TEAM_PHOTOS = [
+  { name: "Sagun Jung Rana", role: "Founder · CA", photo: "/manus-storage/sarjan_f1cd7225.png" },
+  { name: "Prabesh Bhusal", role: "Senior Associate", photo: "/manus-storage/prabesh_57af839c.png" },
+  { name: "Nisha Khanal", role: "IFRS Consultant", photo: "/manus-storage/nisha_94569046.png" },
+  { name: "Himal Ayman Karki", role: "Senior Associate", photo: "/manus-storage/himal_485516ec.png" },
+  { name: "Aayush Shah", role: "Senior Associate", photo: "/manus-storage/aayush_0beac206.png" },
+];
+
+const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Accounting: Calculator,
+  "Tax Filing": FileBarChart,
+  "Accounts": ClipboardList,
+  "Year-end": RefreshCcw,
+  Migration: Mail,
+  Invoice: FileSpreadsheet,
+  Bank: PiggyBank,
+  Management: LineChart,
+  Budgeting: Target,
+  Virtual: Landmark,
+};
 
 function CountUp({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -60,15 +81,15 @@ export default function Home() {
 
   return (
     <Layout path="/">
-      {/* ── Hero: asymmetric 55/45 ── */}
-      <section className="pt-28 lg:pt-36 pb-14 lg:pb-20">
-        <div className="container relative grid lg:grid-cols-12 gap-10 lg:gap-6 items-center">
-          <div className="lg:col-span-7">
+      {/* ── Hero: split with rich photo edge-to-edge ── */}
+      <section className="pt-24 lg:pt-32 pb-0 overflow-hidden">
+        <div className="container grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          <div className="lg:col-span-7 pb-10 lg:pb-16">
             <p className="folio-tag mb-4 reveal">Bookkeeping · Accounting · Virtual CFO · US &amp; Canada</p>
-            <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] text-[var(--navy)] reveal">
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.6rem] leading-[1.06] text-[var(--navy)] reveal">
               Your books, balanced.
               <br />
-              Your week, back.
+              <em className="text-[var(--meridian)]">Your week, back.</em>
             </h1>
             <p className="mt-5 text-base lg:text-lg leading-relaxed text-[var(--muted-foreground)] max-w-xl reveal">
               Team Yulsa is the outsourced accounting team for US and Canadian small businesses
@@ -96,20 +117,48 @@ export default function Home() {
               <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--meridian)]" /> Read-only access · NDA protected</span>
             </div>
           </div>
-          <div className="lg:col-span-5 reveal">
-            <div className="relative">
-              <img
-                src={HERO_IMG}
-                alt="Team Yulsa accountants reviewing financial dashboards with a client"
-                className="relative w-full aspect-[4/3] object-cover"
-                loading="eager"
-              />
-              <div className="absolute bottom-4 left-4 bg-[oklch(0.18_0.04_265)]/95 backdrop-blur-sm px-4 py-3 flex items-center gap-3">
-                <img src={LOGO} alt="" className="h-7 w-7" />
+        </div>
+        {/* Trust strip with real team faces */}
+        <div className="container pb-6 pt-2">
+          <div className="flex items-center gap-4 reveal">
+            <div className="flex -space-x-2.5">
+              {TEAM_PHOTOS.map((t) => (
+                <img
+                  key={t.name}
+                  src={t.photo}
+                  alt={t.name}
+                  className="h-10 w-10 rounded-full object-cover object-top ring-2 ring-[oklch(0.99_0.003_85)]"
+                  loading="eager"
+                />
+              ))}
+            </div>
+            <p className="text-[0.8125rem] leading-snug text-[var(--muted-foreground)]">
+              <span className="font-semibold text-[var(--navy)]">9 certified specialists</span> across bookkeeping, tax &amp; reporting
+            </p>
+          </div>
+        </div>
+        {/* Full-width photo band beneath the hero text */}
+        <div className="relative mt-6 lg:mt-0">
+          <img
+            src={HERO_IMG}
+            alt="Team Yulsa accountants reviewing financial dashboards with a client"
+            className="relative w-full h-[300px] lg:h-[380px] object-cover"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,25,47,0.55)] via-transparent to-transparent" />
+          <div className="absolute bottom-5 left-0 right-0">
+            <div className="container flex flex-wrap items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <img src={LOGO} alt="" className="h-8 w-8" />
                 <div>
-                  <p className="stat-num text-lg font-semibold text-white leading-none">100%</p>
-                  <p className="text-[0.6875rem] uppercase tracking-wider text-white/70">on-time delivery</p>
+                  <p className="stat-num text-xl font-semibold text-white leading-none">100%</p>
+                  <p className="text-[0.6875rem] uppercase tracking-wider text-white/75">on-time delivery</p>
                 </div>
+              </div>
+              <div className="hidden sm:flex items-center gap-8 text-white/85">
+                {["USD & CAD", "US GAAP", "IRS · CRA ready"].map((t) => (
+                  <span key={t} className="text-xs font-mono uppercase tracking-[0.15em]">{t}</span>
+                ))}
               </div>
             </div>
           </div>
@@ -150,6 +199,14 @@ export default function Home() {
                 className="group bg-white p-6 lg:p-7 hover:bg-[oklch(0.975_0.01_90)] transition-colors duration-200 reveal"
               >
                 <p className="folio-tag mb-3">{s.folio}</p>
+                {(() => {
+                  const Icon = Object.entries(SERVICE_ICONS).find(([k]) => s.title.startsWith(k))?.[1];
+                  return Icon ? (
+                    <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[oklch(0.96_0.02_160)] text-[var(--meridian)] transition-colors duration-200 group-hover:bg-[var(--meridian)] group-hover:text-white">
+                      <Icon className="h-4.5 w-4.5" />
+                    </span>
+                  ) : null;
+                })()}
                 <h3 className="font-serif text-xl text-[var(--navy)] group-hover:text-[var(--meridian)] transition-colors">
                   {s.title}
                 </h3>

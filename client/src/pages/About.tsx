@@ -40,11 +40,12 @@ const STANDARDS = [
 ];
 
 const TEAM = [
-  { name: "Sagun Jung Rana", role: "Founder · Chartered Accountant", note: "Client strategy & quality review", photo: "/manus-storage/team-sandesh_47d07124.png" },
-  { name: "Prabesh Bhusal", role: "Senior Associate", note: "Month-end close & management reporting", photo: "/manus-storage/team-bibek_5384e02b.png" },
-  { name: "Nisha Khanal", role: "IFRS Consultant", note: "Standards compliance & audit readiness", photo: "/manus-storage/team-priya_98dbbd26.png" },
-  { name: "Aayush Shah", role: "Senior Associate", note: "Tax-season workflows & filing support", photo: "/manus-storage/team-rabindra_9e5846c5.png" },
-  { name: "Himal Ayman Karki", role: "Senior Associate", note: "Software migrations & transitions", photo: "/manus-storage/team-sarita_16d9ef9e.png" },
+  { name: "Sagun Jung Rana", role: "Founder · Chartered Accountant", note: "Client strategy & quality review", photo: "/manus-storage/sarjan_f1cd7225.png" },
+  { name: "Prabesh Bhusal", role: "Senior Associate", note: "Month-end close & management reporting", photo: "/manus-storage/prabesh_57af839c.png" },
+  { name: "Nisha Khanal", role: "IFRS Consultant", note: "Standards compliance & audit readiness", photo: "/manus-storage/nisha_94569046.png" },
+  { name: "Aayush Shah", role: "Senior Associate", note: "Tax-season workflows & filing support", photo: "/manus-storage/aayush_0beac206.png" },
+  { name: "Himal Ayman Karki", role: "Senior Associate", note: "Software migrations & transitions", photo: "/manus-storage/himal_485516ec.png" },
+  { name: "Sarjan Jung Rana", role: "Tax Associate", note: "Tax workpapers & compliance", photo: "" },
   { name: "Dinesh Puri", role: "Associate", note: "Reconciliations & AR/AP operations", photo: "" },
   { name: "Sujal Aryal", role: "Associate", note: "Budgeting, forecasting & reporting", photo: "" },
   { name: "Samrat Hamal", role: "IT Associate", note: "Data security, tooling & automation", photo: "" },
@@ -119,7 +120,7 @@ export default function About() {
         <div className="container">
           <div className="grid lg:grid-cols-12 gap-8 items-end mb-10">
             <div className="lg:col-span-8">
-              <p className="folio-tag mb-3 reveal">The Team · 8 Specialists</p>
+              <p className="folio-tag mb-3 reveal">The Team · 9 Specialists</p>
               <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
                 Certified specialists, not a call center
               </h2>
@@ -130,6 +131,32 @@ export default function About() {
               </p>
             </div>
           </div>
+
+          {/* ── Featured photos: leadership band ── */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
+            {TEAM.filter((m) => m.photo).map((m) => (
+              <figure key={m.name} className="group relative overflow-hidden rounded-lg reveal">
+                <img
+                  src={m.photo}
+                  alt={`${m.name}, ${m.role}`}
+                  className="aspect-[3/4] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(10,25,47,0.85)] via-[rgba(10,25,47,0.35)] to-transparent p-3 pt-10">
+                  <figcaption>
+                    <p className="font-serif text-white text-sm leading-tight">{m.name}</p>
+                    <p className="text-[0.625rem] font-mono uppercase tracking-wider text-white/75 mt-0.5">{m.role}</p>
+                  </figcaption>
+                </div>
+              </figure>
+            ))}
+            <div className="relative rounded-lg bg-[var(--navy)] text-white p-5 flex flex-col justify-end overflow-hidden reveal">
+              <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 23px, white 23px, white 24px)" }} />
+              <p className="stat-num text-4xl text-[var(--meridian)]">9</p>
+              <p className="text-sm leading-relaxed mt-2">named specialists across bookkeeping, tax, IFRS, and IT — every one bound by indefinite client confidentiality.</p>
+            </div>
+          </div>
+
           <div className="border border-[var(--border)] overflow-x-auto">
             <table className="w-full min-w-[640px] text-sm">
               <tbody>
