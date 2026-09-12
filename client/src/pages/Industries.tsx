@@ -8,6 +8,7 @@ import { ArrowRight } from "lucide-react";
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
 import { INDUSTRIES } from "@/lib/siteData";
+import { ASSETS } from "@/lib/assets";
 import { useReveal } from "@/hooks/useReveal";
 
 export default function Industries() {
@@ -37,7 +38,7 @@ export default function Industries() {
           </div>
           <div className="lg:col-span-4 reveal">
             <img
-              src="/manus-storage/industries-collage_3c29fe26.png"
+              src={ASSETS.industriesCollage}
               alt="Collage representing staffing, restaurant, ecommerce, lifestyle services, healthcare, and real estate industries served by Team Yulsa"
               className="w-full rounded-md shadow-md"
               loading="eager"

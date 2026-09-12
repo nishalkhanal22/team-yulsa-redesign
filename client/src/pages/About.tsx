@@ -5,6 +5,7 @@
 */
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
+import { asset } from "@/lib/assets";
 import { useReveal } from "@/hooks/useReveal";
 import { Check } from "lucide-react";
 
@@ -40,15 +41,15 @@ const STANDARDS = [
 ];
 
 const TEAM = [
-  { name: "Sagun Jung Rana", role: "Founder · Chartered Accountant", note: "Client strategy & quality review", photo: "/manus-storage/sagun_ca_0b9ac2f3.png" },
-  { name: "Prabesh Bhusal", role: "Senior Associate", note: "Month-end close & management reporting", photo: "/manus-storage/prabesh_57af839c.png" },
-  { name: "Nisha Khanal", role: "IFRS Consultant", note: "Standards compliance & audit readiness", photo: "/manus-storage/nisha_94569046.png" },
-  { name: "Aayush Shah", role: "Senior Associate", note: "Tax-season workflows & filing support", photo: "/manus-storage/aayush2_20008bc2.png" },
-  { name: "Himal Ayman Karki", role: "Senior Associate", note: "Software migrations & transitions", photo: "/manus-storage/himal_485516ec.png" },
-  { name: "Sarjan Jung Rana", role: "Tax Associate", note: "Tax workpapers & compliance", photo: "/manus-storage/sarjan_f1cd7225.png" },
-  { name: "Dinesh Puri", role: "Associate", note: "Reconciliations & AR/AP operations", photo: "/manus-storage/dinesh_89398095.png" },
-  { name: "Sujal Aryal", role: "Associate", note: "Budgeting, forecasting & reporting", photo: "/manus-storage/sujal_429a0972.png" },
-  { name: "Samrat Hamal", role: "IT Associate", note: "Data security, tooling & automation", photo: "/manus-storage/samrat_746a0552.png" },
+  { name: "Sagun Jung Rana", role: "Founder · Chartered Accountant", note: "Client strategy & quality review", photo: asset("sagun_ca_0b9ac2f3.png") },
+  { name: "Prabesh Bhusal", role: "Senior Associate", note: "Month-end close & management reporting", photo: asset("prabesh_57af839c.png") },
+  { name: "Nisha Khanal", role: "IFRS Consultant", note: "Standards compliance & audit readiness", photo: asset("nisha_94569046.png") },
+  { name: "Aayush Shah", role: "Senior Associate", note: "Tax-season workflows & filing support", photo: asset("aayush2_20008bc2.png") },
+  { name: "Himal Ayman Karki", role: "Senior Associate", note: "Software migrations & transitions", photo: asset("himal_485516ec.png") },
+  { name: "Sarjan Jung Rana", role: "Tax Associate", note: "Tax workpapers & compliance", photo: asset("sarjan_f1cd7225.png") },
+  { name: "Dinesh Puri", role: "Associate", note: "Reconciliations & AR/AP operations", photo: asset("dinesh_89398095.png") },
+  { name: "Sujal Aryal", role: "Associate", note: "Budgeting, forecasting & reporting", photo: asset("sujal_429a0972.png") },
+  { name: "Samrat Hamal", role: "IT Associate", note: "Data security, tooling & automation", photo: asset("samrat_746a0552.png") },
 ];
 
 export default function About() {

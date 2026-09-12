@@ -5,8 +5,9 @@
 import { Link } from "wouter";
 import { Linkedin, Facebook, Instagram, Mail, MessageCircle, MapPin, ArrowUpRight } from "lucide-react";
 import { BRAND, SERVICES, SOCIALS } from "@/lib/siteData";
+import { ASSETS } from "@/lib/assets";
 
-const LOGO = "/manus-storage/yulsa-logo_2bfeef45.png";
+const LOGO = ASSETS.logo;
 
 export default function SiteFooter() {
   return (

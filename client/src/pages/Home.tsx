@@ -16,20 +16,21 @@ import {
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
 import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS } from "@/lib/siteData";
+import { ASSETS, asset } from "@/lib/assets";
 import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
 import { useEffect, useRef, useState } from "react";
 
-const HERO_IMG = "/manus-storage/hero-office_05c0bd7f.png";
-const PROCESS_IMG = "/manus-storage/process-workflow_66aa4f70.png";
-const LOGO = "/manus-storage/yulsa-logo_2bfeef45.png";
+const HERO_IMG = ASSETS.heroOffice;
+const PROCESS_IMG = ASSETS.processWorkflow;
+const LOGO = ASSETS.logo;
 const TEAM_PHOTOS = [
-  { name: "Sagun Jung Rana", role: "Founder · CA", photo: "/manus-storage/sagun_ca_0b9ac2f3.png" },
-  { name: "Prabesh Bhusal", role: "Senior Associate", photo: "/manus-storage/prabesh_57af839c.png" },
-  { name: "Nisha Khanal", role: "IFRS Consultant", photo: "/manus-storage/nisha_94569046.png" },
-  { name: "Aayush Shah", role: "Senior Associate", photo: "/manus-storage/aayush2_20008bc2.png" },
-  { name: "Himal Ayman Karki", role: "Senior Associate", photo: "/manus-storage/himal_485516ec.png" },
-  { name: "Sarjan Jung Rana", role: "Tax Associate", photo: "/manus-storage/sarjan_f1cd7225.png" },
+  { name: "Sagun Jung Rana", role: "Founder · CA", photo: asset("sagun_ca_0b9ac2f3.png") },
+  { name: "Prabesh Bhusal", role: "Senior Associate", photo: asset("prabesh_57af839c.png") },
+  { name: "Nisha Khanal", role: "IFRS Consultant", photo: asset("nisha_94569046.png") },
+  { name: "Aayush Shah", role: "Senior Associate", photo: asset("aayush2_20008bc2.png") },
+  { name: "Himal Ayman Karki", role: "Senior Associate", photo: asset("himal_485516ec.png") },
+  { name: "Sarjan Jung Rana", role: "Tax Associate", photo: asset("sarjan_f1cd7225.png") },
 ];
 
 const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -329,7 +330,7 @@ export default function Home() {
           </p>
           <div className="mt-8 reveal">
             <img
-              src="/manus-storage/software-official-logos_9fc69c90.png"
+              src={ASSETS.softwareLogos}
               alt="Software Team Yulsa uses: QuickBooks Online and Desktop, Xero, FreshBooks, Wave, Power BI, ADP Payroll, Acumatica, and Zoho Books"
               className="w-full max-w-4xl rounded-md border border-[var(--border)]"
               loading="lazy"

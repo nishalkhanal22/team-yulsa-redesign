@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, Phone } from "lucide-react";
 import { BRAND } from "@/lib/siteData";
+import { ASSETS } from "@/lib/assets";
 
-const LOGO = "/manus-storage/yulsa-logo_2bfeef45.png";
+const LOGO = ASSETS.logo;
 
 const NAV = [
   { href: "/", label: "Home" },
