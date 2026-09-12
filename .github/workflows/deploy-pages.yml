@@ -41,6 +41,10 @@ jobs:
         run: |
           pnpm exec vite build
           cp dist/public/index.html dist/public/404.html
+          for route in services industries industries/staffing industries/restaurants industries/ecommerce industries/lifestyle industries/healthcare industries/real-estate security about contact; do
+            mkdir -p "dist/public/$route"
+            cp dist/public/index.html "dist/public/$route/index.html"
+          done
           touch dist/public/.nojekyll
 
       - name: Upload Pages artifact
