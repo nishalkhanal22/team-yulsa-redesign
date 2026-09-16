@@ -14,6 +14,7 @@ const NAV = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/industries", label: "Industries" },
+  { href: "/how-it-works", label: "How It Works" },
   { href: "/security", label: "Security" },
   { href: "/about", label: "About" },
 ];
@@ -78,13 +79,13 @@ export default function SiteHeader() {
               {BRAND.phoneDisplay}
             </a>
           )}
-          <Link
-            href="/contact"
-            className="inline-flex items-center px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
-            style={{ background: "var(--navy)" }}
-          >
-            Contact Us
-          </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
+              style={{ background: "var(--navy)" }}
+            >
+              Book a Free Call
+            </Link>
         </div>
 
         <button
@@ -121,7 +122,7 @@ export default function SiteHeader() {
               className="mt-3 inline-flex justify-center px-4 py-3 text-sm font-semibold text-white"
               style={{ background: "var(--navy)" }}
             >
-              Contact Us
+              Book a Free Discovery Call
             </Link>
             <Link
               href="/contact"

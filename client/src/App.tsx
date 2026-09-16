@@ -10,6 +10,7 @@ import IndustryDetail from "./pages/IndustryDetail";
 import Security from "./pages/Security";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import HowItWorks from "./pages/HowItWorks";
 import NotFound from "./pages/NotFound";
 
 function Router() {
@@ -22,6 +23,7 @@ function Router() {
       <Route path={"/security"} component={Security} />
       <Route path={"/about"} component={About} />
       <Route path={"/contact"} component={Contact} />
+      <Route path={"/how-it-works"} component={HowItWorks} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

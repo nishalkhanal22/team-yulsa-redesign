@@ -62,6 +62,11 @@ const PAGE_META: Record<string, { title: string; description: string }> = {
     description:
       "Book a free discovery call or request your free bookkeeping health check. Responses within one US business day.",
   },
+  "/how-it-works": {
+    title: "How Outsourced Bookkeeping Works | Team Yulsa",
+    description:
+      "See how Team Yulsa takes US and Canadian businesses from discovery call to secure onboarding, monthly close, and practical financial reporting.",
+  },
 };
 
 export function usePageMeta(path: string) {
@@ -76,7 +81,12 @@ export function usePageMeta(path: string) {
     }
     desc.setAttribute("content", meta.description);
     const canon = document.querySelector('link[rel="canonical"]');
-    if (canon) canon.setAttribute("href", `https://teamyulsa.com${path}`);
+    if (canon) {
+      const siteOrigin = window.location.hostname.endsWith("github.io")
+        ? "https://nishalkhanal22.github.io/team-yulsa-redesign"
+        : "https://teamyulsa.com";
+      canon.setAttribute("href", `${siteOrigin}${path}`);
+    }
   }, [path, meta.title, meta.description]);
 }
 

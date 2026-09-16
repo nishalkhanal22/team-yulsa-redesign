@@ -323,10 +323,10 @@ export const TEAM = [
 ];
 
 export const STATS = [
-  { value: 250, suffix: "+", label: "Financial records reconciled monthly across client engagements" },
-  { value: 100, suffix: "%", label: "On-time delivery commitment — month-end closes land on schedule" },
-  { value: 12, suffix: "h", label: "Average turnaround on priority requests during US business hours" },
-  { value: 40, suffix: "%", label: "Typical cost saving vs. hiring in-house US bookkeeping staff" },
+  { value: 100, suffix: "%", label: "On-time delivery commitment for agreed monthly close dates" },
+  { value: 5, suffix: " days", label: "Typical onboarding checklist target after access is shared" },
+  { value: 1, suffix: " fee", label: "Fixed monthly scope — no hourly billing or surprise add-ons" },
+  { value: 1, suffix: " team", label: "One accountable team across bookkeeping, reporting, and tax support" },
 ];
 
 export const PROCESS_STEPS = [

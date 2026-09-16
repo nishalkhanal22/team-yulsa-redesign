@@ -19,7 +19,6 @@ import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS } from "@/lib/siteData";
 import { ASSETS, asset } from "@/lib/assets";
 import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
-import { useEffect, useRef, useState } from "react";
 
 const HERO_IMG = ASSETS.heroOffice;
 const PROCESS_IMG = ASSETS.processWorkflow;
@@ -47,32 +46,9 @@ const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>>
 };
 
 function CountUp({ value, suffix }: { value: number; suffix: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState(0);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        io.disconnect();
-        const start = performance.now();
-        const dur = 1200;
-        const tick = (now: number) => {
-          const p = Math.min((now - start) / dur, 1);
-          setDisplay(Math.round(value * (1 - Math.pow(1 - p, 3))));
-          if (p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      },
-      { threshold: 0.4 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, [value]);
   return (
-    <span ref={ref} className="stat-num text-4xl lg:text-5xl font-semibold" style={{ color: "var(--meridian)" }}>
-      {display}
+    <span className="stat-num text-4xl lg:text-5xl font-semibold" style={{ color: "var(--meridian)" }}>
+      {value}
       {suffix}
     </span>
   );
@@ -140,29 +116,43 @@ export default function Home() {
           </div>
         </div>
         {/* Full-width photo band beneath the hero text */}
-        <div className="relative mt-6 lg:mt-0">
-          <img
-            src={HERO_IMG}
-            alt="Team Yulsa accountants reviewing financial dashboards with a client"
-            className="relative w-full h-[300px] lg:h-[380px] object-cover"
-            loading="eager"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,25,47,0.55)] via-transparent to-transparent" />
-          <div className="absolute bottom-5 left-0 right-0">
-            <div className="container flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <img src={LOGO} alt="" className="h-8 w-8" />
-                <div>
-                  <p className="stat-num text-xl font-semibold text-white leading-none">100%</p>
-                  <p className="text-[0.6875rem] uppercase tracking-wider text-white/75">on-time delivery</p>
-                </div>
-              </div>
-              <div className="hidden sm:flex items-center gap-8 text-white/85">
-                {["USD & CAD", "US GAAP", "IRS · CRA ready"].map((t) => (
-                  <span key={t} className="text-xs font-mono uppercase tracking-[0.15em]">{t}</span>
-                ))}
+        <div className="container relative mt-6 lg:mt-0 grid lg:grid-cols-12 gap-px bg-[var(--navy)]">
+          <div className="relative lg:col-span-7 min-h-[300px] lg:min-h-[380px] overflow-hidden bg-[var(--navy)]">
+            <img
+              src={HERO_IMG}
+              alt="Team Yulsa accountants reviewing financial dashboards with a client"
+              className="h-full min-h-[300px] lg:min-h-[380px] w-full object-cover opacity-90"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,25,47,0.7)] via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 lg:left-7 flex items-center gap-3">
+              <img src={LOGO} alt="" className="h-8 w-8" />
+              <div>
+                <p className="stat-num text-xl font-semibold text-white leading-none">100%</p>
+                <p className="text-[0.6875rem] uppercase tracking-wider text-white/75">on-time delivery commitment</p>
               </div>
             </div>
+          </div>
+          <div className="lg:col-span-5 bg-[var(--navy)] p-6 lg:p-8 text-white">
+            <div className="flex items-center justify-between gap-3">
+              <p className="folio-tag text-white/65">Financial infrastructure</p>
+              <ShieldCheck className="h-5 w-5 text-[var(--meridian)]" />
+            </div>
+            <h2 className="mt-10 font-serif text-2xl lg:text-3xl leading-tight">A clean close gives every next decision a firmer foundation.</h2>
+            <div className="mt-8 divide-y divide-white/15 border-y border-white/15">
+              {[
+                ["Source systems", "QuickBooks · Xero · more"],
+                ["Close rhythm", "Monthly, on your schedule"],
+                ["Report language", "Plain English, decision-ready"],
+                ["Coverage", "USD · CAD · US/Canada hours"],
+              ].map(([label, value]) => (
+                <div key={label} className="flex items-center justify-between gap-4 py-3 text-sm">
+                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-white/55">{label}</span>
+                  <span className="text-right text-white/90">{value}</span>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-xs leading-relaxed text-white/60">A human team, structured process, and secure access — working together instead of leaving you to connect the dots.</p>
           </div>
         </div>
       </section>
@@ -262,11 +252,70 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Financial visibility ── */}
+      <section className="py-16 lg:py-24 bg-[oklch(0.97_0.01_90)] border-y border-[var(--border)]">
+        <div className="container grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5 reveal">
+            <p className="folio-tag mb-3">03 / Financial visibility</p>
+            <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] leading-tight">
+              Your books should explain the business, not just record it.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-[var(--muted-foreground)]">
+              We turn reconciled accounts into a monthly view your owners, operators, and CPAs can actually use — with the right level of detail for your industry.
+            </p>
+            <div className="mt-7 grid sm:grid-cols-2 gap-3">
+              {["Revenue by channel", "Margin by service", "Cash by week", "Plain-English notes"].map((item) => (
+                <div key={item} className="flex items-center gap-2 border border-[var(--border)] bg-white px-4 py-3 text-sm font-semibold text-[var(--navy)]">
+                  <CheckCircle2 className="h-4 w-4 text-[var(--meridian)]" />
+                  {item}
+                </div>
+              ))}
+            </div>
+            <Link href="/how-it-works" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--navy)] hover:text-[var(--meridian)] transition-colors reveal">
+              See the reporting journey <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="lg:col-span-7 reveal">
+            <div className="border border-[var(--border)] bg-white shadow-[0_18px_50px_rgba(15,32,55,0.08)]">
+              <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Illustrative monthly view</p>
+                  <p className="mt-1 font-serif text-xl text-[var(--navy)]">Management snapshot</p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--meridian)]"><ShieldCheck className="h-4 w-4" /> Secure workflow</span>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-px bg-[var(--border)]">
+                {["Income statement", "Balance sheet", "Cash outlook", "Action notes"].map((label, index) => (
+                  <div key={label} className="bg-white p-5">
+                    <p className="text-xs font-mono uppercase tracking-[0.12em] text-[var(--muted-foreground)]">{label}</p>
+                    <div className="mt-5 flex items-end gap-1.5 h-12">
+                      {[25, 40, 60, 80, 60, 100].map((width, barIndex) => (
+                        <span
+                          key={`${label}-${barIndex}`}
+                          className="block"
+                          style={{
+                            width: `${width}%`,
+                            height: `${12 + ((barIndex + index) % 4) * 8}px`,
+                            background: barIndex === 5 ? "var(--meridian)" : "oklch(0.84 0.04 160)",
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <p className="mt-4 text-xs text-[var(--muted-foreground)]">Built around the accounts and KPIs your team uses.</p>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-[var(--border)] px-5 py-4 text-xs leading-relaxed text-[var(--muted-foreground)]">Example layout only — not client data. Reporting scope is agreed before work begins.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Industries ── */}
       <section className="py-16 lg:py-24">
         <div className="container">
           <div className="mb-10 max-w-xl">
-            <p className="folio-tag mb-3 reveal">03 / Industries</p>
+            <p className="folio-tag mb-3 reveal">04 / Industries</p>
             <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
               Industry-specific books, not generic bookkeeping.
             </h2>
@@ -296,7 +345,7 @@ export default function Home() {
       <section className="py-16 lg:py-24 bg-white border-t border-[var(--border)]">
         <div className="container">
           <div className="mb-10 max-w-xl">
-            <p className="folio-tag mb-3 reveal">04 / How it works</p>
+            <p className="folio-tag mb-3 reveal">05 / How it works</p>
             <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
               From first call to first clean close in 30 days.
             </h2>

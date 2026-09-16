@@ -69,3 +69,7 @@ Team Yulsa (Yulsa Advisor Pvt. Ltd.) is a Kathmandu-based accounting/bookkeeping
 - Every page must include at least one visible Meridian Precision signature: ledger-line/tick motif, mono folio rail, oversized tabular numeral, or data-table treatment.
 - Interior pages should favor asymmetric Swiss layouts with a left rail or split composition; avoid default equal-card grids unless visibly tied to ledger rules and numbered folios.
 - Imagery/illustration must be owned-brand financial infrastructure: ledger squares, document flows, data grids, the mint-green upward check glyph — avoid generic shield/check stock art as the dominant visual.
+
+## Style Decisions
+
+The homepage now treats large numerals as verifiable service promises or concrete units rather than placeholder authority signals. Dominant visual language should emphasize Team Yulsa’s financial infrastructure—ledger rules, reporting snapshots, document flows, and structured data panels—with human photography as supporting trust imagery. Meridian green remains a controlled signal color for folio labels, key numerals, primary action emphasis, proof points, and check motifs rather than general decoration.
