@@ -127,7 +127,7 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,25,47,0.7)] via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 lg:left-7 flex items-center gap-3">
-              <img src={LOGO} alt="" className="h-8 w-8" />
+              <img src={LOGO} alt="Team Yulsa" className="h-8 w-12 object-cover object-center" />
               <div>
                 <p className="stat-num text-xl font-semibold text-white leading-none">100%</p>
                 <p className="text-[0.6875rem] uppercase tracking-wider text-white/75">on-time delivery commitment</p>

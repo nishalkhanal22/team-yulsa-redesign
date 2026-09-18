@@ -46,10 +46,7 @@ export default function SiteHeader() {
     >
       <div className="container flex items-center justify-between h-16 lg:h-[72px]">
         <Link href="/" className="flex items-center gap-2.5" aria-label="Team Yulsa home">
-          <img src={LOGO} alt="Team Yulsa logo" className="h-9 w-9 lg:h-10 lg:w-10" />
-          <span className="font-serif text-xl lg:text-[1.35rem] font-bold tracking-tight" style={{ color: "var(--navy)" }}>
-            Team Yulsa
-          </span>
+          <img src={LOGO} alt="Team Yulsa logo" className="h-11 w-28 lg:h-12 lg:w-32 object-cover object-center" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7" aria-label="Primary">

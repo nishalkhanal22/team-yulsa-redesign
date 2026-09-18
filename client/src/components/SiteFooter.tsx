@@ -15,9 +15,8 @@ export default function SiteFooter() {
       <div className="container pt-16 pb-8">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
-            <div className="flex items-center gap-2.5 mb-4">
-              <img src={LOGO} alt="Team Yulsa logo" className="h-9 w-9" />
-              <span className="font-serif text-xl font-bold">Team Yulsa</span>
+            <div className="flex items-center mb-4">
+              <img src={LOGO} alt="Team Yulsa logo" className="h-12 w-32 object-cover object-center" />
             </div>
             <p className="text-sm leading-relaxed text-white/70 max-w-xs">
               Outsourced bookkeeping, accounting, and virtual CFO services for small businesses and
