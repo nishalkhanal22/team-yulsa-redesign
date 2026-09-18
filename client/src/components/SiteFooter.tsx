@@ -3,7 +3,7 @@
   Real contact details (valid email — audit fix), US phone, only verified social (LinkedIn).
 */
 import { Link } from "wouter";
-import { Linkedin, Facebook, Instagram, Mail, MessageCircle, MapPin, ArrowUpRight } from "lucide-react";
+import { Linkedin, Mail, MessageCircle, MapPin, ArrowUpRight, Twitter } from "lucide-react";
 import { BRAND, SERVICES, SOCIALS } from "@/lib/siteData";
 import { ASSETS } from "@/lib/assets";
 
@@ -70,7 +70,7 @@ export default function SiteFooter() {
             <p className="text-sm text-white/70 leading-relaxed mb-5">{BRAND.hours}</p>
             <div className="flex items-center gap-3">
               {SOCIALS.map((s) => {
-                const Icon = s.name === "WhatsApp" ? MessageCircle : s.name === "LinkedIn" ? Linkedin : s.name === "Facebook" ? Facebook : s.name === "Instagram" ? Instagram : Linkedin;
+                const Icon = s.name === "WhatsApp" ? MessageCircle : s.name === "LinkedIn" ? Linkedin : Twitter;
                 return (
                   <a
                     key={s.name}
@@ -85,7 +85,7 @@ export default function SiteFooter() {
                 );
               })}
             </div>
-            <a href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--meridian)] hover:gap-2.5 transition-all">
+            <a href={BRAND.calendar} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--meridian)] hover:gap-2.5 transition-all">
               Book a discovery call <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>

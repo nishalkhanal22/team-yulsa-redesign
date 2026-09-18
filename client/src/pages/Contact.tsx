@@ -5,7 +5,7 @@
 */
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter, CalendarDays } from "lucide-react";
 import Layout from "@/components/Layout";
 import { BRAND, FAQS } from "@/lib/siteData";
 import { useReveal } from "@/hooks/useReveal";
@@ -219,6 +219,15 @@ export default function Contact() {
                 >
                   <Mail className="h-4.5 w-4.5" />
                   {BRAND.email}
+                </a>
+                <a
+                  href={BRAND.calendar}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 px-6 py-4 text-sm font-semibold border border-[var(--navy)] bg-white text-[var(--navy)] hover:border-[var(--meridian)] hover:text-[var(--meridian)] transition-colors"
+                >
+                  <CalendarDays className="h-4.5 w-4.5" />
+                  Book on Google Calendar
                 </a>
                 <div className="flex items-center gap-3">
                   <a

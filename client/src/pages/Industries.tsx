@@ -67,18 +67,10 @@ export default function Industries() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
-              <div className="lg:col-span-3">
+              <div className="lg:col-span-10">
                 <h2 className="font-serif text-2xl lg:text-[1.7rem] text-[var(--navy)] group-hover:text-[var(--meridian)] transition-colors leading-snug">
                   {ind.name}
                 </h2>
-                <p className="mt-1.5 text-sm font-medium text-[var(--meridian)] hidden lg:block">
-                  {ind.short}
-                </p>
-              </div>
-              <div className="lg:col-span-7">
-                <p className="text-sm lg:text-[0.9375rem] text-[var(--muted-foreground)] leading-relaxed">
-                  {ind.solution}
-                </p>
               </div>
               <div className="lg:col-span-1 lg:justify-self-end flex lg:block items-center">
                 <span

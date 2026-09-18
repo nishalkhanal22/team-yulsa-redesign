@@ -12,10 +12,9 @@ export const BRAND = {
   address: "Kathmandu, Nepal · Serving clients across the US & Canada",
   hours: "Mon–Fri, 9:00 AM – 5:00 PM (EST) · We work on your time zone",
   linkedin: "https://www.linkedin.com/company/team-yulsa/",
-  facebook: "https://www.facebook.com/teamyulsa",
-  instagram: "https://www.instagram.com/teamyulsa",
   x: "https://x.com/teamyulsa",
   whatsapp: "https://wa.me/15555550100",
+  calendar: "https://calendar.google.com/calendar/u/0/r?cid=yulsaadvisors%40gmail.com",
 };
 
 /*
@@ -24,10 +23,15 @@ export const BRAND = {
  */
 export const SOCIALS = [
   { name: "LinkedIn", href: BRAND.linkedin },
-  { name: "Facebook", href: BRAND.facebook },
-  { name: "Instagram", href: BRAND.instagram },
   { name: "X", href: BRAND.x },
   { name: "WhatsApp", href: BRAND.whatsapp },
+];
+
+export const SOFTWARE_GROUPS = [
+  { label: "Accounting", items: ["QuickBooks Online / Desktop", "Xero", "FreshBooks", "Wave", "Acumatica", "Zoho Books"] },
+  { label: "Payroll", items: ["Gusto", "Wagepoint", "ADP Payroll"] },
+  { label: "Vendor management", items: ["Bill.com", "Ramp", "Plooto"] },
+  { label: "Reporting", items: ["Power BI"] },
 ];
 
 export interface Service {
@@ -323,10 +327,10 @@ export const TEAM = [
 ];
 
 export const STATS = [
-  { value: 100, suffix: "%", label: "On-time delivery commitment for agreed monthly close dates" },
-  { value: 5, suffix: " days", label: "Typical onboarding checklist target after access is shared" },
-  { value: 1, suffix: " fee", label: "Fixed monthly scope — no hourly billing or surprise add-ons" },
-  { value: 1, suffix: " team", label: "One accountable team across bookkeeping, reporting, and tax support" },
+  { display: "80+", label: "Businesses supported" },
+  { display: "$100M+", label: "Revenue managed" },
+  { display: "5+", label: "Years of industry experience" },
+  { display: "Zero", label: "Tolerance policy for financial errors" },
 ];
 
 export const PROCESS_STEPS = [

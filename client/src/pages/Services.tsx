@@ -97,27 +97,13 @@ export default function Services() {
                         </h2>
                       </div>
                     </div>
-                    <p className="mt-5 text-sm font-medium text-[var(--meridian)] border-l-2 border-[var(--meridian)] pl-4 leading-relaxed">
-                      {s.short}
-                    </p>
                   </div>
                   <div
                     className={`lg:col-span-7 ${i % 2 === 1 ? "lg:order-1 lg:col-start-1" : ""}`}
                   >
-                    <p className="text-[0.9375rem] leading-relaxed text-[var(--ink)]">{s.detail}</p>
-                    <ul className="mt-5 grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
-                      {s.bullets.map((b) => (
-                        <li
-                          key={b}
-                          className="flex gap-2 text-sm text-[var(--muted-foreground)]"
-                        >
-                          <span className="shrink-0 h-5 w-5 rounded-full bg-[var(--meridian)]/12 flex items-center justify-center mt-px">
-                            <span className="h-2 w-2 rounded-full bg-[var(--meridian)]" />
-                          </span>
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
+                    <Link href={`/services#${s.id}`} className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--navy)] hover:text-[var(--meridian)]">
+                      View service details <ArrowRight className="h-4 w-4" />
+                    </Link>
                   </div>
                 </div>
               </div>

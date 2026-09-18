@@ -79,13 +79,15 @@ export default function SiteHeader() {
               {BRAND.phoneDisplay}
             </a>
           )}
-            <Link
-              href="/contact"
+            <a
+              href={BRAND.calendar}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
               style={{ background: "var(--navy)" }}
             >
               Book a Free Call
-            </Link>
+            </a>
         </div>
 
         <button
@@ -117,13 +119,15 @@ export default function SiteHeader() {
                 {BRAND.phoneDisplay}
               </a>
             )}
-            <Link
-              href="/contact"
+            <a
+              href={BRAND.calendar}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-3 inline-flex justify-center px-4 py-3 text-sm font-semibold text-white"
               style={{ background: "var(--navy)" }}
             >
               Book a Free Discovery Call
-            </Link>
+            </a>
             <Link
               href="/contact"
               className="mt-1 mb-1 inline-flex justify-center px-4 py-3 text-sm font-semibold text-[var(--meridian)] border border-[var(--meridian)]"

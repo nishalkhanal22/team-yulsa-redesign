@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
-import { SERVICES, INDUSTRIES, PROCESS_STEPS, STATS } from "@/lib/siteData";
+import { BRAND, PROCESS_STEPS, STATS, SOFTWARE_GROUPS } from "@/lib/siteData";
 import { ASSETS, asset } from "@/lib/assets";
 import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
@@ -45,11 +45,10 @@ const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>>
   Virtual: Landmark,
 };
 
-function CountUp({ value, suffix }: { value: number; suffix: string }) {
+function CountUp({ display }: { display: string }) {
   return (
     <span className="stat-num text-4xl lg:text-5xl font-semibold" style={{ color: "var(--meridian)" }}>
-      {value}
-      {suffix}
+      {display}
     </span>
   );
 }
@@ -75,13 +74,15 @@ export default function Home() {
               tax-ready year-round, and report in plain English.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3 reveal">
-              <Link
-                href="/contact"
+              <a
+                href={BRAND.calendar}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
                 style={{ background: "var(--navy)" }}
               >
                 Book a Free Discovery Call <ArrowUpRight className="h-4 w-4" />
-              </Link>
+              </a>
               <Link
                 href="/services"
                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold border border-[var(--navy)] text-[var(--navy)] transition-all duration-200 active:scale-[0.97] hover:bg-[var(--navy)] hover:text-white"
@@ -162,50 +163,10 @@ export default function Home() {
         <div className="container py-10 grid grid-cols-2 lg:grid-cols-4 gap-8">
           {STATS.map((s) => (
             <div key={s.label} className="reveal">
-              <CountUp value={s.value} suffix={s.suffix} />
+              <CountUp display={s.display} />
               <p className="mt-2 text-xs lg:text-[0.8125rem] leading-snug text-[var(--muted-foreground)] max-w-[24ch]">{s.label}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ── Services overview ── */}
-      <section className="py-16 lg:py-24">
-        <div className="container">
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
-            <div className="max-w-xl">
-              <p className="folio-tag mb-3 reveal">01 / Services</p>
-              <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
-                Ten services. One clean ledger.
-              </h2>
-            </div>
-            <Link href="/services" className="text-sm font-semibold text-[var(--navy)] inline-flex items-center gap-1.5 hover:text-[var(--meridian)] transition-colors reveal">
-              View all services <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)]">
-            {SERVICES.map((s) => (
-              <Link
-                key={s.id}
-                href="/services"
-                className="group bg-white p-6 lg:p-7 hover:bg-[oklch(0.975_0.01_90)] transition-colors duration-200 reveal"
-              >
-                <p className="folio-tag mb-3">{s.folio}</p>
-                {(() => {
-                  const Icon = Object.entries(SERVICE_ICONS).find(([k]) => s.title.startsWith(k))?.[1];
-                  return Icon ? (
-                    <span className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[oklch(0.96_0.02_160)] text-[var(--meridian)] transition-colors duration-200 group-hover:bg-[var(--meridian)] group-hover:text-white">
-                      <Icon className="h-4.5 w-4.5" />
-                    </span>
-                  ) : null;
-                })()}
-                <h3 className="font-serif text-xl text-[var(--navy)] group-hover:text-[var(--meridian)] transition-colors">
-                  {s.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[var(--muted-foreground)]">{s.short}</p>
-              </Link>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -311,36 +272,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Industries ── */}
-      <section className="py-16 lg:py-24">
-        <div className="container">
-          <div className="mb-10 max-w-xl">
-            <p className="folio-tag mb-3 reveal">04 / Industries</p>
-            <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
-              Industry-specific books, not generic bookkeeping.
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {INDUSTRIES.map((ind, i) => (
-              <Link
-                key={ind.id}
-                href={`/industries/${ind.slug}`}
-                className="group border border-[var(--border)] bg-white p-6 hover:border-[var(--meridian)] hover:shadow-md transition-all duration-200 reveal"
-              >
-                <p className="folio-tag mb-3">IND 0{i + 1}</p>
-                <h3 className="font-serif text-xl text-[var(--navy)] group-hover:text-[var(--meridian)] transition-colors">
-                  {ind.name}
-                </h3>
-                <p className="mt-3 text-sm text-[var(--muted-foreground)] leading-relaxed">{ind.short}</p>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--navy)] group-hover:gap-2.5 transition-all">
-                  See how we help <ArrowRight className="h-3.5 w-3.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Process ── */}
       <section className="py-16 lg:py-24 bg-white border-t border-[var(--border)]">
         <div className="container">
@@ -370,26 +301,21 @@ export default function Home() {
       <section className="py-14 lg:py-18 border-t border-[var(--border)] bg-white">
         <div className="container">
           <p className="folio-tag mb-3 reveal">Tools · Certified Expertise</p>
-          <h2 className="font-serif text-2xl lg:text-3xl text-[var(--navy)] max-w-lg reveal">
-            Certified on the platforms your business already uses
-          </h2>
+          <h2 className="font-serif text-2xl lg:text-3xl text-[var(--navy)] max-w-lg reveal">One team across your finance stack</h2>
           <p className="mt-3 text-sm text-[var(--muted-foreground)] max-w-xl leading-relaxed reveal">
             We connect through your accounting software's official accountant channels — read-only
             access, so you keep full control of your data.
           </p>
-          <div className="mt-8 reveal">
-            <img
-              src={ASSETS.softwareLogos}
-              alt="Software Team Yulsa uses: QuickBooks Online and Desktop, Xero, FreshBooks, Wave, Power BI, ADP Payroll, Acumatica, and Zoho Books"
-              className="w-full max-w-4xl rounded-md border border-[var(--border)]"
-              loading="lazy"
-            />
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 reveal">
+            {SOFTWARE_GROUPS.map((group) => (
+              <div key={group.label} className="border border-[var(--border)] bg-[oklch(0.99_0.002_85)] p-5">
+                <p className="folio-tag mb-4">{group.label}</p>
+                <ul className="space-y-2 text-sm font-semibold text-[var(--navy)]">
+                  {group.items.map((item) => <li key={item}>{item}</li>)}
+                </ul>
+              </div>
+            ))}
           </div>
-          <p className="mt-5 text-xs text-[var(--muted-foreground)] max-w-2xl reveal">
-            Certified daily users of QuickBooks Online &amp; Desktop, Xero, FreshBooks, Wave, Power BI,
-            ADP Payroll, Acumatica, and Zoho Books — we connect through each platform's official
-            accountant channels with read-only access, so you keep full control of your data.
-          </p>
         </div>
       </section>
 
