@@ -11,28 +11,24 @@ import { Check } from "lucide-react";
 
 const STANDARDS = [
   {
-    n: "S-01",
     title: "Zero tolerance for financial errors",
     text: "Every month-end file passes a two-person review: the assigned specialist closes it, a second reviewer reconciles it. Nothing ships without both signatures in the file.",
     metric: "2",
     metricLabel: "person review on every close",
   },
   {
-    n: "S-02",
     title: "North American accounting readiness",
     text: "Our team works in USD and CAD, follows US GAAP conventions, and prepares the workpapers IRS and CRA filers actually ask for — 1099s, T4s, state and provincial sales tax schedules.",
     metric: "2",
     metricLabel: "jurisdictions covered (US · CA)",
   },
   {
-    n: "S-03",
     title: "Defined turnarounds, published uptime",
     text: "Month-end closes land within 5 business days. Priority requests during US hours get handled within 12 hours on average. Missed deadlines are credited — in writing.",
     metric: "5",
     metricLabel: "business-day close SLA",
   },
   {
-    n: "S-04",
     title: "Confidentiality discipline",
     text: "Every team member is bound by client confidentiality agreements covering all engagements, indefinitely. Files are named, access is role-based, and revocation takes one click.",
     metric: "∞",
@@ -51,6 +47,7 @@ const TEAM = [
   { name: "Sujal Aryal", role: "Associate", note: "Budgeting, forecasting & reporting", photo: asset("sujal_429a0972.png") },
   { name: "Samrat Hamal", role: "IT Associate", note: "Data security, tooling & automation", photo: asset("samrat_746a0552.png") },
   { name: "HR Associate", role: "HR Associate", note: "People operations & team support", photo: "/manus-storage/hr_bdf89b86.jpeg" },
+  { name: "Accounting Associate", role: "Accounting Associate", note: "Accounting operations & client support", photo: "/manus-storage/Gemini_Generated_Image_d821g8d821g8d821_d341153c.jpeg" },
 ];
 
 export default function About() {
@@ -93,13 +90,10 @@ export default function About() {
           <div className="ledger-rule mb-0" />
           {STANDARDS.map((s, i) => (
             <div
-              key={s.n}
+              key={s.title}
               className="grid lg:grid-cols-12 gap-4 lg:gap-8 py-8 border-b border-[var(--border)] items-start reveal"
             >
-              <div className="lg:col-span-2">
-                <p className="stat-num text-sm font-semibold text-[var(--muted-foreground)]">{s.n}</p>
-              </div>
-              <div className="lg:col-span-4">
+              <div className="lg:col-span-5">
                 <h2 className="font-serif text-xl lg:text-2xl text-[var(--navy)] leading-snug">{s.title}</h2>
               </div>
               <div className="lg:col-span-4">
@@ -122,7 +116,7 @@ export default function About() {
         <div className="container">
           <div className="grid lg:grid-cols-12 gap-8 items-end mb-10">
             <div className="lg:col-span-8">
-              <p className="folio-tag mb-3 reveal">The Team · 10 Specialists</p>
+              <p className="folio-tag mb-3 reveal">The Team · 11 Specialists</p>
               <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
                 Certified specialists, not a call center
               </h2>
@@ -154,8 +148,8 @@ export default function About() {
             ))}
             <div className="relative rounded-lg bg-[var(--navy)] text-white p-5 flex flex-col justify-end overflow-hidden reveal">
               <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 23px, white 23px, white 24px)" }} />
-              <p className="stat-num text-4xl text-[var(--meridian)]">10</p>
-              <p className="text-sm leading-relaxed mt-2">named specialists across bookkeeping, tax, IFRS, HR, and IT — every one bound by indefinite client confidentiality.</p>
+              <p className="stat-num text-4xl text-[var(--meridian)]">11</p>
+              <p className="text-sm leading-relaxed mt-2">named specialists across accounting, bookkeeping, tax, IFRS, HR, and IT — every one bound by indefinite client confidentiality.</p>
             </div>
           </div>
 

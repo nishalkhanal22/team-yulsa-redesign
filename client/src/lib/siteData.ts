@@ -325,6 +325,7 @@ export const TEAM = [
   { name: "Sujal Aryal", role: "Associate", note: "Supports budgeting, forecasting, and reporting." },
   { name: "Samrat Hamal", role: "IT Associate", note: "Owns data security, tooling, and automation." },
   { name: "HR Associate", role: "HR Associate", note: "Supports people operations and team coordination." },
+  { name: "Accounting Associate", role: "Accounting Associate", note: "Supports accounting operations and client delivery." },
 ];
 
 export const STATS = [
@@ -387,7 +388,7 @@ export const FAQS = [
     a: "Engagements start with a simple service agreement. Many clients begin with a single month of bookkeeping cleanup to see the quality first, then move to a monthly engagement. No multi-year lock-ins.",
   },
   {
-    q: "What does the free bookkeeping health check include?",
-    a: "We review your last 1–3 months of books, check reconciliations, categorization, and closing status, and return a short report with issues found and a fix plan — even if you never hire us.",
+    q: "How do I request a discovery call?",
+    a: "Complete the contact form with your details and preferred date and time in EST. We review your request and reply within one US business day to confirm the meeting details.",
   },
 ];

@@ -58,9 +58,9 @@ const PAGE_META: Record<string, { title: string; description: string }> = {
       "The certified accountants and consultants behind Team Yulsa, serving US and Canadian businesses with precision and integrity.",
   },
   "/contact": {
-    title: "Contact Team Yulsa — Get Your Free Bookkeeping Health Check",
+    title: "Contact Team Yulsa — Book a Discovery Call",
     description:
-      "Book a free discovery call or request your free bookkeeping health check. Responses within one US business day.",
+      "Request a discovery call with Team Yulsa for outsourced bookkeeping and accounting support across the US and Canada. Responses within one US business day.",
   },
   "/how-it-works": {
     title: "How Outsourced Bookkeeping Works | Team Yulsa",

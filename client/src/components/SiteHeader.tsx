@@ -1,6 +1,6 @@
 /*
   MERIDIAN PRECISION — sticky nav, opaque on scroll with bottom ledger rule.
-  Serif wordmark + mono nav labels. Primary CTA is a value-exchange ("Free Health Check").
+  Serif wordmark + mono nav labels. Primary CTA routes visitors to Contact.
 */
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
@@ -47,10 +47,7 @@ export default function SiteHeader() {
       <div className="container flex items-center justify-between h-16 lg:h-[72px]">
         <Link href="/" className="flex items-center gap-2.5" aria-label="Team Yulsa home">
           <img src={LOGO} alt="Team Yulsa logo" className="h-9 w-9 lg:h-10 lg:w-10" />
-          <span
-            className="font-serif text-xl lg:text-[1.35rem] font-bold tracking-tight"
-            style={{ color: "var(--navy)" }}
-          >
+          <span className="font-serif text-xl lg:text-[1.35rem] font-bold tracking-tight" style={{ color: "var(--navy)" }}>
             Team Yulsa
           </span>
         </Link>
@@ -70,32 +67,16 @@ export default function SiteHeader() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-4">
-          {BRAND.phoneDisplay && (
-            <a
-              href={BRAND.phoneHref}
-              className="flex items-center gap-1.5 text-[0.8125rem] font-mono font-medium text-[var(--navy)]"
-            >
-              <Phone className="h-3.5 w-3.5" />
-              {BRAND.phoneDisplay}
-            </a>
-          )}
-            <a
-              href={BRAND.calendar}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
-              style={{ background: "var(--navy)" }}
-            >
-              Book a Free Call
-            </a>
+          <Link
+            href="/contact"
+            className="inline-flex items-center px-4 py-2.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
+            style={{ background: "var(--navy)" }}
+          >
+            Book a Free Call
+          </Link>
         </div>
 
-        <button
-          className="lg:hidden p-2 text-[var(--navy)]"
-          onClick={() => setOpen(!open)}
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-        >
+        <button className="lg:hidden p-2 text-[var(--navy)]" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
@@ -107,32 +88,16 @@ export default function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`py-2.5 text-sm font-semibold uppercase tracking-wide ${
-                  location === item.href ? "text-[var(--meridian)]" : "text-[var(--navy)]"
-                }`}
+                className={`py-2.5 text-sm font-semibold uppercase tracking-wide ${location === item.href ? "text-[var(--meridian)]" : "text-[var(--navy)]"}`}
               >
                 {item.label}
               </Link>
             ))}
-            {BRAND.phoneDisplay && (
-              <a href={BRAND.phoneHref} className="py-2.5 text-sm font-mono text-[var(--navy)]">
-                {BRAND.phoneDisplay}
-              </a>
-            )}
-            <a
-              href={BRAND.calendar}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex justify-center px-4 py-3 text-sm font-semibold text-white"
-              style={{ background: "var(--navy)" }}
-            >
+            <Link href="/contact" className="mt-3 inline-flex justify-center px-4 py-3 text-sm font-semibold text-white" style={{ background: "var(--navy)" }}>
               Book a Free Discovery Call
-            </a>
-            <Link
-              href="/contact"
-              className="mt-1 mb-1 inline-flex justify-center px-4 py-3 text-sm font-semibold text-[var(--meridian)] border border-[var(--meridian)]"
-            >
-              Free Health Check
+            </Link>
+            <Link href="/contact" className="mt-1 mb-1 inline-flex justify-center px-4 py-3 text-sm font-semibold text-[var(--meridian)] border border-[var(--meridian)]">
+              Contact Team Yulsa
             </Link>
           </nav>
         </div>

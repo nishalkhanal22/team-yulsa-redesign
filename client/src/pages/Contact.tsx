@@ -1,6 +1,6 @@
 /*
   MERIDIAN PRECISION — Contact page.
-  Lead-gen focus: free health check / discovery call framing, US phone line,
+  Lead-gen focus: discovery call framing and US phone line,
   FAQ accordion with FAQPage JSON-LD (audit fix).
 */
 import { useEffect, useState } from "react";
@@ -25,7 +25,7 @@ const SERVICES_SELECT = [
 export default function Contact() {
   useReveal();
 
-  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", date: "", time: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
 
   // FAQPage structured data (audit fix)
@@ -61,8 +61,8 @@ export default function Contact() {
     // Static site: acknowledge receipt. Wire to a real inbox / endpoint when live.
     await new Promise((r) => setTimeout(r, 600));
     setSubmitting(false);
-    toast.success("Thanks! Your request has been noted. We'll reply within one US business day.");
-    setForm({ name: "", email: "", company: "", service: "", message: "" });
+    toast.success("Thanks! Your discovery-call request has been noted. We'll reply within one US business day.");
+    setForm({ name: "", email: "", company: "", service: "", date: "", time: "", message: "" });
   };
 
   return (
@@ -77,10 +77,8 @@ export default function Contact() {
               run themselves.
             </h1>
             <p className="mt-5 text-base lg:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
-              Book a free 30-minute discovery call, or request a free bookkeeping health check —
-              we review your last 1–3 months of books and return a plain-English report, even if
-              you never hire us. Either way, you'll know exactly what needs fixing — and what it
-              would cost to fix.
+              Book a 30-minute discovery call and tell us about your business, accounting workflow,
+              and preferred time. We will review the details and follow up with the next step.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -121,7 +119,7 @@ export default function Contact() {
             >
               <p className="folio-tag mb-1">Start here</p>
               <h2 className="font-serif text-2xl text-[var(--navy)] mb-6">
-                Free Bookkeeping Health Check
+                Request a Discovery Call
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 <label className="block">
@@ -167,6 +165,14 @@ export default function Contact() {
                     ))}
                   </select>
                 </label>
+                <label className="block">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Preferred date</span>
+                  <input type="date" className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian)] transition-colors" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} />
+                </label>
+                <label className="block">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Preferred time (EST)</span>
+                  <input type="time" className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian)] transition-colors" value={form.time} onChange={(e) => setForm({ ...form, time: e.target.value })} />
+                </label>
               </div>
               <label className="block mt-4">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Anything else?</span>
@@ -184,10 +190,10 @@ export default function Contact() {
                 className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] disabled:opacity-60 hover:bg-[oklch(0.28_0.05_265)]"
                 style={{ background: "var(--navy)" }}
               >
-                {submitting ? "Sending…" : "Request My Free Health Check"} <Send className="h-4 w-4" />
+                {submitting ? "Sending…" : "Request Discovery Call"} <Send className="h-4 w-4" />
               </button>
               <p className="mt-3 text-xs text-[var(--muted-foreground)] text-center">
-                Read-only access · signed NDA · we reply within one US business day
+                We reply within one US business day · preferred times are subject to confirmation
               </p>
             </form>
 
@@ -206,7 +212,7 @@ export default function Contact() {
                 One email is all it takes.
               </h2>
               <p className="mt-4 text-base text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
-                Email us or book a free discovery call — we respond within 1 US business day and
+                Email us or request a discovery call — we respond within 1 US business day and
                 always reply to a real human, not a chatbot.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
@@ -227,7 +233,7 @@ export default function Contact() {
                   className="inline-flex items-center gap-3 px-6 py-4 text-sm font-semibold border border-[var(--navy)] bg-white text-[var(--navy)] hover:border-[var(--meridian)] hover:text-[var(--meridian)] transition-colors"
                 >
                   <CalendarDays className="h-4.5 w-4.5" />
-                  Book on Google Calendar
+                  Open Google Calendar
                 </a>
                 <div className="flex items-center gap-3">
                   <a
@@ -267,7 +273,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <p className="stat-num text-3xl font-semibold text-[var(--meridian)]">$0</p>
-                  <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">health check cost — always</p>
+                  <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1">no obligation to book</p>
                 </div>
               </div>
             </div>

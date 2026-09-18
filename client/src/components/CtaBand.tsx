@@ -10,7 +10,7 @@ export default function CtaBand({
   title = "Your books, balanced. Your week, back.",
   sub = "Book a free 30-minute discovery call — you'll leave with a clear scope and a fixed monthly price, in writing. No obligation, no sales pressure.",
   primaryLabel = "Book Free Discovery Call",
-  secondaryLabel = "Get Free Health Check",
+  secondaryLabel = "Contact Team Yulsa",
 }: {
   title?: string;
   sub?: string;
