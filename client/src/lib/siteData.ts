@@ -6,9 +6,9 @@
 
 export const BRAND = {
   email: "info@teamyulsa.com",
-  phone: "", // no US number yet — client to provide a real one before enabling
-  phoneHref: "mailto:info@teamyulsa.com",
-  phoneDisplay: "",
+  phone: "+19143395442",
+  phoneHref: "tel:+19143395442",
+  phoneDisplay: "+1 (914) 339-5442",
   address: "Kathmandu, Nepal · Serving clients across the US & Canada",
   hours: "Mon–Fri, 9:00 AM – 5:00 PM (EST) · We work on your time zone",
   linkedin: "https://www.linkedin.com/company/team-yulsa/",
@@ -324,6 +324,7 @@ export const TEAM = [
   { name: "Dinesh Puri", role: "Associate", note: "Handles reconciliations and AR/AP operations." },
   { name: "Sujal Aryal", role: "Associate", note: "Supports budgeting, forecasting, and reporting." },
   { name: "Samrat Hamal", role: "IT Associate", note: "Owns data security, tooling, and automation." },
+  { name: "HR Associate", role: "HR Associate", note: "Supports people operations and team coordination." },
 ];
 
 export const STATS = [

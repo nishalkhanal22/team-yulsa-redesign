@@ -50,6 +50,7 @@ const TEAM = [
   { name: "Dinesh Puri", role: "Associate", note: "Reconciliations & AR/AP operations", photo: asset("dinesh_89398095.png") },
   { name: "Sujal Aryal", role: "Associate", note: "Budgeting, forecasting & reporting", photo: asset("sujal_429a0972.png") },
   { name: "Samrat Hamal", role: "IT Associate", note: "Data security, tooling & automation", photo: asset("samrat_746a0552.png") },
+  { name: "HR Associate", role: "HR Associate", note: "People operations & team support", photo: "/manus-storage/hr_bdf89b86.jpeg" },
 ];
 
 export default function About() {
@@ -121,7 +122,7 @@ export default function About() {
         <div className="container">
           <div className="grid lg:grid-cols-12 gap-8 items-end mb-10">
             <div className="lg:col-span-8">
-              <p className="folio-tag mb-3 reveal">The Team · 9 Specialists</p>
+              <p className="folio-tag mb-3 reveal">The Team · 10 Specialists</p>
               <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
                 Certified specialists, not a call center
               </h2>
@@ -153,8 +154,8 @@ export default function About() {
             ))}
             <div className="relative rounded-lg bg-[var(--navy)] text-white p-5 flex flex-col justify-end overflow-hidden reveal">
               <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 23px, white 23px, white 24px)" }} />
-              <p className="stat-num text-4xl text-[var(--meridian)]">9</p>
-              <p className="text-sm leading-relaxed mt-2">named specialists across bookkeeping, tax, IFRS, and IT — every one bound by indefinite client confidentiality.</p>
+              <p className="stat-num text-4xl text-[var(--meridian)]">10</p>
+              <p className="text-sm leading-relaxed mt-2">named specialists across bookkeeping, tax, IFRS, HR, and IT — every one bound by indefinite client confidentiality.</p>
             </div>
           </div>
 

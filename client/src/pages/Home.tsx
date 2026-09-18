@@ -112,7 +112,7 @@ export default function Home() {
               ))}
             </div>
             <p className="text-[0.8125rem] leading-snug text-[var(--muted-foreground)]">
-              <span className="font-semibold text-[var(--navy)]">9 certified specialists</span> across bookkeeping, tax &amp; reporting
+              <span className="font-semibold text-[var(--navy)]">10 named specialists</span> across bookkeeping, tax, HR &amp; reporting
             </p>
           </div>
         </div>
