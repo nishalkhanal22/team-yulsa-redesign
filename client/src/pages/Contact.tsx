@@ -24,14 +24,44 @@ const SERVICES_SELECT = [
 ];
 
 const REGION_NAMES = new Intl.DisplayNames(["en"], { type: "region" });
+const GMT_LABEL_REFERENCE_DATE = new Date("2026-01-15T12:00:00Z");
+
+const timezoneOffsetMinutes = (timezone: string) => {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: timezone,
+    timeZoneName: "longOffset",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).formatToParts(GMT_LABEL_REFERENCE_DATE);
+  const value = parts.find((part) => part.type === "timeZoneName")?.value ?? "GMT";
+  const match = value.match(/GMT([+-])(\d{1,2})(?::(\d{2}))?/);
+  if (!match) return 0;
+  const minutes = Number(match[2]) * 60 + Number(match[3] ?? 0);
+  return match[1] === "+" ? minutes : -minutes;
+};
+
+const timezoneGmtLabel = (timezone: string) => {
+  const offset = timezoneOffsetMinutes(timezone);
+  if (offset === 0) return "GMT+0:00";
+  const sign = offset >= 0 ? "+" : "-";
+  const absolute = Math.abs(offset);
+  const hours = Math.floor(absolute / 60);
+  const minutes = absolute % 60;
+  return `GMT${sign}${hours}:${String(minutes).padStart(2, "0")}`;
+};
 
 const timezoneLabel = (timezone: (typeof GLOBAL_TIMEZONES)[number]) => {
   const countries = timezone.countryCodes
     .split(",")
     .map((code) => REGION_NAMES.of(code) ?? code)
     .join(" / ");
-  return `${countries} — ${timezone.location}`;
+  return `${timezoneGmtLabel(timezone.value)} — ${timezone.location}, ${countries}`;
 };
+
+const SORTED_TIMEZONES = [...GLOBAL_TIMEZONES].sort((a, b) => {
+  const offsetDifference = timezoneOffsetMinutes(a.value) - timezoneOffsetMinutes(b.value);
+  return offsetDifference || timezoneLabel(a).localeCompare(timezoneLabel(b));
+});
 
 export default function Contact() {
   useReveal();
@@ -217,7 +247,7 @@ export default function Contact() {
                     value={form.timezone}
                     onChange={(e) => setForm({ ...form, timezone: e.target.value })}
                   >
-                    {GLOBAL_TIMEZONES.map((zone) => (
+                    {SORTED_TIMEZONES.map((zone) => (
                       <option key={zone.value} value={zone.value}>{timezoneLabel(zone)}</option>
                     ))}
                   </select>
