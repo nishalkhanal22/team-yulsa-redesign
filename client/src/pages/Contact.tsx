@@ -23,17 +23,21 @@ const SERVICES_SELECT = [
 ];
 
 const TIMEZONE_OPTIONS = [
-  { value: "America/New_York", label: "Eastern Time (ET)" },
-  { value: "America/Chicago", label: "Central Time (CT)" },
-  { value: "America/Denver", label: "Mountain Time (MT)" },
-  { value: "America/Los_Angeles", label: "Pacific Time (PT)" },
-  { value: "America/Anchorage", label: "Alaska Time (AKT)" },
-  { value: "Pacific/Honolulu", label: "Hawaii Time (HT)" },
-  { value: "America/Halifax", label: "Atlantic Time (AT)" },
-  { value: "America/Toronto", label: "Canada Eastern Time" },
-  { value: "America/Winnipeg", label: "Canada Central Time" },
-  { value: "America/Edmonton", label: "Canada Mountain Time" },
-  { value: "America/Vancouver", label: "Canada Pacific Time" },
+  { value: "America/New_York", label: "United States — New York / Eastern Time" },
+  { value: "America/Toronto", label: "Canada — Toronto / Eastern Time" },
+  { value: "America/Chicago", label: "United States — Chicago / Central Time" },
+  { value: "America/Winnipeg", label: "Canada — Winnipeg / Central Time" },
+  { value: "America/Regina", label: "Canada — Regina / Central Time (no DST)" },
+  { value: "America/Denver", label: "United States — Denver / Mountain Time" },
+  { value: "America/Phoenix", label: "United States — Phoenix / Mountain Time (no DST)" },
+  { value: "America/Edmonton", label: "Canada — Edmonton / Mountain Time" },
+  { value: "America/Los_Angeles", label: "United States — Los Angeles / Pacific Time" },
+  { value: "America/Vancouver", label: "Canada — Vancouver / Pacific Time" },
+  { value: "America/Whitehorse", label: "Canada — Whitehorse / Yukon Time" },
+  { value: "America/Anchorage", label: "United States — Anchorage / Alaska Time" },
+  { value: "Pacific/Honolulu", label: "United States — Honolulu / Hawaii Time" },
+  { value: "America/Halifax", label: "Canada — Halifax / Atlantic Time" },
+  { value: "America/St_Johns", label: "Canada — St. John's / Newfoundland Time" },
 ];
 
 export default function Contact() {
