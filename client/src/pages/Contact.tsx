@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter, CalendarDays } from "lucide-react";
 import Layout from "@/components/Layout";
 import { BRAND, FAQS } from "@/lib/siteData";
+import { GLOBAL_TIMEZONES } from "@/lib/timezones";
 import { useReveal } from "@/hooks/useReveal";
 
 const SERVICES_SELECT = [
@@ -22,23 +23,15 @@ const SERVICES_SELECT = [
   "Not sure — I'd like guidance",
 ];
 
-const TIMEZONE_OPTIONS = [
-  { value: "America/New_York", label: "United States — New York / Eastern Time" },
-  { value: "America/Toronto", label: "Canada — Toronto / Eastern Time" },
-  { value: "America/Chicago", label: "United States — Chicago / Central Time" },
-  { value: "America/Winnipeg", label: "Canada — Winnipeg / Central Time" },
-  { value: "America/Regina", label: "Canada — Regina / Central Time (no DST)" },
-  { value: "America/Denver", label: "United States — Denver / Mountain Time" },
-  { value: "America/Phoenix", label: "United States — Phoenix / Mountain Time (no DST)" },
-  { value: "America/Edmonton", label: "Canada — Edmonton / Mountain Time" },
-  { value: "America/Los_Angeles", label: "United States — Los Angeles / Pacific Time" },
-  { value: "America/Vancouver", label: "Canada — Vancouver / Pacific Time" },
-  { value: "America/Whitehorse", label: "Canada — Whitehorse / Yukon Time" },
-  { value: "America/Anchorage", label: "United States — Anchorage / Alaska Time" },
-  { value: "Pacific/Honolulu", label: "United States — Honolulu / Hawaii Time" },
-  { value: "America/Halifax", label: "Canada — Halifax / Atlantic Time" },
-  { value: "America/St_Johns", label: "Canada — St. John's / Newfoundland Time" },
-];
+const REGION_NAMES = new Intl.DisplayNames(["en"], { type: "region" });
+
+const timezoneLabel = (timezone: (typeof GLOBAL_TIMEZONES)[number]) => {
+  const countries = timezone.countryCodes
+    .split(",")
+    .map((code) => REGION_NAMES.of(code) ?? code)
+    .join(" / ");
+  return `${countries} — ${timezone.location}`;
+};
 
 export default function Contact() {
   useReveal();
@@ -224,8 +217,8 @@ export default function Contact() {
                     value={form.timezone}
                     onChange={(e) => setForm({ ...form, timezone: e.target.value })}
                   >
-                    {TIMEZONE_OPTIONS.map((zone) => (
-                      <option key={zone.value} value={zone.value}>{zone.label}</option>
+                    {GLOBAL_TIMEZONES.map((zone) => (
+                      <option key={zone.value} value={zone.value}>{timezoneLabel(zone)}</option>
                     ))}
                   </select>
                 </label>
