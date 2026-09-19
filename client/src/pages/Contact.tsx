@@ -22,10 +22,24 @@ const SERVICES_SELECT = [
   "Not sure — I'd like guidance",
 ];
 
+const TIMEZONE_OPTIONS = [
+  { value: "America/New_York", label: "Eastern Time (ET)" },
+  { value: "America/Chicago", label: "Central Time (CT)" },
+  { value: "America/Denver", label: "Mountain Time (MT)" },
+  { value: "America/Los_Angeles", label: "Pacific Time (PT)" },
+  { value: "America/Anchorage", label: "Alaska Time (AKT)" },
+  { value: "Pacific/Honolulu", label: "Hawaii Time (HT)" },
+  { value: "America/Halifax", label: "Atlantic Time (AT)" },
+  { value: "America/Toronto", label: "Canada Eastern Time" },
+  { value: "America/Winnipeg", label: "Canada Central Time" },
+  { value: "America/Edmonton", label: "Canada Mountain Time" },
+  { value: "America/Vancouver", label: "Canada Pacific Time" },
+];
+
 export default function Contact() {
   useReveal();
 
-  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", date: "", time: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", company: "", service: "", date: "", time: "", timezone: "America/New_York", message: "" });
   const [submitting, setSubmitting] = useState(false);
 
   // FAQPage structured data (audit fix)
@@ -57,12 +71,37 @@ export default function Contact() {
       toast.error("Please fill in your name and email so we can reach you.");
       return;
     }
+    if (!form.date || !form.time) {
+      toast.error("Please choose your preferred date and time.");
+      return;
+    }
+
     setSubmitting(true);
-    // Static site: acknowledge receipt. Wire to a real inbox / endpoint when live.
-    await new Promise((r) => setTimeout(r, 600));
-    setSubmitting(false);
-    toast.success("Thanks! Your discovery-call request has been noted. We'll reply within one US business day.");
-    setForm({ name: "", email: "", company: "", service: "", date: "", time: "", message: "" });
+    try {
+      const body = new URLSearchParams({
+        name: form.name.trim(),
+        email: form.email.trim(),
+        company: form.company.trim(),
+        service: form.service,
+        date: form.date,
+        time: form.time,
+        timezone: form.timezone,
+        message: form.message.trim(),
+      });
+
+      await fetch(BRAND.bookingEndpoint, {
+        method: "POST",
+        mode: "no-cors",
+        body,
+      });
+
+      toast.success("Your discovery call has been booked successfully. Check your email for the Google Meet invitation.");
+      setForm({ name: "", email: "", company: "", service: "", date: "", time: "", timezone: "America/New_York", message: "" });
+    } catch {
+      toast.error("We could not submit your booking. Please try again or email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -170,8 +209,21 @@ export default function Contact() {
                   <input type="date" className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian)] transition-colors" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} />
                 </label>
                 <label className="block">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Preferred time (EST)</span>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Preferred time *</span>
                   <input type="time" className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian)] transition-colors" value={form.time} onChange={(e) => setForm({ ...form, time: e.target.value })} />
+                </label>
+                <label className="block sm:col-span-2">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Your timezone *</span>
+                  <select
+                    required
+                    className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian)] transition-colors"
+                    value={form.timezone}
+                    onChange={(e) => setForm({ ...form, timezone: e.target.value })}
+                  >
+                    {TIMEZONE_OPTIONS.map((zone) => (
+                      <option key={zone.value} value={zone.value}>{zone.label}</option>
+                    ))}
+                  </select>
                 </label>
               </div>
               <label className="block mt-4">

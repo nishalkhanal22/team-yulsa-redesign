@@ -15,6 +15,7 @@ export const BRAND = {
   x: "https://x.com/teamyulsa",
   whatsapp: "https://wa.me/15555550100",
   calendar: "https://calendar.google.com/calendar/u/0/r?cid=yulsaadvisors%40gmail.com",
+  bookingEndpoint: "https://script.google.com/macros/s/AKfycbwhljyZOfa0m2ORHjL6_s6MufYti06qeNzGiF-0rip07dg0YrtxdWz3eNEnQeAv9xUj0w/exec",
 };
 
 /*
