@@ -8,14 +8,13 @@ import {
   ArrowRight,
   ArrowUpRight,
   CheckCircle2,
-  Globe2,
   ShieldCheck,
   Clock,
   DollarSign,
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
-import { BRAND, PROCESS_STEPS, STATS, SOFTWARE_GROUPS } from "@/lib/siteData";
+import { BRAND, STATS, SOFTWARE_GROUPS } from "@/lib/siteData";
 import { ASSETS, asset } from "@/lib/assets";
 import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
@@ -232,9 +231,6 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <Link href="/how-it-works" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-[var(--navy)] hover:text-[var(--meridian)] transition-colors reveal">
-              See the reporting journey <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
           <div className="lg:col-span-7 reveal">
             <div className="border border-[var(--border)] bg-white shadow-[0_18px_50px_rgba(15,32,55,0.08)]">
@@ -269,31 +265,6 @@ export default function Home() {
               <div className="border-t border-[var(--border)] px-5 py-4 text-xs leading-relaxed text-[var(--muted-foreground)]">Example layout only — not client data. Reporting scope is agreed before work begins.</div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ── Process ── */}
-      <section className="py-16 lg:py-24 bg-white border-t border-[var(--border)]">
-        <div className="container">
-          <div className="mb-10 max-w-xl">
-            <p className="folio-tag mb-3 reveal">05 / How it works</p>
-            <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
-              From first call to first clean close in 30 days.
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-[var(--border)] border border-[var(--border)]">
-            {PROCESS_STEPS.map((step) => (
-              <div key={step.n} className="bg-white p-6 reveal">
-                <p className="stat-num text-2xl font-semibold text-[var(--meridian)] mb-3">{step.n}</p>
-                <h3 className="font-serif text-lg text-[var(--navy)]">{step.title}</h3>
-                <p className="mt-2 text-sm text-[var(--muted-foreground)] leading-relaxed">{step.text}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-6 flex items-center gap-2 text-xs text-[var(--muted-foreground)] reveal">
-            <Globe2 className="h-3.5 w-3.5 text-[var(--meridian)]" />
-            Onboarding typically completes within 5 business days — secure, read-only, and guided by a kickoff checklist.
-          </p>
         </div>
       </section>
 
