@@ -65,20 +65,24 @@ export default function Contact() {
 
     setSubmitting(true);
     try {
-      const body = new URLSearchParams({
+      // Apps Script expects JSON and uses the camel-case `timeZone` field.
+      // text/plain keeps this a simple cross-origin request from GitHub Pages,
+      // avoiding a browser preflight that Apps Script web apps do not handle.
+      const body = JSON.stringify({
         name: form.name.trim(),
         email: form.email.trim(),
-        company: form.company.trim(),
-        service: form.service,
+        company: form.company.trim() || "Not provided",
+        service: form.service || "General discovery call",
         date: form.date,
         time: form.time,
-        timezone: form.timezone,
-        message: form.message.trim(),
+        timeZone: form.timezone,
+        message: form.message.trim() || "No additional message provided.",
       });
 
       await fetch(BRAND.bookingEndpoint, {
         method: "POST",
         mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body,
       });
 
