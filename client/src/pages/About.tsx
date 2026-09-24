@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — About page.
+  MERIDIAN PRECISION, About page.
   Operational, numbers-first voice (no generic mission/vision/values).
   Swiss asymmetric: mono folio rail, ledger-rule standards rows, team table with roles.
 */
@@ -12,27 +12,19 @@ import { Check } from "lucide-react";
 const STANDARDS = [
   {
     title: "Zero tolerance for financial errors",
-    text: "Every month-end file passes a two-person review: the assigned specialist closes it, a second reviewer reconciles it. Nothing ships without both signatures in the file.",
-    metric: "2",
-    metricLabel: "person review on every close",
+    text: "Every month end file passes a two-person review: the assigned specialist closes it, a second reviewer reconciles it. Nothing ships without both signatures in the file.",
   },
   {
     title: "North American accounting readiness",
-    text: "Our team works in USD and CAD, follows US GAAP conventions, and prepares the workpapers IRS and CRA filers actually ask for — 1099s, T4s, state and provincial sales tax schedules.",
-    metric: "2",
-    metricLabel: "jurisdictions covered (US · CA)",
+    text: "Our team works in USD and CAD, follows US GAAP conventions, and prepares the workpapers IRS and CRA filers actually ask for, 1099s, T4s, state and provincial sales tax schedules.",
   },
   {
     title: "Defined turnarounds, published uptime",
-    text: "Month-end closes land within 5 business days. Priority requests during US hours get handled within 12 hours on average. Missed deadlines are credited — in writing.",
-    metric: "5",
-    metricLabel: "business-day close SLA",
+    text: "Month-end closes land within 5 business days. Priority requests during US hours get handled within 12 hours on average. Missed deadlines are credited, in writing.",
   },
   {
     title: "Confidentiality discipline",
     text: "Every team member is bound by client confidentiality agreements covering all engagements, indefinitely. Files are named, access is role-based, and revocation takes one click.",
-    metric: "∞",
-    metricLabel: "duration of NDA obligation",
   },
 ];
 
@@ -72,8 +64,8 @@ export default function About() {
             </h1>
             <p className="mt-6 text-base lg:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-2xl reveal">
               Team Yulsa (Yulsa Advisor Pvt. Ltd.) serves small businesses and CPA firms across the
-              United States and Canada. We do one thing — keep books clean, months closed, and
-              reports actionable — and we hold ourselves to standards you can measure.
+              United States and Canada. We do one thing, keep books clean, months closed, and
+              reports actionable, and we hold ourselves to standards you can measure.
             </p>
             <p className="mt-4 text-base lg:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-2xl reveal">
               Our founders trained as Chartered Accountants and IFRS consultants, then built a
@@ -99,12 +91,6 @@ export default function About() {
               <div className="lg:col-span-4">
                 <p className="text-[0.9375rem] text-[var(--muted-foreground)] leading-relaxed">{s.text}</p>
               </div>
-              <div className="lg:col-span-2 lg:justify-self-end">
-                <p className="stat-num text-3xl lg:text-4xl font-semibold text-[var(--meridian)]">{s.metric}</p>
-                <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1 max-w-[14ch]">
-                  {s.metricLabel}
-                </p>
-              </div>
               {i === STANDARDS.length - 1 && null}
             </div>
           ))}
@@ -123,7 +109,7 @@ export default function About() {
             </div>
             <div className="lg:col-span-4 lg:justify-self-end reveal">
               <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">
-                One named team per engagement — you'll always know exactly who is working on your books.
+                One named team per engagement, you'll always know exactly who is working on your books.
               </p>
             </div>
           </div>
@@ -149,7 +135,7 @@ export default function About() {
             <div className="relative rounded-lg bg-[var(--navy)] text-white p-5 flex flex-col justify-end overflow-hidden reveal">
               <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 23px, white 23px, white 24px)" }} />
               <p className="stat-num text-4xl text-[var(--meridian)]">11</p>
-              <p className="text-sm leading-relaxed mt-2">named specialists across accounting, bookkeeping, tax, IFRS, HR, and IT — every one bound by indefinite client confidentiality.</p>
+              <p className="text-sm leading-relaxed mt-2">named specialists across accounting, bookkeeping, tax, IFRS, HR, and IT, every one bound by indefinite client confidentiality.</p>
             </div>
           </div>
 
@@ -201,7 +187,7 @@ export default function About() {
 
       <CtaBand
         title="Meet us before you commit"
-        sub="Ask the team anything — scope, process, security, pricing. The discovery call is free because confidence should come before contracts."
+        sub="Ask the team anything, scope, process, security, pricing. The discovery call is free because confidence should come before contracts."
       />
     </Layout>
   );
