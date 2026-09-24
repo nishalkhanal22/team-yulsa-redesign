@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — sticky nav, opaque on scroll with bottom ledger rule.
+  MERIDIAN PRECISION. sticky nav, opaque on scroll with bottom ledger rule.
   Serif wordmark + mono nav labels. Primary CTA routes visitors to Contact.
 */
 import { useEffect, useState } from "react";

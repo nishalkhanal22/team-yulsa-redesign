@@ -1,6 +1,6 @@
 /*
-  MERIDIAN PRECISION — deep navy footer with ledger-rule motif.
-  Real contact details (valid email — audit fix), US phone, only verified social (LinkedIn).
+  MERIDIAN PRECISION. deep navy footer with ledger-rule motif.
+  Real contact details (valid email. audit fix), US phone, only verified social (LinkedIn).
 */
 import { Link } from "wouter";
 import { Linkedin, Mail, MessageCircle, MapPin, ArrowUpRight, Twitter } from "lucide-react";
@@ -93,7 +93,7 @@ export default function SiteFooter() {
         <div className="ledger-rule my-10 opacity-40" />
 
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-white/50">
-          <p>© {new Date().getFullYear()} Team Yulsa · Yulsa Advisor Pvt. Ltd. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Team Yulsa • Yulsa Advisor Pvt. Ltd. All rights reserved.</p>
           <p>Serving businesses across the United States &amp; Canada</p>
         </div>
       </div>

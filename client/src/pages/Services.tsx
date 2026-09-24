@@ -1,7 +1,7 @@
 /*
-  MERIDIAN PRECISION — Services page (redesign pass).
+  MERIDIAN PRECISION. Services page (redesign pass).
   Visual richness: navy icon tiles, alternating white/mist panels, serif authority,
-  strong navy text for contrast. No price ranges — fixed monthly pricing only.
+  strong navy text for contrast. No price ranges. fixed monthly pricing only.
 */
 import { Link } from "wouter";
 import {
@@ -50,18 +50,18 @@ export default function Services() {
           }}
         />
         <div className="container">
-          <p className="folio-tag mb-3 reveal">Services · 10 Disciplines</p>
+          <p className="folio-tag mb-3 reveal">Services • 10 Disciplines</p>
           <h1 className="font-serif text-4xl lg:text-5xl text-[var(--navy)] max-w-3xl leading-tight reveal">
             Outsourced accounting services, built for US &amp; Canadian businesses
           </h1>
           <p className="mt-5 text-base lg:text-lg text-[var(--muted-foreground)] max-w-2xl leading-relaxed reveal">
             We help you increase the efficiency and efficacy of your bookkeeping, reporting,
-            forecasting, and customer relationship management — giving you a clear technological
+            forecasting, and customer relationship management. giving you a clear technological
             advantage over your competitors.
           </p>
           <p className="mt-3 text-sm lg:text-base text-[var(--muted-foreground)] max-w-2xl leading-relaxed reveal">
             Every engagement runs on a fixed monthly fee, a defined scope, and a 5-business-day
-            month-end close. Pick one service or bundle several — the scope follows your business,
+            month-end close. Pick one service or bundle several. the scope follows your business,
             not the other way around.
           </p>
         </div>
@@ -130,11 +130,11 @@ export default function Services() {
               <div className="lg:col-span-8">
                 <p className="folio-tag mb-3 !text-[var(--meridian)]">Pricing model</p>
                 <h2 className="font-serif text-2xl lg:text-3xl text-white">
-                  Fixed monthly fees — scoped once, never surprise-changed.
+                  Fixed monthly fees. scoped once, never surprise-changed.
                 </h2>
                 <p className="mt-3 text-sm lg:text-base text-white/75 leading-relaxed max-w-2xl">
                   Your quote is a single fixed monthly fee based on transaction volume, number of
-                  accounts, and services included — written down before we start, and it never
+                  accounts, and services included. written down before we start, and it never
                   changes mid-engagement without your approval. Virtual CFO engagements are scoped
                   separately.
                 </p>
@@ -154,7 +154,7 @@ export default function Services() {
 
       <CtaBand
         title="Not sure which service fits?"
-        sub="Tell us about your books in a free 30-minute call and we'll recommend exactly what you need — even if that's doing nothing at all."
+        sub="Tell us about your books in a free 30-minute call and we'll recommend exactly what you need. even if that's doing nothing at all."
       />
     </Layout>
   );

@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — How It Works page.
+  MERIDIAN PRECISION. How It Works page.
   Editorial service journey with ledger rules, navy/meridian contrast, and practical proof.
   Bench-inspired structure only: Team Yulsa owns the copy, process, and visual system.
 */
@@ -57,7 +57,7 @@ export default function HowItWorks() {
       <section className="pt-28 pb-14 lg:pt-36 lg:pb-20 bg-[oklch(0.97_0.01_90)] border-b border-[var(--border)]">
         <div className="container grid lg:grid-cols-12 gap-10 lg:gap-8 items-end">
           <div className="lg:col-span-7">
-            <p className="folio-tag mb-4 reveal">How it works · A calmer close</p>
+            <p className="folio-tag mb-4 reveal">How it works • A calmer close</p>
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-[4.2rem] leading-[1.03] text-[var(--navy)] reveal">
               Clear books start with a
               <br />
@@ -160,7 +160,7 @@ export default function HowItWorks() {
                 ))}
               </div>
               <div className="border-t border-[var(--border)] px-5 py-4 text-xs leading-relaxed text-[var(--muted-foreground)]">
-                Example layout only — not client data. Your reporting pack is scoped to the accounts, locations, and KPIs your team actually uses.
+                Example layout only. not client data. Your reporting pack is scoped to the accounts, locations, and KPIs your team actually uses.
               </div>
             </div>
           </div>
