@@ -295,8 +295,9 @@ export default function Home() {
                             src={`https://cdn.simpleicons.org/${slug}`}
                             alt=""
                             aria-hidden="true"
-                            className="h-6 w-6 shrink-0 object-contain"
-                            loading="lazy"
+                            className="h-8 w-8 shrink-0 object-contain"
+                            loading="eager"
+                            onError={(e) => { e.currentTarget.style.display = "none"; }}
                           />
                         ) : (
                           <span className="h-6 w-6 shrink-0 rounded-sm bg-[var(--secondary)]" />
