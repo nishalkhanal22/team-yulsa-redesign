@@ -10,12 +10,10 @@ export default function CtaBand({
   title = "Your books, balanced. Your week, back.",
   sub = "Book a free 30-minute discovery call — you'll leave with a clear scope and a fixed monthly price, in writing. No obligation, no sales pressure.",
   primaryLabel = "Book Free Discovery Call",
-  secondaryLabel = "Contact Team Yulsa",
 }: {
   title?: string;
   sub?: string;
   primaryLabel?: string;
-  secondaryLabel?: string;
 }) {
   return (
     <section style={{ background: "var(--navy)" }} className="relative overflow-hidden">
@@ -39,12 +37,6 @@ export default function CtaBand({
           <span className="hidden lg:flex items-center gap-1.5 text-xs text-white/50 font-mono ml-1">
             Responds within 1 US business day
           </span>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold border border-white/25 text-white transition-all duration-200 active:scale-[0.97] hover:border-[var(--meridian)] hover:text-[var(--meridian)]"
-          >
-            {secondaryLabel}
-          </Link>
         </div>
       </div>
       <div className="container pb-10 flex items-center gap-2 text-xs text-white/45">
