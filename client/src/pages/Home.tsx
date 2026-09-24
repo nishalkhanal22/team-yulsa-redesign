@@ -111,7 +111,7 @@ export default function Home() {
               ))}
             </div>
             <p className="text-[0.8125rem] leading-snug text-[var(--muted-foreground)]">
-              <span className="font-semibold text-[var(--navy)]">11 named specialists</span> across bookkeeping, tax, HR &amp; reporting
+              <span className="font-semibold text-[var(--navy)]">Specialists</span> across bookkeeping, tax, HR &amp; reporting
             </p>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,25,47,0.7)] via-transparent to-transparent" />
             <div className="absolute bottom-5 left-5 lg:left-7 flex items-center gap-3">
-              <img src={LOGO} alt="Team Yulsa" className="h-8 w-12 object-cover object-center" />
+              <div className="hero-brand-mark"><img src={LOGO} alt="Team Yulsa" /></div>
               <div>
                 <p className="stat-num text-xl font-semibold text-white leading-none">100%</p>
                 <p className="text-[0.6875rem] uppercase tracking-wider text-white/75">on-time delivery commitment</p>
@@ -281,8 +281,26 @@ export default function Home() {
             {SOFTWARE_GROUPS.map((group) => (
               <div key={group.label} className="border border-[var(--border)] bg-[oklch(0.99_0.002_85)] p-5">
                 <p className="folio-tag mb-4">{group.label}</p>
-                <ul className="space-y-2 text-sm font-semibold text-[var(--navy)]">
-                  {group.items.map((item) => <li key={item}>{item}</li>)}
+                <ul className="grid grid-cols-1 gap-2.5 text-sm font-semibold text-[var(--navy)]">
+                  {group.items.map((item) => {
+                    const slug = SOFTWARE_LOGO_SLUGS[item];
+                    return (
+                      <li key={item} className="flex items-center gap-3 rounded-sm px-1 py-1.5">
+                        {slug ? (
+                          <img
+                            src={`https://cdn.simpleicons.org/${slug}`}
+                            alt=""
+                            aria-hidden="true"
+                            className="h-6 w-6 shrink-0 object-contain"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span className="h-6 w-6 shrink-0 rounded-sm bg-[var(--secondary)]" />
+                        )}
+                        <span>{item}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
