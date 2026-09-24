@@ -44,6 +44,22 @@ export const SOFTWARE_LOGO_SLUGS: Record<string, string> = {
   "Power BI": "microsoftpowerbi",
 };
 
+export const SOFTWARE_LOGO_URLS: Record<string, string> = {
+  "QuickBooks Online / Desktop": "https://cdn.simpleicons.org/quickbooks",
+  "Xero": "https://cdn.simpleicons.org/xero",
+  "FreshBooks": "https://img.logokit.com/freshbooks.com",
+  "Wave": "https://img.logokit.com/waveapps.com",
+  "Acumatica": "https://img.logokit.com/acumatica.com",
+  "Zoho Books": "https://cdn.simpleicons.org/zoho",
+  "Gusto": "https://cdn.simpleicons.org/gusto",
+  "Wagepoint": "https://img.logokit.com/wagepoint.com",
+  "ADP Payroll": "https://cdn.simpleicons.org/adp",
+  "Bill.com": "https://img.logokit.com/bill.com",
+  "Ramp": "https://img.logokit.com/ramp.com",
+  "Plooto": "https://img.logokit.com/plooto.com",
+  "Power BI": "https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg",
+};
+
 export const SOFTWARE_GROUPS = [
   { label: "Accounting", items: ["QuickBooks Online / Desktop", "Xero", "FreshBooks", "Wave", "Acumatica", "Zoho Books"] },
   { label: "Payroll", items: ["Gusto", "Wagepoint", "ADP Payroll"] },
