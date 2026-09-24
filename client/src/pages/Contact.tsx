@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — Contact page.
+  MERIDIAN PRECISION. Contact page.
   Lead-gen focus: discovery call framing and US phone line,
   FAQ accordion with FAQPage JSON-LD (audit fix).
 */
@@ -20,7 +20,7 @@ const SERVICES_SELECT = [
   "Management Reporting",
   "Budgeting & Forecasting",
   "Virtual CFO Services",
-  "Not sure — I'd like guidance",
+  "Not sure. I'd like guidance",
 ];
 
 export default function Contact() {
@@ -100,7 +100,7 @@ export default function Contact() {
       <section className="pt-28 lg:pt-36 pb-12">
         <div className="container grid lg:grid-cols-12 gap-8 lg:gap-0">
           <div className="lg:col-span-7">
-            <p className="folio-tag mb-3 reveal">Contact · US &amp; Canada</p>
+            <p className="folio-tag mb-3 reveal">Contact • US &amp; Canada</p>
             <h1 className="font-serif text-4xl lg:text-5xl text-[var(--navy)] leading-tight reveal">
               Let's make your books
               <br />
@@ -224,7 +224,7 @@ export default function Contact() {
                   className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian)] transition-colors resize-y"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Tell us about your books — software, transaction volume, deadlines…"
+                  placeholder="Tell us about your books. software, transaction volume, deadlines…"
                 />
               </label>
               <button
@@ -236,7 +236,7 @@ export default function Contact() {
                 {submitting ? "Sending…" : "Request Discovery Call"} <Send className="h-4 w-4" />
               </button>
               <p className="mt-3 text-xs text-[var(--muted-foreground)] text-center">
-                We reply within one US business day · preferred times are subject to confirmation
+                We reply within one US business day • preferred times are subject to confirmation
               </p>
             </form>
 
@@ -255,7 +255,7 @@ export default function Contact() {
                 One email is all it takes.
               </h2>
               <p className="mt-4 text-base text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
-                Email us or request a discovery call — we respond within 1 US business day and
+                Email us or request a discovery call. we respond within 1 US business day and
                 always reply to a real human, not a chatbot.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
