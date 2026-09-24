@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — Industries hub page (redesign pass).
+  MERIDIAN PRECISION. Industries hub page (redesign pass).
   Visual richness: tinted number blocks, stronger navy headings, clean hover row states.
   Contrast: headings in solid navy, body copy in readable muted ink.
 */
@@ -26,13 +26,13 @@ export default function Industries() {
         />
         <div className="container grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-8">
-            <p className="folio-tag mb-3 reveal">Industries · 6 Specializations</p>
+            <p className="folio-tag mb-3 reveal">Industries • 6 Specializations</p>
             <h1 className="font-serif text-4xl lg:text-5xl text-[var(--navy)] leading-tight reveal">
               Industry-specific books, built for how your business actually runs
             </h1>
             <p className="mt-5 text-base lg:text-lg text-[var(--muted-foreground)] max-w-2xl leading-relaxed reveal">
-              Generic bookkeepers categorize transactions. We model your unit economics — margins
-              per placement, prime costs per store, profitability per product — because that's
+              Generic bookkeepers categorize transactions. We model your unit economics. margins
+              per placement, prime costs per store, profitability per product. because that's
               where decisions get made.
             </p>
           </div>
