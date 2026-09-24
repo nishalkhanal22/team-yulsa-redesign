@@ -12,8 +12,8 @@ export const BRAND = {
   address: "Kathmandu, Nepal · Serving clients across the US & Canada",
   hours: "Monday to Friday, 9:00 AM – 5:00 PM (EST) · We work on your time zone",
   linkedin: "https://www.linkedin.com/company/team-yulsa/",
-  x: "https://x.com/teamyulsa",
-  whatsapp: "https://wa.me/15555550100",
+  x: "https://x.com/TEAMYULSA",
+  whatsapp: "https://wa.me/9779866206950",
   calendar: "https://calendar.google.com/calendar/u/0/r?cid=yulsaadvisors%40gmail.com",
   bookingEndpoint: "https://script.google.com/macros/s/AKfycbwhljyZOfa0m2ORHjL6_s6MufYti06qeNzGiF-0rip07dg0YrtxdWz3eNEnQeAv9xUj0w/exec",
 };
