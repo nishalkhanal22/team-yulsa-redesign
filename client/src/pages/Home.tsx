@@ -125,6 +125,10 @@ export default function Home() {
               loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,25,47,0.7)] via-transparent to-transparent" />
+            {/* Team Yulsa wall branding replaces the old Summit Accounting mark */}
+            <div className="absolute left-[52%] top-[12%] w-[30%] max-w-[250px] rounded-sm bg-white/90 p-2 shadow-lg backdrop-blur-sm">
+              <img src={LOGO} alt="Team Yulsa" className="w-full object-contain" />
+            </div>
             <div className="absolute bottom-5 left-5 lg:left-7 flex items-center gap-3">
               <div className="hero-brand-mark"><img src={LOGO} alt="Team Yulsa" /></div>
               <div>
