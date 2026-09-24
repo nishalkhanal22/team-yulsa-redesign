@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — Industry landing pages (SEO fix: market-specific pages).
+  MERIDIAN PRECISION. Industry landing pages (SEO fix: market-specific pages).
   Left rail content pattern, pain/solution structure, per-industry FAQ with FAQPage JSON-LD.
 */
 import { Link, useParams } from "wouter";
