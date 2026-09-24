@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — value-exchange CTA band (navy anchor + meridian accent).
+  MERIDIAN PRECISION. value-exchange CTA band (navy anchor + meridian accent).
   Value-exchange CTAs per audit fix: no generic "Submit" prompts.
 */
 import { Link } from "wouter";
@@ -8,7 +8,7 @@ import { BRAND } from "@/lib/siteData";
 
 export default function CtaBand({
   title = "Your books, balanced. Your week, back.",
-  sub = "Book a free 30-minute discovery call — you'll leave with a clear scope and a fixed monthly price, in writing. No obligation, no sales pressure.",
+  sub = "Book a free 30-minute discovery call. you'll leave with a clear scope and a fixed monthly price, in writing. No obligation, no sales pressure.",
   primaryLabel = "Book Free Discovery Call",
 }: {
   title?: string;
@@ -19,7 +19,7 @@ export default function CtaBand({
     <section style={{ background: "var(--navy)" }} className="relative overflow-hidden">
       <div className="container py-16 lg:py-20 grid lg:grid-cols-12 gap-8 items-center">
         <div className="lg:col-span-7">
-          <p className="folio-tag folio-tag--light mb-3">Next Step · 30 minutes</p>
+          <p className="folio-tag folio-tag--light mb-3">Next Step • 30 minutes</p>
           <h2 className="font-serif text-3xl lg:text-[2.6rem] leading-[1.15] text-white">
             {title}
           </h2>
@@ -41,7 +41,7 @@ export default function CtaBand({
       </div>
       <div className="container pb-10 flex items-center gap-2 text-xs text-white/45">
         <ShieldCheck className="h-3.5 w-3.5" />
-        Read-only access · Signed NDA · Fixed monthly pricing
+        Read-only access • Signed NDA • Fixed monthly pricing
       </div>
     </section>
   );
