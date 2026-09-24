@@ -31,17 +31,17 @@ export const SOCIALS = [
 export const SOFTWARE_LOGO_SLUGS: Record<string, string> = {
   "QuickBooks Online / Desktop": "quickbooks",
   "Xero": "xero",
-  "FreshBooks": "freshbooks",
-  "Wave": "wave",
-  "Acumatica": "acumatica",
+  "FreshBooks": "https://www.google.com/s2/favicons?domain=freshbooks.com&sz=128",
+  "Wave": "https://www.google.com/s2/favicons?domain=waveapps.com&sz=128",
+  "Acumatica": "https://www.google.com/s2/favicons?domain=acumatica.com&sz=128",
   "Zoho Books": "zoho",
   "Gusto": "gusto",
-  "Wagepoint": "wagepoint",
+  "Wagepoint": "https://www.google.com/s2/favicons?domain=wagepoint.com&sz=128",
   "ADP Payroll": "adp",
-  "Bill.com": "billdotcom",
-  "Ramp": "ramp",
-  "Plooto": "plooto",
-  "Power BI": "microsoftpowerbi",
+  "Bill.com": "https://www.google.com/s2/favicons?domain=bill.com&sz=128",
+  "Ramp": "https://www.google.com/s2/favicons?domain=ramp.com&sz=128",
+  "Plooto": "https://www.google.com/s2/favicons?domain=plooto.com&sz=128",
+  "Power BI": "https://www.google.com/s2/favicons?domain=app.powerbi.com&sz=128",
 };
 
 export const SOFTWARE_LOGO_URLS: Record<string, string> = {
