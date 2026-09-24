@@ -102,7 +102,7 @@ export default function About() {
         <div className="container">
           <div className="grid lg:grid-cols-12 gap-8 items-end mb-10">
             <div className="lg:col-span-8">
-              <p className="folio-tag mb-3 reveal">The Team • 11 Specialists</p>
+              <p className="folio-tag mb-3 reveal">The Team</p>
               <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
                 Certified specialists, not a call center
               </h2>
@@ -114,7 +114,27 @@ export default function About() {
             </div>
           </div>
 
-          {/* ── Featured photos: leadership band ── */}
+          {/* ── Team photos: single horizontal row ── */}
+          <div className="flex gap-4 overflow-x-auto pb-3 snap-x snap-mandatory">
+            {TEAM.filter((m) => m.photo).map((m) => (
+              <figure key={m.name} className="group relative shrink-0 w-[150px] md:w-[170px] overflow-hidden rounded-lg reveal snap-start">
+                <img
+                  src={m.photo}
+                  alt={`${m.name}, ${m.role}`}
+                  className="aspect-[3/4] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(10,25,47,0.85)] via-[rgba(10,25,47,0.35)] to-transparent p-3 pt-10">
+                  <figcaption>
+                    <p className="font-serif text-white text-sm leading-tight">{m.name}</p>
+                    <p className="text-[0.625rem] font-mono uppercase tracking-wider text-white/75 mt-0.5">{m.role}</p>
+                  </figcaption>
+                </div>
+              </figure>
+            ))}
+          </div>
+
+
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
             {TEAM.filter((m) => m.photo).map((m) => (
               <figure key={m.name} className="group relative overflow-hidden rounded-lg reveal">
@@ -139,45 +159,6 @@ export default function About() {
             </div>
           </div>
 
-          <div className="border border-[var(--border)] overflow-x-auto">
-            <table className="w-full min-w-[640px] text-sm">
-              <tbody>
-                {TEAM.map((m, i) => (
-                  <tr key={m.name} className={`border-b border-[var(--border)] last:border-b-0 ${i % 2 === 1 ? "bg-[var(--secondary)]/50" : "bg-white"}`}>
-                    <td className="px-5 py-4 w-14">
-                      <span className="stat-num text-xs font-semibold text-[var(--muted-foreground)]">{String(i + 1).padStart(2, "0")}</span>
-                    </td>
-                    <td className="px-3 py-4 w-16">
-                      {m.photo ? (
-                        <img
-                          src={m.photo}
-                          alt={m.name}
-                          className="h-12 w-12 rounded-full object-cover object-top ring-1 ring-[var(--border)]"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="h-12 w-12 rounded-full flex items-center justify-center font-mono text-xs font-bold text-white ring-1 ring-[var(--border)]" style={{ background: "var(--navy)" }}>
-                          {m.name.split(" ").map((n) => n[0]).join("")}
-                        </div>
-                      )}
-                    </td>
-                    <td className="px-5 py-4">
-                      <p className="font-serif text-base text-[var(--navy)]">{m.name}</p>
-                    </td>
-                    <td className="px-5 py-4">
-                      <p className="font-mono text-[0.6875rem] uppercase tracking-wider text-[var(--meridian)] font-semibold">{m.role}</p>
-                    </td>
-                    <td className="px-5 py-4 text-[var(--muted-foreground)] hidden md:table-cell">
-                      {m.note}
-                    </td>
-                    <td className="px-5 py-4 text-right hidden lg:table-cell">
-                      <Check className="h-4 w-4 text-[var(--meridian)] ml-auto" />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
           <p className="mt-4 flex items-center gap-2 text-xs text-[var(--muted-foreground)] reveal">
             <Check className="h-3.5 w-3.5 text-[var(--meridian)]" />
             Every team member is bound by client confidentiality agreements covering all engagements, indefinitely.
