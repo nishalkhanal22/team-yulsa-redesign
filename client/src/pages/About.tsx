@@ -135,30 +135,6 @@ export default function About() {
           </div>
 
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
-            {TEAM.filter((m) => m.photo).map((m) => (
-              <figure key={m.name} className="group relative overflow-hidden rounded-lg reveal">
-                <img
-                  src={m.photo}
-                  alt={`${m.name}, ${m.role}`}
-                  className="aspect-[3/4] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-                  loading="lazy"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(10,25,47,0.85)] via-[rgba(10,25,47,0.35)] to-transparent p-3 pt-10">
-                  <figcaption>
-                    <p className="font-serif text-white text-sm leading-tight">{m.name}</p>
-                    <p className="text-[0.625rem] font-mono uppercase tracking-wider text-white/75 mt-0.5">{m.role}</p>
-                  </figcaption>
-                </div>
-              </figure>
-            ))}
-            <div className="relative rounded-lg bg-[var(--navy)] text-white p-5 flex flex-col justify-end overflow-hidden reveal">
-              <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 23px, white 23px, white 24px)" }} />
-              <p className="stat-num text-4xl text-[var(--meridian)]">11</p>
-              <p className="text-sm leading-relaxed mt-2">named specialists across accounting, bookkeeping, tax, IFRS, HR, and IT, every one bound by indefinite client confidentiality.</p>
-            </div>
-          </div>
-
           <p className="mt-4 flex items-center gap-2 text-xs text-[var(--muted-foreground)] reveal">
             <Check className="h-3.5 w-3.5 text-[var(--meridian)]" />
             Every team member is bound by client confidentiality agreements covering all engagements, indefinitely.
