@@ -5,7 +5,7 @@
 */
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter, MessageCircle } from "lucide-react";
 import Layout from "@/components/Layout";
 import { BRAND, FAQS } from "@/lib/siteData";
 import { TIMEZONE_OPTIONS } from "@/lib/timezones";
@@ -287,6 +287,15 @@ export default function Contact() {
                     className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] bg-white text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
                   >
                     <Twitter className="h-5 w-5" />
+                  </a>
+                  <a
+                    href={BRAND.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Team Yulsa on WhatsApp"
+                    className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] bg-white text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
+                  >
+                    <MessageCircle className="h-5 w-5" />
                   </a>
                 </div>
               </div>
