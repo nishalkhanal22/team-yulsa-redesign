@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — shared site content
+  MERIDIAN PRECISION, shared site content
   Single source of truth for services, industries, team, and FAQ.
   Content targets US/Canada buyer intent (audit fix).
 */
@@ -10,7 +10,7 @@ export const BRAND = {
   phoneHref: "tel:+19143395442",
   phoneDisplay: "+1 (914) 339-5442",
   address: "Kathmandu, Nepal · Serving clients across the US & Canada",
-  hours: "Mon–Fri, 9:00 AM – 5:00 PM (EST) · We work on your time zone",
+  hours: "Monday to Friday, 9:00 AM – 5:00 PM (EST) · We work on your time zone",
   linkedin: "https://www.linkedin.com/company/team-yulsa/",
   x: "https://x.com/teamyulsa",
   whatsapp: "https://wa.me/15555550100",
@@ -19,7 +19,7 @@ export const BRAND = {
 };
 
 /*
- * Social profile links — placeholders. Replace with your real profile URLs
+ * Social profile links, placeholders. Replace with your real profile URLs
  * (Settings → Integrations or ask Manus to update) once pages are live.
  */
 export const SOCIALS = [
@@ -27,6 +27,22 @@ export const SOCIALS = [
   { name: "X", href: BRAND.x },
   { name: "WhatsApp", href: BRAND.whatsapp },
 ];
+
+export const SOFTWARE_LOGO_SLUGS: Record<string, string> = {
+  "QuickBooks Online / Desktop": "quickbooks",
+  "Xero": "xero",
+  "FreshBooks": "freshbooks",
+  "Wave": "wave",
+  "Acumatica": "acumatica",
+  "Zoho Books": "zoho",
+  "Gusto": "gusto",
+  "Wagepoint": "wagepoint",
+  "ADP Payroll": "adp",
+  "Bill.com": "billdotcom",
+  "Ramp": "ramp",
+  "Plooto": "plooto",
+  "Power BI": "powerbi",
+};
 
 export const SOFTWARE_GROUPS = [
   { label: "Accounting", items: ["QuickBooks Online / Desktop", "Xero", "FreshBooks", "Wave", "Acumatica", "Zoho Books"] },
@@ -51,14 +67,14 @@ export const SERVICES: Service[] = [
     folio: "SERV 01",
     title: "Accounting & Bookkeeping",
     short:
-      "Clean, current books — reconciled monthly, organized by month-end, ready for your accountant or tax preparer.",
+      "Clean, current books, reconciled monthly, organized by month-end, ready for your accountant or tax preparer.",
     detail:
       "We keep your QuickBooks or Xero files accurate and current all year long: categorizing transactions, reconciling bank and credit card accounts, managing the month-end close, and producing clean financials your US or Canadian accountant can rely on. Most clients hand over reconciliation work entirely and get a monthly close package within 5 business days.",
     bullets: [
       "Monthly bank & credit card reconciliations",
       "Expense categorization aligned with your chart of accounts",
       "Month-end close within 5 business days",
-      "Clean books handed to your tax preparer — no year-end scramble",
+      "Clean books handed to your tax preparer, no year-end scramble",
     ],
     icon: "BookOpenCheck",
   },
@@ -98,7 +114,7 @@ export const SERVICES: Service[] = [
     folio: "SERV 04",
     title: "Year-End Accounting",
     short:
-      "Fiscal and calendar year-end close, audit-ready schedules, and clean cutoffs — every time.",
+      "Fiscal and calendar year-end close, audit-ready schedules, and clean cutoffs, every time.",
     detail:
       "We manage the full year-end process: closing open periods, adjusting entries, accruals, fixed asset schedules, and preparing the complete audit or review package your external accountant requests.",
     bullets: [
@@ -114,7 +130,7 @@ export const SERVICES: Service[] = [
     folio: "SERV 05",
     title: "Accounting Software Migration",
     short:
-      "Move from spreadsheets, legacy desktop, or a competitor to QuickBooks Online or Xero — safely, with clean history.",
+      "Move from spreadsheets, legacy desktop, or a competitor to QuickBooks Online or Xero, safely, with clean history.",
     detail:
       "We migrate historical data, customers, vendors, and open balances into QuickBooks Online, QuickBooks Desktop, or Xero, then validate every account against source records before go-live. Clients typically transition in 2–4 weeks with zero downtime.",
     bullets: [
@@ -130,7 +146,7 @@ export const SERVICES: Service[] = [
     folio: "SERV 06",
     title: "Invoice Management",
     short:
-      "Every invoice tracked, coded, approved, and filed — nothing lost between the inbox and the ledger.",
+      "Every invoice tracked, coded, approved, and filed, nothing lost between the inbox and the ledger.",
     detail:
       "From invoice capture to coding to approval routing, we keep your payable pipeline moving and ensure every bill is matched to the right job, cost center, or property.",
     bullets: [
@@ -146,7 +162,7 @@ export const SERVICES: Service[] = [
     folio: "SERV 07",
     title: "Bank Reconciliations",
     short:
-      "Every account, every month, every discrepancy found and resolved — the foundation everything else stands on.",
+      "Every account, every month, every discrepancy found and resolved, the foundation everything else stands on.",
     detail:
       "We reconcile all bank, credit card, loan, and merchant accounts monthly, investigate breaks, resolve timing differences, and report exceptions before they become problems.",
     bullets: [
@@ -162,7 +178,7 @@ export const SERVICES: Service[] = [
     folio: "SERV 08",
     title: "Management Reporting",
     short:
-      "Dashboards and reports that tell you where the business stands — revenue by line, margin by location, cash by week.",
+      "Dashboards and reports that tell you where the business stands, revenue by line, margin by location, cash by week.",
     detail:
       "We build the reports leadership actually reads: monthly management packs, KPI dashboards in Power BI, department P&Ls, and location-level performance. Delivered on schedule, in the format you choose.",
     bullets: [
@@ -180,7 +196,7 @@ export const SERVICES: Service[] = [
     short:
       "Annual budgets, rolling forecasts, and scenario models that help you plan instead of react.",
     detail:
-      "We build annual budgets with your leadership, then maintain rolling 12-month forecasts with actual-vs-budget variance analysis each month — so you always know where the year is heading.",
+      "We build annual budgets with your leadership, then maintain rolling 12-month forecasts with actual-vs-budget variance analysis each month, so you always know where the year is heading.",
     bullets: [
       "Annual budget build with department input",
       "Rolling 12-month forecasts",
@@ -194,7 +210,7 @@ export const SERVICES: Service[] = [
     folio: "SERV 10",
     title: "Virtual CFO Services",
     short:
-      "CFO-level strategy — cash planning, fundraising prep, pricing, and board reporting — at a fraction of the cost.",
+      "CFO-level strategy, cash planning, fundraising prep, pricing, and board reporting, at a fraction of the cost.",
     detail:
       "Our virtual CFO engagement gives growing businesses strategic financial leadership: cash-flow planning, capital strategy, pricing analysis, lender and investor reporting, and monthly advisory sessions. Fractional cost, full expertise.",
     bullets: [
@@ -226,7 +242,7 @@ export const INDUSTRIES: Industry[] = [
     pain:
       "Staffing firms live on margins measured in basis points: gross vs. net payroll, W-2 vs. 1099 workers, multi-state tax registrations, and billings that change weekly.",
     solution:
-      "We track gross margin per assignment, reconcile payroll and burden weekly, manage client billings and collections, and produce per-client profitability reports — so you know exactly which placements make money.",
+      "We track gross margin per assignment, reconcile payroll and burden weekly, manage client billings and collections, and produce per-client profitability reports, so you know exactly which placements make money.",
     bullets: [
       "Gross margin analysis per assignment & client",
       "Payroll burden reconciliation (taxes, benefits, workers' comp)",
@@ -240,7 +256,7 @@ export const INDUSTRIES: Industry[] = [
     short: "Prime-cost visibility and multi-location reporting, done weekly.",
     slug: "restaurants",
     pain:
-      "Restaurants run on thin margins where food cost, labor, and waste decide everything — and multi-location operators drown in POS systems and daily cash deposits.",
+      "Restaurants run on thin margins where food cost, labor, and waste decide everything, and multi-location operators drown in POS systems and daily cash deposits.",
     solution:
       "We reconcile POS and payment data daily, track prime costs weekly against budget, manage vendor AP across locations, and produce per-store P&Ls your franchise or ownership group can act on.",
     bullets: [
@@ -256,7 +272,7 @@ export const INDUSTRIES: Industry[] = [
     short: "Channel-level profitability across Shopify, Amazon, and marketplaces.",
     slug: "ecommerce",
     pain:
-      "Ecommerce sellers juggle Shopify, Amazon, ad spend, returns, and inventory — and usually can't tell which product or channel is actually profitable after fees.",
+      "Ecommerce sellers juggle Shopify, Amazon, ad spend, returns, and inventory, and usually can't tell which product or channel is actually profitable after fees.",
     solution:
       "We reconcile marketplace settlements and payment gateways, track COGS and inventory, allocate ad spend by channel, and build true product-level profitability reports.",
     bullets: [
@@ -272,7 +288,7 @@ export const INDUSTRIES: Industry[] = [
     short: "Bookkeeping that keeps up with subscriptions, seasonality, and busy schedules.",
     slug: "lifestyle",
     pain:
-      "Lifestyle and wellness businesses — fitness studios, salons, coaching, memberships — live on recurring subscriptions, seasonal peaks, and high transaction volume from POS and booking platforms.",
+      "Lifestyle and wellness businesses, fitness studios, salons, coaching, memberships, live on recurring subscriptions, seasonal peaks, and high transaction volume from POS and booking platforms.",
     solution:
       "We reconcile POS, booking, and payment-platform data daily, track subscription and membership revenue correctly, manage vendor and contractor payments, and deliver clear monthly P&Ls so you can see which services actually profit.",
     bullets: [
@@ -304,7 +320,7 @@ export const INDUSTRIES: Industry[] = [
     short: "Property-level P&Ls, security deposit accounting, and owner distributions.",
     slug: "real-estate",
     pain:
-      "Property managers track rent rolls, security deposits, vendor maintenance costs, and owner distributions across dozens of units — usually in spreadsheets that don't tie out.",
+      "Property managers track rent rolls, security deposits, vendor maintenance costs, and owner distributions across dozens of units, usually in spreadsheets that don't tie out.",
     solution:
       "We maintain property-level accounting in your PM software or QuickBooks, reconcile trust and operating accounts, prepare owner statements, and produce portfolio-level performance reports.",
     bullets: [
@@ -345,7 +361,7 @@ export const PROCESS_STEPS = [
   {
     n: "02",
     title: "Scope & fixed quote",
-    text: "We quote a fixed monthly fee based on transaction volume and scope — no surprise invoices, ever.",
+    text: "We quote a fixed monthly fee based on transaction volume and scope, no surprise invoices, ever.",
   },
   {
     n: "03",
@@ -362,11 +378,11 @@ export const PROCESS_STEPS = [
 export const FAQS = [
   {
     q: "How much does outsourced bookkeeping cost?",
-    a: "We charge a single fixed monthly price — no hourly billing, no surprise add-ons. The fee is scoped after a free discovery call based on your transaction volume, number of accounts, and services included, and you receive the written quote before any work begins. It never changes mid-engagement without your approval.",
+    a: "We charge a single fixed monthly price, no hourly billing, no surprise add-ons. The fee is scoped after a free discovery call based on your transaction volume, number of accounts, and services included, and you receive the written quote before any work begins. It never changes mid-engagement without your approval.",
   },
   {
     q: "Do you work with US and Canadian businesses specifically?",
-    a: "Yes — the US and Canada are our core markets. We work in US dollars and Canadian dollars, follow US GAAP and CRA standards, and support IRS and CRA filing requirements including 1099s, T4s, and state/provincial sales tax workpapers.",
+    a: "Yes, the US and Canada are our core markets. We work in US dollars and Canadian dollars, follow US GAAP and CRA standards, and support IRS and CRA filing requirements including 1099s, T4s, and state/provincial sales tax workpapers.",
   },
   {
     q: "Which accounting software do you support?",
