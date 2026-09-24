@@ -41,7 +41,7 @@ export const SOFTWARE_LOGO_SLUGS: Record<string, string> = {
   "Bill.com": "billdotcom",
   "Ramp": "ramp",
   "Plooto": "plooto",
-  "Power BI": "powerbi",
+  "Power BI": "microsoftpowerbi",
 };
 
 export const SOFTWARE_GROUPS = [
