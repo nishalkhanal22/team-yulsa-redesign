@@ -29,7 +29,7 @@ const STANDARDS = [
 ];
 
 const TEAM = [
-  { name: "Sagun Jung Rana", role: "Founder · Chartered Accountant", note: "Client strategy & quality review", photo: asset("sagun_ca_0b9ac2f3.png") },
+  { name: "Sagun Jung Rana", role: "Founder • Chartered Accountant", note: "Client strategy & quality review", photo: asset("sagun_ca_0b9ac2f3.png") },
   { name: "Prabesh Bhusal", role: "Senior Associate", note: "Month-end close & management reporting", photo: asset("prabesh_57af839c.png") },
   { name: "Nisha Khanal", role: "IFRS Consultant", note: "Standards compliance & audit readiness", photo: asset("nisha_94569046.png") },
   { name: "Aayush Shah", role: "Senior Associate", note: "Tax-season workflows & filing support", photo: asset("aayush2_20008bc2.png") },
@@ -54,7 +54,7 @@ export default function About() {
             <p className="folio-tag leading-relaxed">About<br />The<br />Practice</p>
             <p className="text-[0.6875rem] font-mono text-[var(--muted-foreground)] leading-relaxed mt-auto">
               YULSA ADVISOR<br />
-              PVT. LTD. · KTM
+              PVT. LTD. • KTM
             </p>
           </div>
           <div className="lg:col-span-10 lg:pl-12">
@@ -102,7 +102,7 @@ export default function About() {
         <div className="container">
           <div className="grid lg:grid-cols-12 gap-8 items-end mb-10">
             <div className="lg:col-span-8">
-              <p className="folio-tag mb-3 reveal">The Team · 11 Specialists</p>
+              <p className="folio-tag mb-3 reveal">The Team • 11 Specialists</p>
               <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] reveal">
                 Certified specialists, not a call center
               </h2>
