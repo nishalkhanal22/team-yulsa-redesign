@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
-import { BRAND, STATS, SOFTWARE_GROUPS, SOFTWARE_LOGO_SLUGS } from "@/lib/siteData";
+import { BRAND, STATS, SOFTWARE_GROUPS, SOFTWARE_LOGO_URLS } from "@/lib/siteData";
 import { ASSETS, asset } from "@/lib/assets";
 import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
@@ -287,17 +287,15 @@ export default function Home() {
                 <p className="folio-tag mb-4">{group.label}</p>
                 <ul className="grid grid-cols-1 gap-2.5 text-sm font-semibold text-[var(--navy)]">
                   {group.items.map((item) => {
-                    const slug = SOFTWARE_LOGO_SLUGS[item];
+                    const logoUrl = SOFTWARE_LOGO_URLS[item];
                     return (
                       <li key={item} className="flex items-center gap-3 rounded-sm px-1 py-1.5">
-                        {slug ? (
+                        {logoUrl ? (
                           <img
-                            src={`https://cdn.simpleicons.org/${slug}`}
-                            alt=""
-                            aria-hidden="true"
+                            src={logoUrl}
+                            alt={`${item} logo`}
                             className="h-8 w-8 shrink-0 object-contain"
                             loading="eager"
-                            onError={(e) => { e.currentTarget.style.display = "none"; }}
                           />
                         ) : (
                           <span className="h-6 w-6 shrink-0 rounded-sm bg-[var(--secondary)]" />
