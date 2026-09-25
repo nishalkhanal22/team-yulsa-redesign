@@ -115,49 +115,14 @@ export default function Home() {
             </p>
           </div>
         </div>
-        {/* Full-width photo band beneath the hero text */}
-        <div className="container relative mt-6 lg:mt-0 grid lg:grid-cols-12 gap-px bg-[var(--navy)]">
-          <div className="relative lg:col-span-7 min-h-[300px] lg:min-h-[380px] overflow-hidden bg-[var(--navy)]">
-            <img
-              src={HERO_IMG}
-              alt="Team Yulsa accountants reviewing financial dashboards with a client"
-              className="h-full min-h-[300px] lg:min-h-[380px] w-full object-cover opacity-90"
-              loading="eager"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,25,47,0.7)] via-transparent to-transparent" />
-            {/* Team Yulsa wall branding replaces the old Summit Accounting mark */}
-            <div className="absolute left-[52%] top-[12%] w-[30%] max-w-[250px] rounded-sm bg-white/90 p-2 shadow-lg backdrop-blur-sm">
-              <img src={LOGO} alt="Team Yulsa" className="w-full object-contain" />
-            </div>
-            <div className="absolute bottom-5 left-5 lg:left-7 flex items-center gap-3">
-              <div className="hero-brand-mark"><img src={LOGO} alt="Team Yulsa" /></div>
-              <div>
-                <p className="stat-num text-xl font-semibold text-white leading-none">100%</p>
-                <p className="text-[0.6875rem] uppercase tracking-wider text-white/75">on-time delivery commitment</p>
-              </div>
-            </div>
-          </div>
-          <div className="lg:col-span-5 bg-[var(--navy)] p-6 lg:p-8 text-white">
-            <div className="flex items-center justify-between gap-3">
-              <p className="folio-tag text-white/65">Financial infrastructure</p>
-              <ShieldCheck className="h-5 w-5 text-[var(--meridian)]" />
-            </div>
-            <h2 className="mt-10 font-serif text-2xl lg:text-3xl leading-tight">A clean close gives every next decision a firmer foundation.</h2>
-            <div className="mt-8 divide-y divide-white/15 border-y border-white/15">
-              {[
-                ["Source systems", "QuickBooks • Xero • more"],
-                ["Close rhythm", "Monthly, on your schedule"],
-                ["Report language", "Plain English, decision-ready"],
-                ["Coverage", "USD • CAD • US/Canada hours"],
-              ].map(([label, value]) => (
-                <div key={label} className="flex items-center justify-between gap-4 py-3 text-sm">
-                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.12em] text-white/55">{label}</span>
-                  <span className="text-right text-white/90">{value}</span>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 text-xs leading-relaxed text-white/60">A human team, structured process, and secure access. working together instead of leaving you to connect the dots.</p>
-          </div>
+        {/* Full-width Team Yulsa hero banner */}
+        <div className="container relative mt-6 lg:mt-0 overflow-hidden bg-[var(--navy)]">
+          <img
+            src={HERO_IMG}
+            alt="Team Yulsa financial infrastructure and accounting team"
+            className="block w-full h-auto"
+            loading="eager"
+          />
         </div>
       </section>
 
