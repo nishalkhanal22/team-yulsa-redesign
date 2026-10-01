@@ -1,7 +1,7 @@
 /*
-  MERIDIAN PRECISION Data Security page.
+  MERIDIAN PRECISION, Data Security page.
   Swiss asymmetric: mono folio rail on left, ledger-rule rows, oversized tabular numerals,
-  compliance-coverage data table. No generic shield stock art owned ledger linework.
+  compliance-coverage data table. No generic shield stock art, owned ledger linework.
 */
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
@@ -20,12 +20,12 @@ const MEASURES = [
   {
     icon: EyeOff,
     title: "Read-only accountant access",
-    text: "We connect through QuickBooks or Xero's official accountant channels with read-only permissions where possible. You keep all passwords and can revoke access in one click, any time.",
+    text: "We connect through QuickBooks or Xero's official accountant channels with read only permissions where possible. You keep all passwords and can revoke access in one click, any time.",
   },
   {
     icon: Lock,
     title: "Encrypted file transfer",
-    text: "All documents move through encrypted channels never personal email or consumer chat apps. Bank statements, payroll files, and tax documents are stored encrypted at rest.",
+    text: "All documents move through encrypted channels, never personal email or consumer chat apps. Bank statements, payroll files, and tax documents are stored encrypted at rest.",
   },
   {
     icon: Users,
@@ -40,7 +40,7 @@ const MEASURES = [
   {
     icon: ClipboardCheck,
     title: "Documented procedures",
-    text: "Every recurring task follows a written procedure reviewed by our founder. No tribal knowledge, no handoff gaps, and a clear audit trail of who did what, when.",
+    text: "Every recurring task follows a written procedure reviewed by our founder, no tribal knowledge, no handoff gaps, and a clear audit trail of who did what, when.",
   },
   {
     icon: ShieldCheck,
@@ -77,7 +77,7 @@ export default function Security() {
             </h1>
             <p className="mt-5 text-base lg:text-lg text-[var(--muted-foreground)] max-w-xl leading-relaxed reveal">
               Financial data is the most sensitive thing a business owns. Here is exactly how we
-              protect it: six commitments, measured and verifiable.
+              protect it, six commitments, measured and verifiable.
             </p>
           </div>
         </div>
@@ -115,7 +115,7 @@ export default function Security() {
                   <h2 className="font-serif text-xl lg:text-2xl text-[var(--navy)] leading-snug">{m.title}</h2>
                   <p className="mt-2 text-[0.9375rem] text-[var(--muted-foreground)] leading-relaxed">{m.text}</p>
                 </div>
-              </div>
+                </div>
             );
           })}
         </div>
@@ -131,7 +131,7 @@ export default function Security() {
             </h2>
             <p className="mt-4 text-sm lg:text-[0.9375rem] text-[var(--muted-foreground)] leading-relaxed">
               This is the control ledger we hold ourselves to. Ask for the full version of our
-              security agreement at any time. You'll receive it before work begins.
+              security agreement at any time, you'll receive it before work begins.
             </p>
           </div>
           <div className="lg:col-span-8 reveal">
@@ -165,7 +165,7 @@ export default function Security() {
 
       <CtaBand
         title="Questions about how we'd handle your data?"
-        sub="Ask us anything on a free discovery call including for a copy of our confidentiality agreement before you share a single document."
+        sub="Ask us anything on a free discovery call, including for a copy of our confidentiality agreement before you share a single document."
       />
     </Layout>
   );

@@ -1,5 +1,5 @@
 /*
-  GitHub Pages asset helper keeps local static assets working under the
+  GitHub Pages asset helper — keeps local static assets working under the
   /team-yulsa-redesign/ project base and on the Manus preview root.
 */
 export function asset(filename: string): string {
@@ -8,7 +8,7 @@ export function asset(filename: string): string {
 
 export const ASSETS = {
   logo: asset("team_yulsa_logo.jpeg"),
-  heroOffice: asset("hero-office-team-yulsa.webp"),
+  heroOffice: asset("team_yulsa_hero.jpg"),
   processWorkflow: asset("process-workflow_66aa4f70.png"),
   industriesCollage: asset("industries-collage_3c29fe26.png"),
   softwareLogos: asset("software-official-logos_9fc69c90.png"),
