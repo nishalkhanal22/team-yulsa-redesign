@@ -4,6 +4,8 @@
   Content targets US/Canada buyer intent (audit fix).
 */
 
+import { asset } from "@/lib/assets";
+
 export const BRAND = {
   email: "info@teamyulsa.com",
   phone: "+19143395442",
@@ -29,35 +31,35 @@ export const SOCIALS = [
 ];
 
 export const SOFTWARE_LOGO_SLUGS: Record<string, string> = {
-  "QuickBooks Online / Desktop": "quickbooks",
-  "Xero": "xero",
-  "FreshBooks": "/software-logos/freshbooks.png",
-  "Wave": "/software-logos/wave.png",
-  "Acumatica": "/software-logos/acumatica.png",
-  "Zoho Books": "zoho",
-  "Gusto": "gusto",
-  "Wagepoint": "/software-logos/wagepoint.png",
-  "ADP Payroll": "adp",
-  "Bill.com": "/software-logos/bill.png",
-  "Ramp": "/software-logos/ramp.png",
-  "Plooto": "https://www.google.com/s2/favicons?domain=plooto.com&sz=128",
-  "Power BI": "https://www.google.com/s2/favicons?domain=app.powerbi.com&sz=128",
+  "QuickBooks Online / Desktop": asset("software-logos/quickbooks.svg"),
+  "Xero": asset("software-logos/xero.svg"),
+  "FreshBooks": asset("software-logos/freshbooks.png"),
+  "Wave": asset("software-logos/wave.png"),
+  "Acumatica": asset("software-logos/acumatica.png"),
+  "Zoho Books": asset("software-logos/zoho.svg"),
+  "Gusto": asset("software-logos/gusto.svg"),
+  "Wagepoint": asset("software-logos/wagepoint.png"),
+  "ADP Payroll": asset("software-logos/adp.svg"),
+  "Bill.com": asset("software-logos/bill.png"),
+  "Ramp": asset("software-logos/ramp.png"),
+  "Plooto": asset("software-logos/plooto.png"),
+  "Power BI": asset("software-logos/power-bi.svg"),
 };
 
 export const SOFTWARE_LOGO_URLS: Record<string, string> = {
-  "QuickBooks Online / Desktop": "https://cdn.simpleicons.org/quickbooks",
-  "Xero": "https://cdn.simpleicons.org/xero",
-  "FreshBooks": "https://img.logokit.com/freshbooks.com",
-  "Wave": "https://img.logokit.com/waveapps.com",
-  "Acumatica": "https://img.logokit.com/acumatica.com",
-  "Zoho Books": "https://cdn.simpleicons.org/zoho",
-  "Gusto": "https://cdn.simpleicons.org/gusto",
-  "Wagepoint": "https://img.logokit.com/wagepoint.com",
-  "ADP Payroll": "https://cdn.simpleicons.org/adp",
-  "Bill.com": "https://img.logokit.com/bill.com",
-  "Ramp": "https://img.logokit.com/ramp.com",
-  "Plooto": "https://img.logokit.com/plooto.com",
-  "Power BI": "https://raw.githubusercontent.com/microsoft/PowerBI-Icons/main/SVG/Power-BI.svg",
+  "QuickBooks Online / Desktop": asset("software-logos/quickbooks.svg"),
+  "Xero": asset("software-logos/xero.svg"),
+  "FreshBooks": asset("software-logos/freshbooks.png"),
+  "Wave": asset("software-logos/wave.png"),
+  "Acumatica": asset("software-logos/acumatica.png"),
+  "Zoho Books": asset("software-logos/zoho.svg"),
+  "Gusto": asset("software-logos/gusto.svg"),
+  "Wagepoint": asset("software-logos/wagepoint.png"),
+  "ADP Payroll": asset("software-logos/adp.svg"),
+  "Bill.com": asset("software-logos/bill.png"),
+  "Ramp": asset("software-logos/ramp.png"),
+  "Plooto": asset("software-logos/plooto.png"),
+  "Power BI": asset("software-logos/power-bi.svg"),
 };
 
 export const SOFTWARE_GROUPS = [
