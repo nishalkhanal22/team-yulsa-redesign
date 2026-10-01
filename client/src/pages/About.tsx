@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — About page.
+  MERIDIAN PRECISION About page.
   Operational, numbers-first voice (no generic mission/vision/values).
   Swiss asymmetric: mono folio rail, ledger-rule standards rows, team table with roles.
 */
@@ -13,26 +13,18 @@ const STANDARDS = [
   {
     title: "Zero tolerance for financial errors",
     text: "Every month-end file passes a two-person review: the assigned specialist closes it, a second reviewer reconciles it. Nothing ships without both signatures in the file.",
-    metric: "2",
-    metricLabel: "person review on every close",
   },
   {
     title: "North American accounting readiness",
-    text: "Our team works in USD and CAD, follows US GAAP conventions, and prepares the workpapers IRS and CRA filers actually ask for — 1099s, T4s, state and provincial sales tax schedules.",
-    metric: "2",
-    metricLabel: "jurisdictions covered (US · CA)",
+    text: "Our team works in USD and CAD, follows US GAAP conventions, and prepares the workpapers IRS and CRA filers actually ask for: 1099s, T4s, state and provincial sales tax schedules.",
   },
   {
     title: "Defined turnarounds, published uptime",
-    text: "Month-end closes land within 5 business days. Priority requests during US hours get handled within 12 hours on average. Missed deadlines are credited — in writing.",
-    metric: "5",
-    metricLabel: "business-day close SLA",
+    text: "Month-end closes land within 5 business days. Priority requests during US hours get handled within 12 hours on average. Missed deadlines are credited in writing.",
   },
   {
     title: "Confidentiality discipline",
     text: "Every team member is bound by client confidentiality agreements covering all engagements, indefinitely. Files are named, access is role-based, and revocation takes one click.",
-    metric: "∞",
-    metricLabel: "duration of NDA obligation",
   },
 ];
 
@@ -72,8 +64,8 @@ export default function About() {
             </h1>
             <p className="mt-6 text-base lg:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-2xl reveal">
               Team Yulsa (Yulsa Advisor Pvt. Ltd.) serves small businesses and CPA firms across the
-              United States and Canada. We do one thing — keep books clean, months closed, and
-              reports actionable — and we hold ourselves to standards you can measure.
+              United States and Canada. We do one thing: keep books clean, months closed, and
+              reports actionable and we hold ourselves to standards you can measure.
             </p>
             <p className="mt-4 text-base lg:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-2xl reveal">
               Our founders trained as Chartered Accountants and IFRS consultants, then built a
@@ -88,7 +80,7 @@ export default function About() {
       <section className="pb-16 lg:pb-24">
         <div className="container">
           <div className="ledger-rule mb-0" />
-          {STANDARDS.map((s, i) => (
+          {STANDARDS.map((s) => (
             <div
               key={s.title}
               className="grid lg:grid-cols-12 gap-4 lg:gap-8 py-8 border-b border-[var(--border)] items-start reveal"
@@ -96,16 +88,9 @@ export default function About() {
               <div className="lg:col-span-5">
                 <h2 className="font-serif text-xl lg:text-2xl text-[var(--navy)] leading-snug">{s.title}</h2>
               </div>
-              <div className="lg:col-span-4">
+              <div className="lg:col-span-7">
                 <p className="text-[0.9375rem] text-[var(--muted-foreground)] leading-relaxed">{s.text}</p>
               </div>
-              <div className="lg:col-span-2 lg:justify-self-end">
-                <p className="stat-num text-3xl lg:text-4xl font-semibold text-[var(--meridian)]">{s.metric}</p>
-                <p className="text-[0.6875rem] font-mono uppercase tracking-wider text-[var(--muted-foreground)] mt-1 max-w-[14ch]">
-                  {s.metricLabel}
-                </p>
-              </div>
-              {i === STANDARDS.length - 1 && null}
             </div>
           ))}
         </div>
@@ -123,33 +108,8 @@ export default function About() {
             </div>
             <div className="lg:col-span-4 lg:justify-self-end reveal">
               <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">
-                One named team per engagement — you'll always know exactly who is working on your books.
+                One named team per engagement you'll always know exactly who is working on your books.
               </p>
-            </div>
-          </div>
-
-          {/* ── Featured photos: leadership band ── */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-10">
-            {TEAM.filter((m) => m.photo).map((m) => (
-              <figure key={m.name} className="group relative overflow-hidden rounded-lg reveal">
-                <img
-                  src={m.photo}
-                  alt={`${m.name}, ${m.role}`}
-                  className="aspect-[3/4] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-                  loading="lazy"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[rgba(10,25,47,0.85)] via-[rgba(10,25,47,0.35)] to-transparent p-3 pt-10">
-                  <figcaption>
-                    <p className="font-serif text-white text-sm leading-tight">{m.name}</p>
-                    <p className="text-[0.625rem] font-mono uppercase tracking-wider text-white/75 mt-0.5">{m.role}</p>
-                  </figcaption>
-                </div>
-              </figure>
-            ))}
-            <div className="relative rounded-lg bg-[var(--navy)] text-white p-5 flex flex-col justify-end overflow-hidden reveal">
-              <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(0deg, transparent, transparent 23px, white 23px, white 24px)" }} />
-              <p className="stat-num text-4xl text-[var(--meridian)]">11</p>
-              <p className="text-sm leading-relaxed mt-2">named specialists across accounting, bookkeeping, tax, IFRS, HR, and IT — every one bound by indefinite client confidentiality.</p>
             </div>
           </div>
 
@@ -201,7 +161,7 @@ export default function About() {
 
       <CtaBand
         title="Meet us before you commit"
-        sub="Ask the team anything — scope, process, security, pricing. The discovery call is free because confidence should come before contracts."
+        sub="Ask the team anything scope, process, security, pricing. The discovery call is free because confidence should come before contracts."
       />
     </Layout>
   );

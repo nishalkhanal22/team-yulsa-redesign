@@ -1,11 +1,11 @@
 /*
-  MERIDIAN PRECISION — deep navy footer with ledger-rule motif.
-  Real contact details (valid email — audit fix), US phone, only verified social (LinkedIn).
+  MERIDIAN PRECISION deep navy footer with ledger-rule motif.
+  Real contact details (valid email audit fix), US phone, only verified social (LinkedIn).
 */
 import { Link } from "wouter";
-import { Linkedin, Mail, MessageCircle, MapPin, ArrowUpRight, Twitter } from "lucide-react";
+import { Linkedin, Mail, Phone, MapPin, ArrowUpRight, Twitter } from "lucide-react";
 import { BRAND, SERVICES, SOCIALS } from "@/lib/siteData";
-import { ASSETS } from "@/lib/assets";
+import { ASSETS, asset } from "@/lib/assets";
 
 const LOGO = ASSETS.logo;
 
@@ -29,7 +29,7 @@ export default function SiteFooter() {
               </a>
               {BRAND.phoneDisplay && (
                 <a href={BRAND.phoneHref} className="flex items-center gap-2 text-white/80 hover:text-[var(--meridian)] transition-colors">
-                  <MessageCircle className="h-4 w-4 shrink-0" />
+                  <Phone className="h-4 w-4 shrink-0" />
                   {BRAND.phoneDisplay}
                 </a>
               )}
@@ -69,7 +69,7 @@ export default function SiteFooter() {
             <p className="text-sm text-white/70 leading-relaxed mb-5">{BRAND.hours}</p>
             <div className="flex items-center gap-3">
               {SOCIALS.map((s) => {
-                const Icon = s.name === "WhatsApp" ? MessageCircle : s.name === "LinkedIn" ? Linkedin : Twitter;
+                const Icon = s.name === "LinkedIn" ? Linkedin : Twitter;
                 return (
                   <a
                     key={s.name}
@@ -79,14 +79,18 @@ export default function SiteFooter() {
                     aria-label={`Team Yulsa on ${s.name}`}
                     className="inline-flex h-9 w-9 items-center justify-center border border-white/20 text-white/80 hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
                   >
-                    <Icon className="h-4 w-4" />
+                    {s.name === "WhatsApp" ? (
+                      <img src={asset("whatsapp.svg")} alt="" aria-hidden="true" className="h-4 w-4" />
+                    ) : (
+                      <Icon className="h-4 w-4" />
+                    )}
                   </a>
                 );
               })}
             </div>
-            <a href={BRAND.calendar} target="_blank" rel="noopener noreferrer" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--meridian)] hover:gap-2.5 transition-all">
-              Book a discovery call <ArrowUpRight className="h-4 w-4" />
-            </a>
+            <Link href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--meridian)] hover:gap-2.5 transition-all">
+              Book a Call <ArrowUpRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — Home page.
+  MERIDIAN PRECISION Home page.
   Asymmetric 55/45 hero, folio tags, ledger rules, stat numerals, process rail.
   SEO: single keyword-focused H1 (audit fix). No fabricated testimonials (policy).
 */
@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
-import { BRAND, STATS, SOFTWARE_GROUPS } from "@/lib/siteData";
+import { STATS, SOFTWARE_GROUPS } from "@/lib/siteData";
 import { ASSETS, asset } from "@/lib/assets";
 import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
 import { useReveal } from "@/hooks/useReveal";
@@ -44,6 +44,22 @@ const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>>
   Virtual: Landmark,
 };
 
+const SOFTWARE_DOMAINS: Record<string, string> = {
+  "QuickBooks Online / Desktop": "quickbooks.intuit.com",
+  Xero: "xero.com",
+  FreshBooks: "freshbooks.com",
+  Wave: "waveapps.com",
+  Acumatica: "acumatica.com",
+  "Zoho Books": "zoho.com",
+  Gusto: "gusto.com",
+  Wagepoint: "wagepoint.com",
+  "ADP Payroll": "adp.com",
+  "Bill.com": "bill.com",
+  Ramp: "ramp.com",
+  Plooto: "plooto.com",
+  "Power BI": "powerbi.microsoft.com",
+};
+
 function CountUp({ display }: { display: string }) {
   return (
     <span className="stat-num text-4xl lg:text-5xl font-semibold" style={{ color: "var(--meridian)" }}>
@@ -69,19 +85,17 @@ export default function Home() {
             </h1>
             <p className="mt-5 text-base lg:text-lg leading-relaxed text-[var(--muted-foreground)] max-w-xl reveal">
               Team Yulsa is the outsourced accounting team for US and Canadian small businesses
-              and CPA firms — QuickBooks and Xero experts who close your books monthly, keep you
+              and CPA firms. QuickBooks and Xero experts who close your books monthly, keep you
               tax-ready year-round, and report in plain English.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-3 reveal">
-              <a
-                href={BRAND.calendar}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
                 style={{ background: "var(--navy)" }}
               >
-                Book a Free Discovery Call <ArrowUpRight className="h-4 w-4" />
-              </a>
+                Book a Call <ArrowUpRight className="h-4 w-4" />
+              </Link>
               <Link
                 href="/services"
                 className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold border border-[var(--navy)] text-[var(--navy)] transition-all duration-200 active:scale-[0.97] hover:bg-[var(--navy)] hover:text-white"
@@ -111,7 +125,7 @@ export default function Home() {
               ))}
             </div>
             <p className="text-[0.8125rem] leading-snug text-[var(--muted-foreground)]">
-              <span className="font-semibold text-[var(--navy)]">11 named specialists</span> across bookkeeping, tax, HR &amp; reporting
+              <span className="font-semibold text-[var(--navy)]">specialists</span> across bookkeeping, tax, HR &amp; reporting
             </p>
           </div>
         </div>
@@ -125,6 +139,9 @@ export default function Home() {
               loading="eager"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[rgba(10,25,47,0.7)] via-transparent to-transparent" />
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <img src={LOGO} alt="" aria-hidden="true" className="h-32 w-52 object-contain opacity-25 mix-blend-screen" />
+            </div>
             <div className="absolute bottom-5 left-5 lg:left-7 flex items-center gap-3">
               <img src={LOGO} alt="Team Yulsa" className="h-8 w-12 object-cover object-center" />
               <div>
@@ -152,7 +169,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <p className="mt-6 text-xs leading-relaxed text-white/60">A human team, structured process, and secure access — working together instead of leaving you to connect the dots.</p>
+            <p className="mt-6 text-xs leading-relaxed text-white/60">A human team, structured process, and secure access, working together instead of leaving you to connect the dots.</p>
           </div>
         </div>
       </section>
@@ -180,16 +197,16 @@ export default function Home() {
               fraction of the cost.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-[var(--muted-foreground)]">
-              A US-based bookkeeper typically costs $50,000–$80,000 per year plus benefits. Our
+              A US-based bookkeeper typically costs $50,000 to $80,000 per year plus benefits. Our
               dedicated team delivers the same month-end close, reconciliation rigor, and reporting
-              quality at roughly 60% of that cost — because we specialize, standardize, and scale.
+              quality at roughly 60% of that cost, because we specialize, standardize, and scale.
             </p>
             <ul className="mt-6 space-y-3.5">
               {[
                 ["US & Canada focus", "We work in USD and CAD, follow US GAAP, and support IRS and CRA filing requirements including 1099s, T4s, and sales tax workpapers."],
                 ["Certified expertise", "Led by a Chartered Accountant with consultants across IFRS, tax, and software migration."],
                 ["Fixed monthly pricing", "One predictable fee based on volume. No surprise invoices, no hourly creep."],
-                ["Zero overhead for you", "No recruiting, no training, no benefits — flex up or down as your business changes."],
+                ["Zero overhead for you", "No recruiting, no training, no benefits. Flex up or down as your business changes."],
               ].map(([t, d]) => (
                 <li key={t} className="flex gap-3">
                   <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-[var(--meridian)]" />
@@ -221,7 +238,7 @@ export default function Home() {
               Your books should explain the business, not just record it.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-[var(--muted-foreground)]">
-              We turn reconciled accounts into a monthly view your owners, operators, and CPAs can actually use — with the right level of detail for your industry.
+              We turn reconciled accounts into a monthly view your owners, operators, and CPAs can actually use, with the right level of detail for your industry.
             </p>
             <div className="mt-7 grid sm:grid-cols-2 gap-3">
               {["Revenue by channel", "Margin by service", "Cash by week", "Plain-English notes"].map((item) => (
@@ -262,7 +279,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <div className="border-t border-[var(--border)] px-5 py-4 text-xs leading-relaxed text-[var(--muted-foreground)]">Example layout only — not client data. Reporting scope is agreed before work begins.</div>
+              <div className="border-t border-[var(--border)] px-5 py-4 text-xs leading-relaxed text-[var(--muted-foreground)]">Example layout only, not client data. Reporting scope is agreed before work begins.</div>
             </div>
           </div>
         </div>
@@ -274,15 +291,26 @@ export default function Home() {
           <p className="folio-tag mb-3 reveal">Tools · Certified Expertise</p>
           <h2 className="font-serif text-2xl lg:text-3xl text-[var(--navy)] max-w-lg reveal">One team across your finance stack</h2>
           <p className="mt-3 text-sm text-[var(--muted-foreground)] max-w-xl leading-relaxed reveal">
-            We connect through your accounting software's official accountant channels — read-only
+            We connect through your accounting software's official accountant channels: read-only
             access, so you keep full control of your data.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 reveal">
             {SOFTWARE_GROUPS.map((group) => (
               <div key={group.label} className="border border-[var(--border)] bg-[oklch(0.99_0.002_85)] p-5">
                 <p className="folio-tag mb-4">{group.label}</p>
-                <ul className="space-y-2 text-sm font-semibold text-[var(--navy)]">
-                  {group.items.map((item) => <li key={item}>{item}</li>)}
+                <ul className="space-y-2.5 text-sm font-semibold text-[var(--navy)]">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex items-center gap-2.5">
+                      <img
+                        src={`https://www.google.com/s2/favicons?domain=${SOFTWARE_DOMAINS[item]}&sz=64`}
+                        alt=""
+                        aria-hidden="true"
+                        className="h-5 w-5 rounded object-contain"
+                        loading="lazy"
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}

@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — How It Works page.
+  MERIDIAN PRECISION How It Works page.
   Editorial service journey with ledger rules, navy/meridian contrast, and practical proof.
   Bench-inspired structure only: Team Yulsa owns the copy, process, and visual system.
 */
@@ -160,7 +160,7 @@ export default function HowItWorks() {
                 ))}
               </div>
               <div className="border-t border-[var(--border)] px-5 py-4 text-xs leading-relaxed text-[var(--muted-foreground)]">
-                Example layout only — not client data. Your reporting pack is scoped to the accounts, locations, and KPIs your team actually uses.
+                Example layout only, not client data. Your reporting pack is scoped to the accounts, locations, and KPIs your team actually uses.
               </div>
             </div>
           </div>

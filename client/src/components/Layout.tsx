@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — page shell: header, main, footer.
+  MERIDIAN PRECISION page shell: header, main, footer.
   SEO title updates per route (audit fix: every page gets a unique title + description).
 */
 import { useEffect, ReactNode } from "react";
@@ -8,17 +8,17 @@ import SiteFooter from "./SiteFooter";
 
 const PAGE_META: Record<string, { title: string; description: string }> = {
   "/": {
-    title: "Team Yulsa — Outsourced Bookkeeping, Accounting & Virtual CFO for US & Canadian Businesses",
+    title: "Team Yulsa Outsourced Bookkeeping, Accounting & Virtual CFO for US & Canadian Businesses",
     description:
       "Expert outsourced bookkeeping, accounting, and virtual CFO services for small businesses and CPA firms across the US and Canada. QuickBooks & Xero certified.",
   },
   "/services": {
     title: "Accounting & Bookkeeping Services for US & Canadian Businesses | Team Yulsa",
     description:
-      "Bookkeeping, tax support, AR/AP, virtual CFO, reporting, and software migration — 10 services for US and Canadian small businesses, priced as fixed monthly fees.",
+      "Bookkeeping, tax support, AR/AP, virtual CFO, reporting, and software migration 10 services for US and Canadian small businesses, priced as fixed monthly fees.",
   },
   "/industries": {
-    title: "Industries We Serve — Staffing, Restaurants, Ecommerce, Healthcare, Real Estate | Team Yulsa",
+    title: "Industries We Serve Staffing, Restaurants, Ecommerce, Healthcare, Real Estate | Team Yulsa",
     description:
       "Industry-specialized accounting and bookkeeping for staffing firms, restaurants, ecommerce sellers, healthcare practices, and property managers.",
   },
@@ -33,7 +33,7 @@ const PAGE_META: Record<string, { title: string; description: string }> = {
       "Daily POS reconciliation, weekly prime-cost reporting, and multi-location P&Ls for restaurants and food service businesses.",
   },
   "/industries/ecommerce": {
-    title: "Ecommerce Bookkeeping — Shopify, Amazon & Marketplace Accounting | Team Yulsa",
+    title: "Ecommerce Bookkeeping Shopify, Amazon & Marketplace Accounting | Team Yulsa",
     description:
       "Marketplace settlement reconciliation and product-level profitability for ecommerce and retail brands in the US and Canada.",
   },
@@ -53,12 +53,12 @@ const PAGE_META: Record<string, { title: string; description: string }> = {
       "How Team Yulsa protects client financial data: read-only access, encryption, role-based controls, and signed NDAs.",
   },
   "/about": {
-    title: "About Team Yulsa — Meet the Accounting Team Behind Your Books | Team Yulsa",
+    title: "About Team Yulsa Meet the Accounting Team Behind Your Books | Team Yulsa",
     description:
       "The certified accountants and consultants behind Team Yulsa, serving US and Canadian businesses with precision and integrity.",
   },
   "/contact": {
-    title: "Contact Team Yulsa — Book a Discovery Call",
+    title: "Contact Team Yulsa Book a Discovery Call",
     description:
       "Request a discovery call with Team Yulsa for outsourced bookkeeping and accounting support across the US and Canada. Responses within one US business day.",
   },

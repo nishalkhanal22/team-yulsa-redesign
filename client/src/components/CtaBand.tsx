@@ -1,15 +1,14 @@
 /*
-  MERIDIAN PRECISION — value-exchange CTA band (navy anchor + meridian accent).
+  MERIDIAN PRECISION value-exchange CTA band (navy anchor + meridian accent).
   Value-exchange CTAs per audit fix: no generic "Submit" prompts.
 */
 import { Link } from "wouter";
 import { ArrowUpRight, ShieldCheck } from "lucide-react";
-import { BRAND } from "@/lib/siteData";
 
 export default function CtaBand({
   title = "Your books, balanced. Your week, back.",
-  sub = "Book a free 30-minute discovery call — you'll leave with a clear scope and a fixed monthly price, in writing. No obligation, no sales pressure.",
-  primaryLabel = "Book Free Discovery Call",
+  sub = "Book a free 30-minute discovery call. You'll leave with a clear scope and a fixed monthly price, in writing. No obligation, no sales pressure.",
+  primaryLabel = "Book a Call",
   secondaryLabel = "Contact Team Yulsa",
 }: {
   title?: string;
@@ -28,14 +27,12 @@ export default function CtaBand({
           <p className="mt-4 text-white/70 max-w-xl text-base lg:text-lg leading-relaxed">{sub}</p>
         </div>
         <div className="lg:col-span-5 flex flex-col sm:flex-row lg:justify-end gap-3">
-          <a
-            href={BRAND.calendar}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/contact"
             className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-[var(--navy)] transition-all duration-200 active:scale-[0.97] hover:brightness-110 bg-[var(--meridian)]"
           >
             {primaryLabel} <ArrowUpRight className="h-4 w-4" />
-          </a>
+          </Link>
           <span className="hidden lg:flex items-center gap-1.5 text-xs text-white/50 font-mono ml-1">
             Responds within 1 US business day
           </span>

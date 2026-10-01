@@ -1,5 +1,5 @@
 /*
-  MERIDIAN PRECISION — Contact page.
+  MERIDIAN PRECISION Contact page.
   Lead-gen focus: discovery call framing and US phone line,
   FAQ accordion with FAQPage JSON-LD (audit fix).
 */
@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter } from "lucide-react";
 import Layout from "@/components/Layout";
 import { BRAND, FAQS } from "@/lib/siteData";
+import { asset } from "@/lib/assets";
 import { TIMEZONE_OPTIONS } from "@/lib/timezones";
 import { useReveal } from "@/hooks/useReveal";
 
@@ -20,7 +21,7 @@ const SERVICES_SELECT = [
   "Management Reporting",
   "Budgeting & Forecasting",
   "Virtual CFO Services",
-  "Not sure — I'd like guidance",
+  "Not sure, I'd like guidance",
 ];
 
 export default function Contact() {
@@ -224,7 +225,7 @@ export default function Contact() {
                   className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian)] transition-colors resize-y"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Tell us about your books — software, transaction volume, deadlines…"
+                  placeholder="Tell us about your books software, transaction volume, deadlines…"
                 />
               </label>
               <button
@@ -255,7 +256,7 @@ export default function Contact() {
                 One email is all it takes.
               </h2>
               <p className="mt-4 text-base text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
-                Email us or request a discovery call — we respond within 1 US business day and
+                Email us or request a discovery call we respond within 1 US business day and
                 always reply to a real human, not a chatbot.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-4">
@@ -287,6 +288,15 @@ export default function Contact() {
                     className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] bg-white text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
                   >
                     <Twitter className="h-5 w-5" />
+                  </a>
+                  <a
+                    href={BRAND.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Message Team Yulsa on WhatsApp"
+                    className="inline-flex h-11 w-11 items-center justify-center border border-[var(--border)] bg-white text-[var(--navy)] hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
+                  >
+                    <img src={asset("whatsapp.svg")} alt="" aria-hidden="true" className="h-5 w-5" />
                   </a>
                 </div>
               </div>
