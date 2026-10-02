@@ -101,7 +101,7 @@ export default function Services() {
                   <div
                     className={`lg:col-span-7 ${i % 2 === 1 ? "lg:order-1 lg:col-start-1" : ""}`}
                   >
-                    <Link href={`/services#${s.id}`} className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--navy)] hover:text-[var(--meridian)]">
+                    <Link href={`/services/${s.id}`} className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--navy)] hover:text-[var(--meridian)]">
                       View service details <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
