@@ -8,7 +8,7 @@ export function asset(filename: string): string {
 
 export const ASSETS = {
   logo: asset("team_yulsa_logo.jpeg"),
-  heroOffice: asset("team_yulsa_hero.webp"),
+  heroOffice: asset("team_yulsa_home_banner.jpeg"),
   processWorkflow: asset("process-workflow_66aa4f70.png"),
   industriesCollage: asset("industries-collage_3c29fe26.png"),
   softwareLogos: asset("software-official-logos_9fc69c90.png"),

@@ -38,8 +38,8 @@ const TEAM = [
   { name: "Dinesh Puri", role: "Associate", note: "Reconciliations & AR/AP operations", photo: asset("dinesh_89398095.png") },
   { name: "Sujal Aryal", role: "Associate", note: "Budgeting, forecasting & reporting", photo: asset("sujal_429a0972.png") },
   { name: "Samrat Hamal", role: "IT Associate", note: "Data security, tooling & automation", photo: asset("samrat_746a0552.png") },
-  { name: "HR Associate", role: "HR Associate", note: "People operations & team support", photo: "/manus-storage/hr_bdf89b86.jpeg" },
-  { name: "Accounting Associate", role: "Accounting Associate", note: "Accounting operations & client support", photo: "/manus-storage/Gemini_Generated_Image_d821g8d821g8d821_d341153c.jpeg" },
+  { name: "HR Associate", role: "HR Associate", note: "People operations & team support", photo: asset("hr-associate.jpeg") },
+  { name: "Accounting Associate", role: "Accounting Associate", note: "Accounting operations & client support", photo: asset("accounting-associate.jpeg") },
 ];
 
 export default function About() {

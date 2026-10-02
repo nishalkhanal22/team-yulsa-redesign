@@ -33,8 +33,8 @@ export const SOCIALS = [
 export const SOFTWARE_LOGO_SLUGS: Record<string, string> = {
   "QuickBooks Online / Desktop": asset("software-logos/quickbooks.svg"),
   "Xero": asset("software-logos/xero.svg"),
-  "FreshBooks": asset("software-logos/freshbooks.png"),
-  "Wave": asset("software-logos/wave.png"),
+  "FreshBooks": asset("software-logos/freshbooks.svg"),
+  "Wave": asset("software-logos/wave.svg"),
   "Acumatica": asset("software-logos/acumatica.png"),
   "Zoho Books": asset("software-logos/zoho.svg"),
   "Gusto": asset("software-logos/gusto.svg"),
@@ -49,8 +49,8 @@ export const SOFTWARE_LOGO_SLUGS: Record<string, string> = {
 export const SOFTWARE_LOGO_URLS: Record<string, string> = {
   "QuickBooks Online / Desktop": asset("software-logos/quickbooks.svg"),
   "Xero": asset("software-logos/xero.svg"),
-  "FreshBooks": asset("software-logos/freshbooks.png"),
-  "Wave": asset("software-logos/wave.png"),
+  "FreshBooks": asset("software-logos/freshbooks.svg"),
+  "Wave": asset("software-logos/wave.svg"),
   "Acumatica": asset("software-logos/acumatica.png"),
   "Zoho Books": asset("software-logos/zoho.svg"),
   "Gusto": asset("software-logos/gusto.svg"),
