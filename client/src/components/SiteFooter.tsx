@@ -1,0 +1,109 @@
+/*
+  MERIDIAN PRECISION. deep navy footer with ledger-rule motif.
+  Real contact details (valid email. audit fix), US phone, only verified social (LinkedIn).
+*/
+import { Link } from "wouter";
+import { Linkedin, Mail, Phone, MapPin, ArrowUpRight, Twitter } from "lucide-react";
+import { BRAND, SERVICES, SOCIALS } from "@/lib/siteData";
+import { ASSETS, asset } from "@/lib/assets";
+
+const LOGO = ASSETS.logo;
+
+export default function SiteFooter() {
+  return (
+    <footer style={{ background: "var(--navy-deep)" }} className="text-white">
+      <div className="container pt-16 pb-8">
+        <div className="grid gap-10 md:grid-cols-12">
+          <div className="md:col-span-4">
+            <div className="flex items-center mb-4">
+              <img src={LOGO} alt="Team Yulsa logo" className="h-12 w-32 object-cover object-center" />
+            </div>
+            <p className="text-sm leading-relaxed text-white/70 max-w-xs">
+              Outsourced bookkeeping, accounting, and virtual CFO services for small businesses and
+              CPA firms across the United States and Canada.
+            </p>
+            <div className="mt-6 space-y-2.5 text-sm">
+              <a href={`mailto:${BRAND.email}`} className="flex items-center gap-2 text-white/80 hover:text-[var(--meridian)] transition-colors">
+                <Mail className="h-4 w-4 shrink-0" />
+                {BRAND.email}
+              </a>
+              {BRAND.phoneDisplay && (
+                <a href={BRAND.phoneHref} className="flex items-center gap-2 text-white/80 hover:text-[var(--meridian)] transition-colors">
+                  <Phone className="h-4 w-4 shrink-0" />
+                  {BRAND.phoneDisplay}
+                </a>
+              )}
+              <span className="flex items-center gap-2 text-white/70">
+                <MapPin className="h-4 w-4 shrink-0" />
+                {BRAND.address}
+              </span>
+            </div>
+          </div>
+
+          <div className="md:col-span-2">
+            <p className="folio-tag folio-tag--light mb-4">Services</p>
+            <ul className="space-y-2 text-sm text-white/70">
+              {SERVICES.slice(0, 6).map((s) => (
+                <li key={s.id}>
+                  <Link href="/services" className="hover:text-[var(--meridian)] transition-colors">
+                    {s.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="md:col-span-2">
+            <p className="folio-tag folio-tag--light mb-4">Site</p>
+            <ul className="space-y-2 text-sm text-white/70">
+              <li><Link href="/services" className="hover:text-[var(--meridian)] transition-colors">All Services</Link></li>
+              <li><Link href="/industries" className="hover:text-[var(--meridian)] transition-colors">Industries</Link></li>
+              <li><Link href="/security" className="hover:text-[var(--meridian)] transition-colors">Data Security</Link></li>
+              <li><Link href="/about" className="hover:text-[var(--meridian)] transition-colors">About Us</Link></li>
+              <li><Link href="/contact" className="hover:text-[var(--meridian)] transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+
+          <div className="md:col-span-4">
+            <p className="folio-tag folio-tag--light mb-4">Working hours</p>
+            <p className="text-sm text-white/70 leading-relaxed mb-5">{BRAND.hours}</p>
+            <div className="flex items-center gap-3">
+              {SOCIALS.map((s) => {
+                const Icon = s.name === "LinkedIn" ? Linkedin : Twitter;
+                return (
+                  <a
+                    key={s.name}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Team Yulsa on ${s.name}`}
+                    className="inline-flex h-9 w-9 items-center justify-center border border-white/20 text-white/80 hover:text-[var(--meridian)] hover:border-[var(--meridian)] transition-colors"
+                  >
+                    {s.name === "WhatsApp" ? (
+                      <img src={asset("whatsapp.svg")} alt="" aria-hidden="true" className="h-4 w-4" />
+                    ) : (
+                      <Icon className="h-4 w-4" />
+                    )}
+                  </a>
+                );
+              })}
+            </div>
+            <Link href="/contact" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--meridian)] hover:gap-2.5 transition-all">
+              Book a Call <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+
+        <div className="ledger-rule my-10 opacity-40" />
+
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-white/65">
+          <p>© {new Date().getFullYear()} Team Yulsa • Yulsa Advisor Pvt. Ltd. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <p>Serving businesses across the United States &amp; Canada</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

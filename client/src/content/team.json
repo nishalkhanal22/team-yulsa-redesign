@@ -1,0 +1,92 @@
+{
+  "members": [
+    {
+      "name": "Sagun Jung Rana",
+      "role": "Founder • Chartered Accountant",
+      "note": "Client strategy & quality review",
+      "photo": "sagun-jung-rana.png",
+      "order": 1,
+      "published": true
+    },
+    {
+      "name": "Prabesh Bhusal",
+      "role": "Senior Associate",
+      "note": "Month-end close & management reporting",
+      "photo": "prabesh-bhusal.png",
+      "order": 2,
+      "published": true
+    },
+    {
+      "name": "Nisha Khanal",
+      "role": "IFRS Consultant",
+      "note": "Standards compliance & audit readiness",
+      "photo": "nisha-khanal.png",
+      "order": 3,
+      "published": true
+    },
+    {
+      "name": "Aayush Shah",
+      "role": "Senior Associate",
+      "note": "Tax-season workflows & filing support",
+      "photo": "aayush-shah.png",
+      "order": 4,
+      "published": true
+    },
+    {
+      "name": "Himal Ayman Karki",
+      "role": "Senior Associate",
+      "note": "Software migrations & transitions",
+      "photo": "himal-karki.png",
+      "order": 5,
+      "published": true
+    },
+    {
+      "name": "Sarjan Jung Rana",
+      "role": "Tax Associate",
+      "note": "Tax workpapers & compliance",
+      "photo": "sarjan-rana.png",
+      "order": 6,
+      "published": true
+    },
+    {
+      "name": "Dinesh Puri",
+      "role": "Associate",
+      "note": "Reconciliations & AR/AP operations",
+      "photo": "dinesh-puri.png",
+      "order": 7,
+      "published": true
+    },
+    {
+      "name": "Sujal Aryal",
+      "role": "Associate",
+      "note": "Budgeting, forecasting & reporting",
+      "photo": "sujal-aryal.png",
+      "order": 8,
+      "published": true
+    },
+    {
+      "name": "Samrat Hamal",
+      "role": "IT Associate",
+      "note": "Data security, tooling & automation",
+      "photo": "samrat-hamal.png",
+      "order": 9,
+      "published": true
+    },
+    {
+      "name": "HR Associate",
+      "role": "HR Associate",
+      "note": "People operations & team support",
+      "photo": "hr-associate.jpeg",
+      "order": 10,
+      "published": true
+    },
+    {
+      "name": "Accounting Associate",
+      "role": "Accounting Associate",
+      "note": "Accounting operations & client support",
+      "photo": "accounting-associate.jpeg",
+      "order": 11,
+      "published": true
+    }
+  ]
+}

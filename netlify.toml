@@ -1,0 +1,31 @@
+# Netlify deployment
+#
+# Connect the repository in Netlify, then set the custom domain to teamyulsa.com.
+# Netlify reads this file automatically.
+
+[build]
+  command = "pnpm build"
+  publish = "dist/public"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10.4.1"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# /admin is a small static page that links to Pages CMS.
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200

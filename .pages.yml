@@ -1,0 +1,48 @@
+# Pages CMS configuration (https://pagescms.org)
+#
+# The client signs in at https://app.pagescms.org with GitHub, opens this
+# repository, and edits the team list. Every save commits to Git, which triggers
+# a rebuild and deploy.
+media:
+  input: client/public/assets/team
+  output: /assets/team
+  rename: safe
+  categories: [image]
+
+content:
+  - name: team
+    label: Team members
+    type: file
+    path: client/src/content/team.json
+    format: json
+    fields:
+      - name: members
+        label: Team members
+        type: object
+        list: true
+        fields:
+          - name: name
+            label: Full name
+            type: string
+            required: true
+          - name: role
+            label: Role / title
+            type: string
+            required: true
+          - name: note
+            label: Short note (shown on the About page)
+            type: string
+          - name: photo
+            label: Photo
+            type: image
+            options:
+              categories: [image]
+              rename: safe
+          - name: order
+            label: Display order
+            type: number
+            default: 99
+          - name: published
+            label: Show on the website
+            type: boolean
+            default: true

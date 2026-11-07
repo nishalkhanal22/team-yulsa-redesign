@@ -1,0 +1,287 @@
+/*
+  MERIDIAN PRECISION. Home page.
+  Asymmetric 55/45 hero, folio tags, ledger rules, stat numerals, process rail.
+  SEO: single keyword-focused H1 (audit fix). No fabricated testimonials (policy).
+*/
+import { Link } from "wouter";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  ShieldCheck,
+  Clock,
+  DollarSign,
+} from "lucide-react";
+import Layout from "@/components/Layout";
+import CtaBand from "@/components/CtaBand";
+import { STATS, SOFTWARE_GROUPS, SOFTWARE_LOGO_URLS } from "@/lib/siteData";
+import { ASSETS } from "@/lib/assets";
+import { TEAM, teamPhoto } from "@/lib/team";
+import { Calculator, FileSpreadsheet, PiggyBank, ClipboardList, RefreshCcw, Mail, LineChart, FileBarChart, Target, Landmark } from "lucide-react";
+import { useReveal } from "@/hooks/useReveal";
+
+const HERO_IMG = ASSETS.heroOffice;
+const PROCESS_IMG = ASSETS.processWorkflow;
+
+const SERVICE_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  Accounting: Calculator,
+  "Tax Filing": FileBarChart,
+  "Accounts": ClipboardList,
+  "Year-end": RefreshCcw,
+  Migration: Mail,
+  Invoice: FileSpreadsheet,
+  Bank: PiggyBank,
+  Management: LineChart,
+  Budgeting: Target,
+  Virtual: Landmark,
+};
+
+function CountUp({ display }: { display: string }) {
+  return (
+    <span className="stat-num text-4xl lg:text-5xl font-semibold" style={{ color: "var(--meridian-text)" }}>
+      {display}
+    </span>
+  );
+}
+
+export default function Home() {
+  useReveal();
+
+  return (
+    <Layout path="/">
+      {/* ── Hero: split with rich photo edge-to-edge ── */}
+      <section className="pt-24 lg:pt-32 pb-0 overflow-hidden">
+        <div className="container grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          <div className="lg:col-span-7 pb-10 lg:pb-16">
+            <p className="folio-tag mb-4 reveal">Bookkeeping • Accounting • Virtual CFO • US &amp; Canada</p>
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.6rem] leading-[1.06] text-[var(--navy)] reveal">
+              Your books, balanced.
+              <br />
+              <em className="text-[var(--meridian-text)]">Your week, back.</em>
+            </h1>
+            <p className="mt-5 text-base lg:text-lg leading-relaxed text-[var(--muted-foreground)] max-w-xl reveal">
+              Team Yulsa is the outsourced accounting team for US and Canadian small businesses
+              and CPA firms. QuickBooks and Xero experts who close your books monthly, keep you
+              tax-ready year-round, and report in plain English.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-3 reveal">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
+                style={{ background: "var(--navy)" }}
+              >
+                Book a Call <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <Link
+                href="/services"
+                className="inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold border border-[var(--navy)] text-[var(--navy)] transition-all duration-200 active:scale-[0.97] hover:bg-[var(--navy)] hover:text-white"
+              >
+                Explore Services <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.8125rem] text-[var(--muted-foreground)] reveal">
+              <span className="inline-flex items-center gap-1.5"><DollarSign className="h-4 w-4 text-[var(--meridian-text)]" /> ~40% less than in-house US bookkeeping</span>
+              <span className="inline-flex items-center gap-1.5"><Clock className="h-4 w-4 text-[var(--meridian-text)]" /> US &amp; Canada business-hours coverage</span>
+              <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-[var(--meridian-text)]" /> Read-only access • NDA protected</span>
+            </div>
+          </div>
+        </div>
+        {/* Trust strip with real team faces */}
+        <div className="container pb-6 pt-2">
+          <div className="flex items-center gap-4 reveal">
+            <div className="flex -space-x-2.5">
+              {TEAM.slice(0, 6).map((t) => (
+                <img
+                  key={t.name}
+                  src={teamPhoto(t, 160)}
+                  srcSet={`${teamPhoto(t, 160)} 160w, ${teamPhoto(t, 480)} 480w`}
+                  sizes="40px"
+                  alt={`${t.name}, ${t.role}`}
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full object-cover object-top ring-2 ring-[oklch(0.99_0.003_85)]"
+                  loading="eager"
+                />
+              ))}
+            </div>
+            <p className="text-[0.8125rem] leading-snug text-[var(--muted-foreground)]">
+              <span className="font-semibold text-[var(--navy)]">Specialists</span> across bookkeeping, tax, HR &amp; reporting
+            </p>
+          </div>
+        </div>
+        {/* Full-width Team Yulsa hero banner */}
+        <div className="container relative mt-6 lg:mt-0 overflow-hidden bg-[var(--navy)]">
+          <img
+            src={HERO_IMG}
+            srcSet={`${ASSETS.heroOfficeSmall} 800w, ${ASSETS.heroOffice} 1600w`}
+            sizes="(min-width: 1280px) 1216px, 100vw"
+            alt="Team Yulsa financial infrastructure and accounting team"
+            width={1686}
+            height={624}
+            className="block w-full h-auto"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </div>
+      </section>
+
+      {/* ── Stat band ── */}
+      <section className="border-y border-[var(--border)] bg-white">
+        <div className="container py-10 grid grid-cols-2 lg:grid-cols-4 gap-8">
+          {STATS.map((s) => (
+            <div key={s.label} className="reveal">
+              <CountUp display={s.display} />
+              <p className="mt-2 text-xs lg:text-[0.8125rem] leading-snug text-[var(--muted-foreground)] max-w-[24ch]">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Why Team Yulsa (US/Canada angle) ── */}
+      <section className="py-16 lg:py-24 bg-white border-t border-[var(--border)]">
+        <div className="container grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-6 reveal">
+            <p className="folio-tag mb-3">02 / Why Team Yulsa</p>
+            <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] leading-tight">
+              Big-firm discipline,
+              <br />
+              fraction of the cost.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-[var(--muted-foreground)]">
+              A US-based bookkeeper typically costs $50,000–$80,000 per year plus benefits. Our
+              dedicated team delivers the same month-end close, reconciliation rigor, and reporting
+              quality at roughly 60% of that cost. because we specialize, standardize, and scale.
+            </p>
+            <ul className="mt-6 space-y-3.5">
+              {[
+                ["US & Canada focus", "We work in USD and CAD, follow US GAAP, and support IRS and CRA filing requirements including 1099s, T4s, and sales tax workpapers."],
+                ["Certified expertise", "Led by a Chartered Accountant with consultants across IFRS, tax, and software migration."],
+                ["Fixed monthly pricing", "One predictable fee based on volume. No surprise invoices, no hourly creep."],
+                ["Zero overhead for you", "No recruiting, no training, no benefits. flex up or down as your business changes."],
+              ].map(([t, d]) => (
+                <li key={t} className="flex gap-3">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 mt-0.5 text-[var(--meridian-text)]" />
+                  <div>
+                    <p className="text-sm font-semibold text-[var(--navy)]">{t}</p>
+                    <p className="text-sm text-[var(--muted-foreground)] leading-relaxed">{d}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="lg:col-span-6 reveal">
+            <img
+              src={PROCESS_IMG}
+              srcSet={`${ASSETS.processWorkflowSmall} 640w, ${ASSETS.processWorkflow} 1280w`}
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              alt="Illustration of the four-step Team Yulsa engagement process from discovery to monthly reporting"
+              width={1920}
+              height={1280}
+              className="w-full rounded-md"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ── Financial visibility ── */}
+      <section className="py-16 lg:py-24 bg-[oklch(0.97_0.01_90)] border-y border-[var(--border)]">
+        <div className="container grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5 reveal">
+            <p className="folio-tag mb-3">03 / Financial visibility</p>
+            <h2 className="font-serif text-3xl lg:text-4xl text-[var(--navy)] leading-tight">
+              Your books should explain the business, not just record it.
+            </h2>
+            <p className="mt-5 text-base leading-relaxed text-[var(--muted-foreground)]">
+              We turn reconciled accounts into a monthly view your owners, operators, and CPAs can actually use. with the right level of detail for your industry.
+            </p>
+            <div className="mt-7 grid sm:grid-cols-2 gap-3">
+              {["Revenue by channel", "Margin by service", "Cash by week", "Plain-English notes"].map((item) => (
+                <div key={item} className="flex items-center gap-2 border border-[var(--border)] bg-white px-4 py-3 text-sm font-semibold text-[var(--navy)]">
+                  <CheckCircle2 className="h-4 w-4 text-[var(--meridian-text)]" />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lg:col-span-7 reveal">
+            <div className="border border-[var(--border)] bg-white shadow-[0_18px_50px_rgba(15,32,55,0.08)]">
+              <div className="flex items-center justify-between border-b border-[var(--border)] px-5 py-4">
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-[0.16em] text-[var(--muted-foreground)]">Illustrative monthly view</p>
+                  <p className="mt-1 font-serif text-xl text-[var(--navy)]">Management snapshot</p>
+                </div>
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--meridian-text)]"><ShieldCheck className="h-4 w-4" /> Secure workflow</span>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-px bg-[var(--border)]">
+                {["Income statement", "Balance sheet", "Cash outlook", "Action notes"].map((label, index) => (
+                  <div key={label} className="bg-white p-5">
+                    <p className="text-xs font-mono uppercase tracking-[0.12em] text-[var(--muted-foreground)]">{label}</p>
+                    <div className="mt-5 flex items-end gap-1.5 h-12">
+                      {[25, 40, 60, 80, 60, 100].map((width, barIndex) => (
+                        <span
+                          key={`${label}-${barIndex}`}
+                          className="block"
+                          style={{
+                            width: `${width}%`,
+                            height: `${12 + ((barIndex + index) % 4) * 8}px`,
+                            background: barIndex === 5 ? "var(--meridian)" : "oklch(0.84 0.04 160)",
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <p className="mt-4 text-xs text-[var(--muted-foreground)]">Built around the accounts and KPIs your team uses.</p>
+                  </div>
+                ))}
+              </div>
+              <div className="border-t border-[var(--border)] px-5 py-4 text-xs leading-relaxed text-[var(--muted-foreground)]">Example layout only. not client data. Reporting scope is agreed before work begins.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Software we work with ── */}
+      <section className="py-14 lg:py-18 border-t border-[var(--border)] bg-white">
+        <div className="container">
+          <p className="folio-tag mb-3 reveal">Tools • Certified Expertise</p>
+          <h2 className="font-serif text-2xl lg:text-3xl text-[var(--navy)] max-w-lg reveal">One team across your finance stack</h2>
+          <p className="mt-3 text-sm text-[var(--muted-foreground)] max-w-xl leading-relaxed reveal">
+            We connect through your accounting software's official accountant channels. read-only
+            access, so you keep full control of your data.
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 reveal">
+            {SOFTWARE_GROUPS.map((group) => (
+              <div key={group.label} className="border border-[var(--border)] bg-[oklch(0.99_0.002_85)] p-5">
+                <p className="folio-tag mb-4">{group.label}</p>
+                <ul className="grid grid-cols-1 gap-2.5 text-sm font-semibold text-[var(--navy)]">
+                  {group.items.map((item) => {
+                    const logoUrl = SOFTWARE_LOGO_URLS[item];
+                    return (
+                      <li key={item} className="flex items-center gap-3 rounded-sm px-1 py-1.5">
+                        {logoUrl ? (
+                          <img
+                            src={logoUrl}
+                            alt={`${item} logo`}
+                            className="h-8 w-8 shrink-0 object-contain"
+                            loading="eager"
+                          />
+                        ) : (
+                          <span className="h-6 w-6 shrink-0 rounded-sm bg-[var(--secondary)]" />
+                        )}
+                        <span>{item}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CtaBand />
+    </Layout>
+  );
+}
