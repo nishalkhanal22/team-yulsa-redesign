@@ -5,6 +5,19 @@
   "framework": "vite",
   "cleanUrls": false,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/index.php", "destination": "/", "permanent": true },
+    { "source": "/about-us.php", "destination": "/about", "permanent": true },
+    { "source": "/services.php", "destination": "/services", "permanent": true },
+    { "source": "/contact.php", "destination": "/contact", "permanent": true },
+    { "source": "/blogs.php", "destination": "/how-it-works", "permanent": true },
+    {
+      "source": "/frontend/_blogs/blog1.php",
+      "destination": "/how-it-works",
+      "permanent": true
+    },
+    { "source": "/frontend/:path*", "destination": "/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

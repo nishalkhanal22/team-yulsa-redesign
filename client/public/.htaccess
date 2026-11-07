@@ -11,7 +11,29 @@ ErrorDocument 404 /404.html
   # Redirect www to the canonical non-www domain.
   RewriteCond %{HTTP_HOST} ^www\.teamyulsa\.com$ [NC]
   RewriteRule ^ https://teamyulsa.com%{REQUEST_URI} [L,R=301]
+
+  # Force HTTPS.
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # ---------------------------------------------------------------------
+  # Legacy URLs from the previous site. 301s keep existing search rankings
+  # and any links in old emails or proposals working.
+  # ---------------------------------------------------------------------
+  RewriteRule ^index\.php$ / [R=301,L]
+  RewriteRule ^about-us\.php$ /about [R=301,L]
+  RewriteRule ^services\.php$ /services [R=301,L]
+  RewriteRule ^contact\.php$ /contact [R=301,L]
+  RewriteRule ^blogs\.php$ /how-it-works [R=301,L]
+  RewriteRule ^frontend/_blogs/blog1\.php$ /how-it-works [R=301,L]
+  RewriteRule ^frontend/(.*)$ / [R=301,L]
 </IfModule>
+
+# Never serve source files or the CMS config.
+<FilesMatch "(^\.|\.(json|ts|tsx|mjs|map|md|yml|yaml|lock)$)">
+  Require all denied
+</FilesMatch>
 
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml

@@ -1,1 +1,16 @@
-/admin /admin/index.html 200
+# Netlify / Cloudflare Pages redirects.
+# Legacy URLs from the previous PHP site keep their search rankings.
+
+/index.php              /                 301
+/about-us.php           /about            301
+/services.php           /services         301
+/contact.php            /contact          301
+/blogs.php              /how-it-works     301
+/frontend/_blogs/blog1.php  /how-it-works 301
+/frontend/*             /                 301
+
+# /admin is a small static page that links to Pages CMS.
+/admin                  /admin/index.html 200
+
+# Anything else is a real 404 (the app renders a branded not-found page).
+/*                      /404.html         404
