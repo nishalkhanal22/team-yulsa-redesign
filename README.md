@@ -6,6 +6,21 @@ services for US and Canadian businesses.
 Built with Vite, React, TypeScript, and Tailwind CSS. The build is fully static: no server, no
 database, no monthly hosting bill required.
 
+## Current status
+
+| Item | Value |
+| --- | --- |
+| Repository | <https://github.com/nishalkhanal22/team-yulsa-redesign> |
+| Live preview | <https://nishalkhanal22.github.io/team-yulsa-redesign/> |
+| Production domain | `teamyulsa.com` — still serving the previous site |
+| Previous history | preserved on branch `archive/pre-redesign` |
+
+The preview updates automatically on every push to `main`. `teamyulsa.com` will keep serving the
+old site until someone completes one of the go-live options under **Deploying**.
+
+> Email (`info@teamyulsa.com`) is hosted on the same server as the old website
+> (`167.235.9.123`). Do not change nameservers without recreating the MX and SPF records first.
+
 ## What is included
 
 - 24 prerendered routes (home, services, 10 service pages, industries, 6 industry pages, about,
@@ -37,14 +52,27 @@ picked up automatically.
 
 The only deployable output is **`dist/public`**.
 
-### Cloudflare Pages (recommended)
+### cPanel / shared hosting (current host — recommended for go-live)
 
-1. Push this repository to GitHub.
-2. In Cloudflare Pages: **Create a project → Connect to Git** and select the repository.
-3. Build command: `pnpm build`. Build output directory: `dist/public`.
-4. Add the custom domain `teamyulsa.com` and `www.teamyulsa.com`.
-5. In Namecheap DNS, point the domain to Cloudflare nameservers (or add the CNAME/A records
-   Cloudflare shows). Remove the old site records.
+The current `teamyulsa.com` server also handles email, so this is the lowest-risk move.
+
+1. Run `pnpm build`.
+2. Upload the **contents** of `dist/public` to `public_html` (File Manager or FTP). Delete the old
+   PHP files first, or move them to a backup folder outside `public_html`.
+3. `client/public/.htaccess` is copied into the build and handles 404s, compression, caching, the
+   www → non-www redirect, HTTPS, and the legacy `.php` → new-route 301s.
+4. Confirm AutoSSL / Let's Encrypt still covers `teamyulsa.com`.
+
+### Cloudflare Pages
+
+Only choose this if you are ready to move DNS. The current email setup (`MX = teamyulsa.com`,
+SPF includes `167.235.9.123`) lives on the same server, so MX and SPF records must be recreated in
+Cloudflare before the nameserver change.
+
+1. In Cloudflare Pages: **Create a project → Connect to Git** and select the repository.
+2. Build command: `pnpm build`. Build output directory: `dist/public`.
+3. Add the custom domain `teamyulsa.com` and `www.teamyulsa.com`.
+4. Point the domain at Cloudflare nameservers, then re-add MX, SPF, and any other mail records.
 
 ### Netlify
 
@@ -52,19 +80,21 @@ The only deployable output is **`dist/public`**.
 2. Netlify reads `netlify.toml` automatically (build `pnpm build`, publish `dist/public`).
 3. Add `teamyulsa.com` under **Domain management** and follow the DNS instructions.
 
-### cPanel / shared hosting (Nepali host or Namecheap)
-
-1. Run `pnpm build`.
-2. Upload the **contents** of `dist/public` to `public_html` (File Manager or FTP).
-3. `client/public/.htaccess` is copied into the build and handles 404s, compression, caching,
-   and the www → non-www redirect.
-4. Enable AutoSSL / Let's Encrypt for `teamyulsa.com`.
-
-### GitHub Pages
+### GitHub Pages (currently live preview)
 
 The workflow in `.github/workflows/deploy-pages.yml` builds and deploys automatically on pushes
-to `main`. Enable **Settings → Pages → Source: GitHub Actions**. Note that GitHub Pages serves
-the site under `/team-yulsa-redesign/`; canonical URLs still point to `teamyulsa.com`.
+to `main`. Pages is already enabled with **Source: GitHub Actions**. The site is served under
+`/team-yulsa-redesign/`; canonical URLs still point to `teamyulsa.com`.
+
+To serve the domain from Pages instead, add a `CNAME` file containing `teamyulsa.com` to
+`client/public`, then point the apex A records at GitHub's four IPs and `www` at
+`nishalkhanal22.github.io`. Note that GitHub Pages cannot issue 301s for the old `.php` URLs.
+
+## Legacy URLs
+
+The previous site used `/index.php`, `/about-us.php`, `/services.php`, `/contact.php`,
+`/blogs.php`, and `/frontend/_blogs/blog1.php`. All of them are redirected to the matching new
+route in `.htaccess`, `_redirects`, and `vercel.json`, so rankings and old links keep working.
 
 ## After launch
 
@@ -72,10 +102,8 @@ the site under `/team-yulsa-redesign/`; canonical URLs still point to `teamyulsa
    `https://teamyulsa.com/sitemap.xml`.
 2. **Bing Webmaster Tools** — import from Search Console.
 3. **Google Business Profile** — keep the existing listing; add the new site URL.
-4. Update the old site's 301 redirects at the host so existing rankings carry over. The most
-   common old URLs (`/about`, `/services`, `/contact`) already match this site's routes.
-5. Confirm `https://teamyulsa.com/og-image.jpg` loads and test sharing on LinkedIn.
-6. Optional analytics: add a privacy-friendly script (Plausible, Fathom, or GA4) before
+4. Confirm `https://teamyulsa.com/og-image.jpg` loads and test sharing on LinkedIn.
+5. Optional analytics: add a privacy-friendly script (Plausible, Fathom, or GA4) before
    `</body>` in `client/index.html`; update the privacy policy if you add cookies.
 
 ## Lead form

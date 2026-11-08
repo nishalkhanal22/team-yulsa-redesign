@@ -5,11 +5,11 @@ developer, and without touching code.
 
 ## Add or remove a team member
 
-1. Go to **https://app.pagescms.org** (or **https://teamyulsa.com/admin**, which redirects there).
-2. Sign in with the GitHub account that has access to the website repository.
-3. Choose the repository **team-yulsa-redesign**.
-4. Open **Team members**.
-5. To add someone: click **Add item**, then fill in:
+1. Go to **https://app.pagescms.org** and sign in with GitHub.
+   (Once the new site is live, **https://teamyulsa.com/admin** also forwards there.)
+2. Choose the repository **team-yulsa-redesign**.
+3. Open **Team members**.
+4. To add someone: click **Add item**, then fill in:
    - **Full name** — shown under the photo.
    - **Role / title** — for example, “Senior Associate”.
    - **Short note** — the one-line description shown on the About page.
@@ -17,8 +17,8 @@ developer, and without touching code.
      compresses it automatically.
    - **Display order** — lower numbers appear first. Use 1 for the founder, then 2, 3, 4…
    - **Show on the website** — leave on. Turn it off to hide someone without deleting them.
-6. To remove someone: open their row and delete it.
-7. Click **Save** / **Publish**. Your change is committed to GitHub and the site rebuilds
+5. To remove someone: open their row and delete it.
+6. Click **Save** / **Publish**. Your change is committed to GitHub and the site rebuilds
    automatically (usually within 1–2 minutes).
 
 ## Photo tips
