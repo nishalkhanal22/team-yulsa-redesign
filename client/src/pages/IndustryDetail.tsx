@@ -23,13 +23,6 @@ export default function IndustryDetail() {
   const ind = INDUSTRIES.find((i) => i.slug === slug);
   useReveal();
 
-  useEffect(() => {
-    if (!ind) return;
-    document.title = `Bookkeeping for ${ind.name} Businesses | Team Yulsa`;
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.setAttribute("content", `${ind.short} ${ind.pain} Team Yulsa serves ${ind.name.toLowerCase()} businesses across the US and Canada with industry-specific accounting.`);
-  }, [ind]);
-
   // FAQPage structured data (audit fix: proper schema)
   useEffect(() => {
     if (!ind) return;

@@ -10,6 +10,7 @@
 */
 import fs from "node:fs/promises";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import {
   ROUTES,
   SITE,
@@ -22,6 +23,22 @@ const root = path.resolve(import.meta.dirname, "..");
 const dist = path.join(root, "dist", "public");
 const template = await fs.readFile(path.join(dist, "index.html"), "utf8");
 const today = new Date().toISOString().slice(0, 10);
+
+// The SSR bundle is built by `vite build --ssr` just before this script runs.
+const serverEntry = await import(
+  pathToFileURL(path.join(root, "dist", "server", "entry-server.js")).href
+);
+const renderRouteHtml: (routePath: string) => string =
+  serverEntry.render ?? serverEntry.default;
+
+/** Put the prerendered markup inside #root so the page has real content. */
+function withPrerenderedBody(html: string, routePath: string): string {
+  const markup = renderRouteHtml(routePath);
+  return html.replace(
+    '<div id="root"></div>',
+    `<div id="root" data-prerendered="${routePath}">${markup}</div>`
+  );
+}
 
 function escapeHtml(value: string): string {
   return value
@@ -91,7 +108,7 @@ function renderRoute(routePath: string): string {
     )}</script>\n  </head>`
   );
 
-  return html;
+  return withPrerenderedBody(html, routePath);
 }
 
 async function writeRoute(routePath: string, html: string) {
@@ -123,6 +140,7 @@ notFound = replaceTitle(notFound, "Page not found | Team Yulsa");
 notFound = replaceMeta(notFound, "description", "The page you requested could not be found. Browse Team Yulsa services, industries, or book a free discovery call.");
 notFound = replaceMeta(notFound, "robots", "noindex, follow");
 notFound = notFound.replace(/\s*<link rel="canonical"[^>]*>/, "");
+notFound = withPrerenderedBody(notFound, "/404");
 await fs.writeFile(path.join(dist, "404.html"), notFound, "utf8");
 
 // Sitemap

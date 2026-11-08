@@ -1,38 +1,23 @@
-import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Route, Switch, Router as WouterRouter } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-
-const Services = lazy(() => import("./pages/Services"));
-const ServiceDetail = lazy(() => import("./pages/ServiceDetail"));
-const Industries = lazy(() => import("./pages/Industries"));
-const IndustryDetail = lazy(() => import("./pages/IndustryDetail"));
-const Security = lazy(() => import("./pages/Security"));
-const About = lazy(() => import("./pages/About"));
-const Contact = lazy(() => import("./pages/Contact"));
-const HowItWorks = lazy(() => import("./pages/HowItWorks"));
-const Privacy = lazy(() => import("./pages/Privacy"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+import Services from "./pages/Services";
+import ServiceDetail from "./pages/ServiceDetail";
+import Industries from "./pages/Industries";
+import IndustryDetail from "./pages/IndustryDetail";
+import Security from "./pages/Security";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import HowItWorks from "./pages/HowItWorks";
+import Privacy from "./pages/Privacy";
+import NotFound from "./pages/NotFound";
 
 // Wouter concatenates base + href. A trailing slash in BASE_URL produces
 // "//services" links, so strip it once here.
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-
-function PageFallback() {
-  return (
-    <div
-      className="min-h-screen flex items-center justify-center"
-      role="status"
-      aria-live="polite"
-    >
-      <span className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--border)] border-t-[var(--meridian)]" />
-      <span className="sr-only">Loading page</span>
-    </div>
-  );
-}
 
 function Router() {
   return (
@@ -54,21 +39,21 @@ function Router() {
   );
 }
 
-function App() {
+/**
+ * `ssrPath` is only set by the build-time prerenderer (client/src/entry-server.tsx).
+ * In the browser it is undefined and wouter reads window.location as usual.
+ */
+export default function App({ ssrPath }: { ssrPath?: string }) {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
           <Toaster position="bottom-right" />
-          <WouterRouter base={base}>
-            <Suspense fallback={<PageFallback />}>
-              <Router />
-            </Suspense>
+          <WouterRouter base={base} ssrPath={ssrPath}>
+            <Router />
           </WouterRouter>
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
 }
-
-export default App;

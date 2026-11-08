@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "node scripts/optimize-images.mjs && vite --host",
-    "build": "node scripts/optimize-images.mjs && vite build && tsx scripts/postbuild.ts",
+    "build": "node scripts/optimize-images.mjs && vite build && vite build --ssr src/entry-server.tsx --outDir ../dist/server --emptyOutDir && tsx scripts/postbuild.ts",
     "preview": "vite preview --host",
     "check": "tsc --noEmit",
     "optimize": "node scripts/optimize-images.mjs",

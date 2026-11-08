@@ -106,12 +106,28 @@ route in `.htaccess`, `_redirects`, and `vercel.json`, so rankings and old links
 5. Optional analytics: add a privacy-friendly script (Plausible, Fathom, or GA4) before
    `</body>` in `client/index.html`; update the privacy policy if you add cookies.
 
-## Lead form
+## Lead form and booking
 
 The contact form posts to the Google Apps Script endpoint in
 `client/src/lib/siteData.ts` (`BRAND.bookingEndpoint`). If that endpoint changes, update it there.
-The form uses `no-cors`, so the site cannot read the response — it confirms the request was sent
-and the team confirms the slot by email.
+
+**Timezone handling.** The form never guesses. A slot is an exact instant:
+
+- Slots are defined in `America/New_York`, Monday–Friday, 9:00–17:00, in
+  `client/src/lib/booking.ts` (`BOOKING`). Change `startHour`/`endHour`/`slotMinutes` there.
+- The visitor's timezone is auto-detected (`Intl.DateTimeFormat`) and can be overridden.
+- Every slot and the confirmation show the visitor's local time **and** the same instant in
+  `Asia/Kathmandu`, so a 9:00 AM New York call reads as 7:45 PM in Kathmandu. The server
+  (`Utilities.parseDate`) converts the wall clock plus IANA zone to one UTC instant, so the
+  Google Calendar event is identical for both sides.
+- Already-booked slots are greyed out by asking the endpoint for availability; if the endpoint
+  does not answer, the picker still works and the server rejects conflicts on submit.
+
+**One-time Apps Script update.** The site now expects the script in
+`scripts/apps-script/booking.gs` (availability endpoint, conflict check, Meet link, dual-timezone
+emails). Paste it into the Apps Script editor, enable the **Calendar API** advanced service, set
+`CONFIG`, then deploy a new version of the existing deployment so the URL stays the same. Full
+steps are in the file header.
 
 ## Team editing
 
@@ -127,10 +143,12 @@ client/
   src/
     content/team.json        client-editable team data
     lib/seo.ts               route SEO + JSON-LD (single source of truth)
+    lib/booking.ts           slot generation + timezone conversion
     lib/team.ts              team helpers
     lib/siteData.ts          services, industries, FAQ, contact details
     pages/                   route components
 scripts/
+  apps-script/booking.gs     Google Apps Script booking API (paste into Apps Script)
   optimize-images.mjs        WebP generation
   postbuild.ts               per-route HTML, sitemap, robots, 404
   generate-brand-assets.mjs  OG image + favicons (run only if the logo changes)

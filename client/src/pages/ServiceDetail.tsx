@@ -3,7 +3,6 @@
   Each service gets a real URL so the Services index is useful for visitors and SEO.
 */
 import { Link, useParams } from "wouter";
-import { useEffect } from "react";
 import { ArrowLeft, ArrowRight, Check, BookOpenCheck } from "lucide-react";
 import Layout from "@/components/Layout";
 import CtaBand from "@/components/CtaBand";
@@ -14,13 +13,6 @@ export default function ServiceDetail() {
   const { id } = useParams<{ id: string }>();
   const service = SERVICES.find((item) => item.id === id);
   useReveal();
-
-  useEffect(() => {
-    if (!service) return;
-    document.title = `${service.title} | Team Yulsa`;
-    const description = document.querySelector('meta[name="description"]');
-    description?.setAttribute("content", `${service.short} Team Yulsa provides reliable accounting and bookkeeping support for US and Canadian businesses.`);
-  }, [service]);
 
   if (!service) {
     return (
