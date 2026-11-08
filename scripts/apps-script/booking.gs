@@ -1,12 +1,16 @@
 /**
  * Team Yulsa — discovery-call booking API (Google Apps Script).
  *
- * Deployed as a Web App (Execute as: me, Who has access: Anyone). The website
- * posts JSON here and reads the JSON response.
+ * SETUP (once):
+ *   1. Paste this whole file into Code.gs (replace everything).
+ *   2. Services (+) → add "Calendar API" (the advanced service, not CalendarApp).
+ *   3. Deploy → New deployment → Web app
+ *        Execute as: Me
+ *        Who has access: Anyone
+ *   4. Put the /exec URL into BRAND.bookingEndpoint in client/src/lib/siteData.ts.
  *
- * This is the version that matches the live deployment. If you change it here,
- * paste it into the Apps Script editor and deploy a new version of the same
- * deployment so the endpoint URL stays the same.
+ * The site sends: { name, email, company, service, date, time, timeZone, message }
+ * where date is YYYY-MM-DD and time is 24-hour HH:mm in the visitor's IANA zone.
  */
 
 const CALENDAR_ID = "yulsaadvisors@gmail.com";
@@ -27,7 +31,13 @@ function doGet() {
  */
 function doPost(e) {
   try {
-    const data = JSON.parse(e.postData.contents);
+    const raw = e && e.postData && e.postData.contents;
+
+    if (!raw) {
+      throw bookingError_("Empty request body.", "INVALID_REQUEST");
+    }
+
+    const data = JSON.parse(raw);
     const result = createDiscoveryCall(data);
 
     return jsonResponse({
@@ -50,50 +60,62 @@ function doPost(e) {
  * Creates a real discovery-call booking.
  */
 function createDiscoveryCall(data) {
-  // Required fields
-  const requiredFields = [
-    "name",
-    "email",
-    "company",
-    "service",
-    "message",
-    "date",
-    "time",
-    "timeZone"
-  ];
+  const name = clean_(data.name);
+  const email = clean_(data.email);
+  const company = clean_(data.company);
+  const service = clean_(data.service);
+  const message = clean_(data.message).slice(0, 2000);
+  const date = clean_(data.date);
+  const time = clean_(data.time);
+  const timeZone = clean_(data.timeZone);
 
-  requiredFields.forEach(function (field) {
-    if (!data[field]) {
-      throw bookingError_("Missing required field: " + field, "INVALID_REQUEST");
-    }
+  const missing = [
+    ["name", name],
+    ["email", email],
+    ["company", company],
+    ["service", service],
+    ["message", message],
+    ["date", date],
+    ["time", time],
+    ["timeZone", timeZone]
+  ].filter(function (pair) {
+    return !pair[1];
   });
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(data.email).trim())) {
-    throw bookingError_("That email address does not look right.", "INVALID_REQUEST");
+  if (missing.length > 0) {
+    throw bookingError_(
+      "Missing required field: " + missing[0][0],
+      "INVALID_REQUEST"
+    );
   }
 
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date) || !/^\d{2}:\d{2}$/.test(data.time)) {
-    throw bookingError_("Please choose a valid date and time.", "INVALID_REQUEST");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+    throw bookingError_(
+      "That email address does not look right.",
+      "INVALID_REQUEST"
+    );
   }
 
-  // A bad timezone makes Intl throw a RangeError; catch it early so the visitor
-  // gets a readable message instead of "Invalid time zone specified".
-  if (!isValidTimeZone_(data.timeZone)) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) {
+    throw bookingError_(
+      "Please choose a valid date and time.",
+      "INVALID_REQUEST"
+    );
+  }
+
+  if (!isValidTimeZone_(timeZone)) {
     throw bookingError_(
       "We could not read that timezone. Please pick one from the list.",
       "INVALID_REQUEST"
     );
   }
 
-  // Convert the visitor's date/time in their zone into an exact instant.
-  const startTime = convertToDate(data.date, data.time, data.timeZone);
+  // Convert the visitor's wall clock in their zone into one exact instant.
+  const startTime = convertToDate(date, time, timeZone);
 
   // Daylight-saving gaps (for example 2:30 AM on the US spring-forward day) do
   // not exist. Reject them instead of silently booking a different hour.
-  if (
-    formatInZone_(startTime, data.timeZone, "yyyy-MM-dd HH:mm") !==
-    data.date + " " + data.time
-  ) {
+  if (formatInZone_(startTime, timeZone, "yyyy-MM-dd HH:mm") !== date + " " + time) {
     throw bookingError_(
       "That time does not exist on that date because the clocks change. Please pick another time.",
       "INVALID_REQUEST"
@@ -123,7 +145,6 @@ function createDiscoveryCall(data) {
   }
 
   try {
-    // Make sure the requested time isn't already booked.
     const conflicts = Calendar.Events.list(CALENDAR_ID, {
       timeMin: startTime.toISOString(),
       timeMax: endTime.toISOString(),
@@ -143,43 +164,38 @@ function createDiscoveryCall(data) {
       );
     }
 
-    // Build event details.
     const event = {
-      summary: "Team Yulsa Discovery Call — " + data.name,
+      summary: "Team Yulsa Discovery Call — " + name,
 
       description:
         "Yulsa Discovery Call\n\n" +
-        "Name: " + data.name + "\n" +
-        "Email: " + data.email + "\n" +
-        "Company: " + data.company + "\n" +
-        "Service: " + data.service + "\n" +
-        "Message: " + data.message + "\n\n" +
-        "Client time: " +
-        formatInZone_(startTime, data.timeZone, "EEEE, MMMM d, yyyy 'at' h:mm a z") +
-        "\n" +
-        "Kathmandu time: " +
-        formatInZone_(startTime, TEAM_TIME_ZONE, "EEEE, MMMM d, yyyy 'at' h:mm a z") +
-        "\n" +
-        "Visitor time zone: " + data.timeZone,
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n" +
+        "Company: " + company + "\n" +
+        "Service: " + service + "\n" +
+        "Message: " + message + "\n\n" +
+        "Client time: " + describeTime_(startTime, timeZone) + "\n" +
+        "Kathmandu time: " + describeTime_(startTime, TEAM_TIME_ZONE) + "\n" +
+        "Visitor time zone: " + timeZone,
 
       start: {
         dateTime: startTime.toISOString(),
-        timeZone: data.timeZone
+        timeZone: timeZone
       },
 
       end: {
         dateTime: endTime.toISOString(),
-        timeZone: data.timeZone
+        timeZone: timeZone
       },
 
       attendees: [
         {
-          email: data.email
+          email: email
         }
       ],
 
-      // Explicit reminders: 1 hour before by email, 5 minutes before as a popup.
-      // Remove this block to fall back to the calendar's default notifications.
+      // 1 hour before by email, 5 minutes before as a popup.
+      // Remove this block to use the calendar's default notifications instead.
       reminders: {
         useDefault: false,
         overrides: [
@@ -203,7 +219,6 @@ function createDiscoveryCall(data) {
       }
     };
 
-    // Create the calendar event + Google Meet.
     const createdEvent = Calendar.Events.insert(event, CALENDAR_ID, {
       conferenceDataVersion: 1,
       sendUpdates: "all"
@@ -221,7 +236,7 @@ function createDiscoveryCall(data) {
 }
 
 /**
- * Converts visitor-selected date/time/timezone into a real JavaScript Date.
+ * Converts a visitor's date/time/timezone into an exact JavaScript Date.
  *
  * Two passes are required: the first guess can land on the wrong side of a
  * daylight-saving change, so the offset is recalculated at the resulting
@@ -282,11 +297,22 @@ function isValidTimeZone_(timeZone) {
   }
 }
 
-/**
- * Formats an instant in a zone using Apps Script's SimpleDateFormat patterns.
- */
 function formatInZone_(instant, timeZone, pattern) {
   return Utilities.formatDate(new Date(instant), timeZone, pattern);
+}
+
+/** "Monday, November 9, 2026 at 9:00 AM EST" */
+function describeTime_(instant, timeZone) {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: timeZone,
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZoneName: "short"
+  }).format(instant);
 }
 
 function findMeetLink_(event) {
@@ -301,6 +327,10 @@ function findMeetLink_(event) {
   }
 
   return "";
+}
+
+function clean_(value) {
+  return String(value == null ? "" : value).trim();
 }
 
 function bookingError_(message, code) {
@@ -318,14 +348,20 @@ function jsonResponse(data) {
     .setMimeType(ContentService.MimeType.JSON);
 }
 
+/**
+ * Optional: run this once from the editor to confirm the whole flow works.
+ * It books a real event, so delete it afterwards.
+ */
 function testRealBooking() {
+  const target = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
   const testData = {
     name: "Yulsa Test Visitor",
     email: "yulsaadvisors@gmail.com",
     company: "Test Company",
     service: "Discovery Call",
     message: "This is a temporary booking-system test.",
-    date: "2026-09-20",
+    date: Utilities.formatDate(target, "America/New_York", "yyyy-MM-dd"),
     time: "10:00",
     timeZone: "America/New_York"
   };
