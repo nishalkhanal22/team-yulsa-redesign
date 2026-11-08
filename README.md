@@ -125,6 +125,10 @@ converts that pair into one exact instant, so:
 `client/src/lib/booking.ts` mirrors the conversion in the browser only for the one-line
 preview and the confirmation; the Apps Script remains the source of truth.
 
+A copy of the live Apps Script (with the DST-safe conversion, double-booking lock, and
+validation) is kept at `scripts/apps-script/booking.gs`. Paste it into the Apps Script editor
+and deploy a new version of the same deployment after changing it.
+
 ## Team editing
 
 See `CONTENT-GUIDE.md`. The short version: sign in at <https://app.pagescms.org>, open this
@@ -144,6 +148,7 @@ client/
     lib/siteData.ts          services, industries, FAQ, contact details
     pages/                   route components
 scripts/
+  apps-script/booking.gs     Apps Script booking API (copy of the live script)
   optimize-images.mjs        WebP generation
   postbuild.ts               per-route HTML, sitemap, robots, 404
   generate-brand-assets.mjs  OG image + favicons (run only if the logo changes)
