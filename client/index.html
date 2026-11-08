@@ -12,6 +12,19 @@
     <meta name="theme-color" content="#101c31" />
     <link rel="canonical" href="https://teamyulsa.com/" />
 
+    <!--
+      The home-page hero is the Largest Contentful Paint element. Preloading it
+      starts the download in parallel with the JS bundle instead of waiting for
+      React to render, which cuts ~1s off LCP on slower connections.
+    -->
+    <link
+      rel="preload"
+      as="image"
+      href="%BASE_URL%assets/opt/hero-1600.webp"
+      imagesrcset="%BASE_URL%assets/opt/hero-800.webp 800w, %BASE_URL%assets/opt/hero-1600.webp 1600w"
+      imagesizes="(min-width: 1280px) 1216px, 100vw"
+      fetchpriority="high" />
+
     <!-- Open Graph / social sharing -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://teamyulsa.com/" />

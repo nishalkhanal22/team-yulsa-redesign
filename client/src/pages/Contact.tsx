@@ -5,7 +5,7 @@
 */
 import { useState } from "react";
 import { toast } from "sonner";
-import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter, ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
 import { BRAND, FAQS } from "@/lib/siteData";
@@ -30,6 +30,7 @@ export default function Contact() {
 
   const [form, setForm] = useState({ name: "", email: "", company: "", service: "", date: "", time: "", timezone: "America/New_York", message: "", website: "", consent: false });
   const [submitting, setSubmitting] = useState(false);
+  const [confirmation, setConfirmation] = useState<{ meetLink?: string; start?: string } | null>(null);
 
   const now = new Date();
   const minDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
@@ -63,10 +64,9 @@ export default function Contact() {
     setSubmitting(true);
     try {
       // Apps Script expects JSON and uses the camel-case `timeZone` field.
-      // text/plain keeps this a simple cross-origin request, avoiding a browser
-      // preflight that Apps Script web apps do not handle. Because this is a
-      // no-cors request, the browser cannot read the response: we confirm that
-      // the request was sent, and confirm the slot by email.
+      // text/plain keeps this a simple cross-origin request (no preflight), and
+      // the endpoint returns Access-Control-Allow-Origin: *, so the browser can
+      // read the real result: the Google Meet link and confirmed start time.
       const body = JSON.stringify({
         name: form.name.trim(),
         email: form.email.trim(),
@@ -78,21 +78,60 @@ export default function Contact() {
         message: form.message.trim() || "No additional message provided.",
       });
 
-      await fetch(BRAND.bookingEndpoint, {
+      const response = await fetch(BRAND.bookingEndpoint, {
         method: "POST",
-        mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body,
       });
 
-      toast.success("Request sent. We'll confirm your slot by email within one US business day.");
+      let data: {
+        success?: boolean;
+        message?: string;
+        booking?: { meetLink?: string; start?: string };
+      } | null = null;
+      try {
+        data = await response.json();
+      } catch {
+        data = null;
+      }
+
+      if (data && data.success === false) {
+        toast.error(
+          data.message || `We could not book that slot. Please email ${BRAND.email}.`
+        );
+        return;
+      }
+
+      setConfirmation({
+        meetLink: data?.booking?.meetLink,
+        start: data?.booking?.start,
+      });
       setForm({ name: "", email: "", company: "", service: "", date: "", time: "", timezone: "America/New_York", message: "", website: "", consent: false });
     } catch {
-      toast.error(`We could not send your request. Please email ${BRAND.email} directly.`);
+      toast.error(
+        `We could not confirm your booking in the browser. Please email ${BRAND.email} and we will book the slot for you.`
+      );
     } finally {
       setSubmitting(false);
     }
   };
+
+  const confirmedStart = confirmation?.start ? new Date(confirmation.start) : null;
+  const confirmedEnd = confirmedStart ? new Date(confirmedStart.getTime() + 30 * 60 * 1000) : null;
+  const calendarLink =
+    confirmedStart && confirmedEnd
+      ? `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+          "Team Yulsa discovery call"
+        )}&dates=${confirmedStart
+          .toISOString()
+          .replace(/[-:]/g, "")
+          .replace(/\.\d{3}/, "")}/${confirmedEnd
+          .toISOString()
+          .replace(/[-:]/g, "")
+          .replace(/\.\d{3}/, "")}&details=${encodeURIComponent(
+          "Your 30-minute discovery call with Team Yulsa."
+        )}${confirmation?.meetLink ? `&location=${encodeURIComponent(confirmation.meetLink)}` : ""}`
+      : null;
 
   return (
     <Layout path="/contact">
@@ -106,8 +145,9 @@ export default function Contact() {
               run themselves.
             </h1>
             <p className="mt-5 text-base lg:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
-              Book a 30-minute discovery call and tell us about your business, accounting workflow,
-              and preferred time. We will review the details and follow up with the next step.
+              Pick a 30-minute slot that works for you. You'll get a Google Calendar invite and a
+              Meet link instantly, and we'll come prepared to talk about your books, your software,
+              and where the time is going.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -142,6 +182,58 @@ export default function Contact() {
 
           <div className="lg:col-span-5 reveal">
           <div className="lg:flex lg:flex-col">
+            {confirmation ? (
+              <div className="border border-[var(--border)] bg-white p-7 lg:p-8 shadow-sm">
+                <p className="folio-tag mb-1">Confirmed</p>
+                <h2 className="font-serif text-2xl text-[var(--navy)] mb-3">You're booked.</h2>
+                <p className="text-sm leading-relaxed text-[var(--muted-foreground)]">
+                  Your 30-minute discovery call is on the calendar. A Google Calendar invitation is
+                  on its way to your inbox.
+                </p>
+                {confirmedStart && (
+                  <p className="mt-4 text-sm font-semibold text-[var(--navy)]">
+                    {confirmedStart.toLocaleString(undefined, {
+                      weekday: "long",
+                      month: "long",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "2-digit",
+                      timeZoneName: "short",
+                    })}
+                  </p>
+                )}
+                <div className="mt-6 flex flex-col gap-3">
+                  {confirmation.meetLink && (
+                    <a
+                      href={confirmation.meetLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] hover:bg-[oklch(0.28_0.05_265)]"
+                      style={{ background: "var(--navy)" }}
+                    >
+                      Join with Google Meet <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  )}
+                  {calendarLink && (
+                    <a
+                      href={calendarLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold border border-[var(--navy)] text-[var(--navy)] transition-all duration-200 active:scale-[0.97] hover:bg-[var(--navy)] hover:text-white"
+                    >
+                      Add to my calendar
+                    </a>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setConfirmation(null)}
+                    className="text-sm font-semibold text-[var(--meridian-text)] underline-offset-4 hover:underline"
+                  >
+                    Book another call
+                  </button>
+                </div>
+              </div>
+            ) : (
             <form
               onSubmit={onSubmit}
               className="border border-[var(--border)] bg-white p-7 lg:p-8 shadow-sm"
@@ -302,9 +394,10 @@ export default function Contact() {
                 {submitting ? "Sending…" : "Request Discovery Call"} <Send className="h-4 w-4" />
               </button>
               <p className="mt-3 text-xs text-[var(--muted-foreground)] text-center">
-                We reply within one US business day • preferred times are subject to confirmation
+                You'll get a calendar invite and Google Meet link as soon as you submit
               </p>
             </form>
+            )}
 
 
           </div>
