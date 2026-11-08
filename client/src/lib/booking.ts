@@ -8,6 +8,7 @@
   The Apps Script endpoint performs the same conversion server-side; nothing here
   is sent to Google. No timezone library: Intl.DateTimeFormat handles DST.
 */
+import { TIMEZONE_OPTIONS } from "./timezones";
 
 export const BOOKING = {
   /** Default when the browser will not tell us its zone. */
@@ -20,6 +21,7 @@ export const BOOKING = {
 } as const;
 
 const formatters = new Map<string, Intl.DateTimeFormat>();
+const offsetFormatters = new Map<string, Intl.DateTimeFormat>();
 
 function partsFormatter(timeZone: string): Intl.DateTimeFormat {
   let formatter = formatters.get(timeZone);
@@ -104,6 +106,44 @@ export function zoneCity(timeZone: string): string {
 }
 
 /**
+ * Every timezone the browser knows about (~400), so a visitor is never stuck
+ * with a short curated list. Falls back to the curated set on old browsers.
+ */
+export function listTimeZones(): string[] {
+  let zones: string[] = [];
+  try {
+    const supported = (
+      Intl as unknown as { supportedValuesOf?: (key: string) => string[] }
+    ).supportedValuesOf?.("timeZone");
+    if (Array.isArray(supported) && supported.length > 50) {
+      zones = supported;
+    }
+  } catch {
+    // ignore and use the fallback
+  }
+  if (zones.length === 0) {
+    zones = TIMEZONE_OPTIONS.map((option) => option.value);
+  }
+
+  // Some engines still return legacy names (Asia/Calcutta, Asia/Katmandu).
+  // Normalise and dedupe so the list shows one entry per city.
+  const seen = new Set<string>();
+  const result: string[] = [];
+  for (const zone of zones) {
+    const normalized = normalizeTimeZone(zone);
+    if (seen.has(normalized)) continue;
+    seen.add(normalized);
+    result.push(normalized);
+  }
+  return result;
+}
+
+/** "New York (GMT-5)" for the dropdown. */
+export function timeZoneLabel(timeZone: string, instant = Date.now()): string {
+  return `${zoneCity(timeZone)} (${zoneOffsetLabel(timeZone, instant)})`;
+}
+
+/**
  * Some browsers still report legacy IANA names (for example "Asia/Katmandu"
  * instead of "Asia/Kathmandu"). Map them to the modern name so the dropdown
  * matches the curated list instead of showing a duplicate option.
@@ -125,10 +165,15 @@ export function normalizeTimeZone(timeZone: string): string {
 
 /** Current UTC offset for a zone, e.g. "GMT-5". */
 export function zoneOffsetLabel(timeZone: string, instant = Date.now()): string {
-  const parts = new Intl.DateTimeFormat("en-US", {
-    timeZone,
-    timeZoneName: "shortOffset",
-  }).formatToParts(instant);
+  let formatter = offsetFormatters.get(timeZone);
+  if (!formatter) {
+    formatter = new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      timeZoneName: "shortOffset",
+    });
+    offsetFormatters.set(timeZone, formatter);
+  }
+  const parts = formatter.formatToParts(instant);
   return parts.find((part) => part.type === "timeZoneName")?.value ?? "";
 }
 

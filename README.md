@@ -111,7 +111,9 @@ route in `.htaccess`, `_redirects`, and `vercel.json`, so rankings and old links
 The contact form posts to the Google Apps Script endpoint in
 `client/src/lib/siteData.ts` (`BRAND.bookingEndpoint`). If that endpoint changes, update it there.
 
-The visitor picks their timezone, date, and time. The form sends
+The visitor picks their timezone, date, and time. The timezone defaults to the visitor's own
+zone and city, detected from the browser (`Intl`), and the dropdown offers the full IANA list
+(~420 zones) for anyone whose device reports the wrong place. The form sends
 `{ name, email, company, service, date, time, timeZone, message }`, where `date` is
 `YYYY-MM-DD` and `time` is 24-hour `HH:mm` in the visitor's `timeZone`. The Apps Script
 converts that pair into one exact instant, so:

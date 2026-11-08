@@ -13,15 +13,15 @@ import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter, ArrowUpRight } fro
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
 import { BRAND, FAQS } from "@/lib/siteData";
-import { TIMEZONE_OPTIONS } from "@/lib/timezones";
 import {
   BOOKING,
   detectTimeZone,
   formatLongDay,
   formatTimeWithZone,
+  listTimeZones,
   parseWallClock,
+  timeZoneLabel,
   zoneCity,
-  zoneOffsetLabel,
 } from "@/lib/booking";
 import { asset } from "@/lib/assets";
 import { useReveal } from "@/hooks/useReveal";
@@ -76,11 +76,26 @@ export default function Contact() {
   });
   const [submitting, setSubmitting] = useState(false);
   const [confirmation, setConfirmation] = useState<Confirmation | null>(null);
+  const [zoneOptions, setZoneOptions] = useState<{ value: string; label: string }[]>([]);
+  const [detectedZone, setDetectedZone] = useState("");
 
-  // Default the picker to the visitor's own zone. Runs after hydration, so the
+  // Preselect the visitor's own zone and city, then offer the full IANA list for
+  // anyone whose browser reports the wrong place. Runs after hydration so the
   // prerendered HTML and the first client render stay identical.
   useEffect(() => {
-    setForm((prev) => ({ ...prev, timeZone: detectTimeZone() }));
+    const detected = detectTimeZone();
+    setForm((prev) => ({ ...prev, timeZone: detected }));
+    setDetectedZone(detected);
+
+    const others = listTimeZones()
+      .filter((zone) => zone !== detected)
+      .sort((a, b) => zoneCity(a).localeCompare(zoneCity(b)));
+    setZoneOptions(
+      [detected, ...others].map((zone) => ({
+        value: zone,
+        label: timeZoneLabel(zone),
+      }))
+    );
   }, []);
 
   const today = new Date();
@@ -417,17 +432,20 @@ export default function Contact() {
                     value={form.timeZone}
                     onChange={(e) => setForm({ ...form, timeZone: e.target.value })}
                   >
-                    {!TIMEZONE_OPTIONS.some((zone) => zone.value === form.timeZone) && (
-                      <option value={form.timeZone}>
-                        {zoneCity(form.timeZone)} ({zoneOffsetLabel(form.timeZone)})
-                      </option>
-                    )}
-                    {TIMEZONE_OPTIONS.map((zone) => (
+                    {(zoneOptions.length
+                      ? zoneOptions
+                      : [{ value: form.timeZone, label: timeZoneLabel(form.timeZone) }]
+                    ).map((zone) => (
                       <option key={zone.value} value={zone.value}>
-                        {zoneCity(zone.value)} ({zoneOffsetLabel(zone.value)})
+                        {zone.label}
                       </option>
                     ))}
                   </select>
+                  <span className="mt-1 block text-xs leading-relaxed text-[var(--muted-foreground)]">
+                    {form.timeZone === detectedZone
+                      ? `Detected from your browser: ${timeZoneLabel(form.timeZone, preview?.instant)}. Change it if that's not your city.`
+                      : `Times will show in ${timeZoneLabel(form.timeZone, preview?.instant)}.`}
+                  </span>
                 </label>
               </div>
 
