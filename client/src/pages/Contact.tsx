@@ -3,28 +3,25 @@
   Lead-gen focus: discovery call framing and US phone line,
   FAQ accordion with FAQPage JSON-LD (audit fix).
 
-  Booking is timezone-safe: every slot is an exact instant. The visitor sees it
-  in their own zone (auto-detected, overridable) and the same instant in
-  Kathmandu time, so nobody has to convert anything by hand.
+  Booking stays simple: the visitor picks their timezone, date, and time. The
+  Apps Script endpoint converts that wall clock + IANA zone into one exact
+  instant, so the event lands at the right moment in both calendars.
 */
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter, ArrowUpRight, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Send, Linkedin, Twitter, ArrowUpRight } from "lucide-react";
 import { Link } from "wouter";
 import Layout from "@/components/Layout";
 import { BRAND, FAQS } from "@/lib/siteData";
 import { TIMEZONE_OPTIONS } from "@/lib/timezones";
 import {
   BOOKING,
-  buildSlots,
   detectTimeZone,
-  fetchBusySlots,
   formatLongDay,
   formatTimeWithZone,
+  parseWallClock,
   zoneCity,
   zoneOffsetLabel,
-  type BusyInterval,
-  type Slot,
 } from "@/lib/booking";
 import { asset } from "@/lib/assets";
 import { useReveal } from "@/hooks/useReveal";
@@ -41,6 +38,19 @@ const SERVICES_SELECT = [
   "Not sure. I'd like guidance",
 ];
 
+interface FormState {
+  name: string;
+  email: string;
+  company: string;
+  service: string;
+  date: string;
+  time: string;
+  timeZone: string;
+  message: string;
+  website: string;
+  consent: boolean;
+}
+
 interface Confirmation {
   meetLink?: string;
   /** UTC instant of the confirmed call. */
@@ -52,131 +62,44 @@ interface Confirmation {
 export default function Contact() {
   useReveal();
 
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormState>({
     name: "",
     email: "",
     company: "",
     service: "",
+    date: "",
+    time: "",
+    timeZone: BOOKING.defaultTimeZone,
     message: "",
     website: "",
     consent: false,
   });
-  const [timeZone, setTimeZone] = useState<string>(BOOKING.availabilityTimeZone);
-  const [slots, setSlots] = useState<Slot[]>([]);
-  const [ready, setReady] = useState(false);
-  const [selectedDay, setSelectedDay] = useState<string | null>(null);
-  const [selectedIso, setSelectedIso] = useState<string | null>(null);
-  const [busy, setBusy] = useState<BusyInterval[]>([]);
-  const [busyNonce, setBusyNonce] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [confirmation, setConfirmation] = useState<Confirmation | null>(null);
 
-  // Auto-detect once in the browser. The server render always uses the
-  // availability zone so the prerendered HTML and the first client render match.
+  // Default the picker to the visitor's own zone. Runs after hydration, so the
+  // prerendered HTML and the first client render stay identical.
   useEffect(() => {
-    setTimeZone(detectTimeZone());
+    setForm((prev) => ({ ...prev, timeZone: detectTimeZone() }));
   }, []);
 
-  // Rebuild slots whenever the display timezone changes. Empty during SSR.
-  useEffect(() => {
-    const built = buildSlots(Date.now(), timeZone);
-    setSlots(built);
-    setReady(true);
-    setSelectedIso((prev) =>
-      prev && built.some((slot) => slot.iso === prev) ? prev : null
-    );
-    setSelectedDay((prev) =>
-      prev && built.some((slot) => slot.dayKey === prev)
-        ? prev
-        : built[0]?.dayKey ?? null
-    );
-  }, [timeZone]);
+  const today = new Date();
+  const minDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
-  // Ask the calendar which instants are already taken. If the endpoint does not
-  // implement availability yet, this quietly returns null and every slot stays
-  // selectable (the server still rejects conflicts on submit).
-  useEffect(() => {
-    if (!ready || slots.length === 0) return;
-    const controller = new AbortController();
-    const from = slots[0].iso;
-    const to = slots[slots.length - 1].iso;
+  // Small one-line preview: shows the same instant in the visitor's zone and in
+  // Kathmandu, without turning the form into a calendar.
+  const preview = useMemo(() => {
+    const instant = parseWallClock(form.date, form.time, form.timeZone);
+    if (instant === null) return null;
+    return {
+      instant,
+      day: formatLongDay(instant, form.timeZone),
+      visitor: formatTimeWithZone(instant, form.timeZone),
+      team: formatTimeWithZone(instant, BOOKING.teamTimeZone),
+    };
+  }, [form.date, form.time, form.timeZone]);
 
-    fetchBusySlots(BRAND.bookingEndpoint, from, to, controller.signal).then(
-      (list) => {
-        if (controller.signal.aborted || !list) return;
-        setBusy(list);
-      }
-    );
-
-    return () => controller.abort();
-  }, [ready, slots, busyNonce]);
-
-  // A slot is unavailable when any calendar event overlaps it. This also
-  // catches events that do not sit on a 30-minute boundary.
-  const takenIso = useMemo(() => {
-    const slotMs = BOOKING.slotMinutes * 60 * 1000;
-    const taken = new Set<string>();
-    for (const slot of slots) {
-      if (
-        busy.some(
-          (interval) =>
-            interval.startMs < slot.instant + slotMs &&
-            interval.endMs > slot.instant
-        )
-      ) {
-        taken.add(slot.iso);
-      }
-    }
-    return taken;
-  }, [slots, busy]);
-
-  // A slot can be taken while the page is open. Drop it from the selection.
-  useEffect(() => {
-    if (selectedIso && takenIso.has(selectedIso)) {
-      setSelectedIso(null);
-    }
-  }, [takenIso, selectedIso]);
-
-  const days = useMemo(() => {
-    const map = new Map<
-      string,
-      { key: string; label: string; open: number }
-    >();
-    for (const slot of slots) {
-      const entry =
-        map.get(slot.dayKey) ?? { key: slot.dayKey, label: slot.dayLabel, open: 0 };
-      if (!takenIso.has(slot.iso)) entry.open += 1;
-      map.set(slot.dayKey, entry);
-    }
-    return [...map.values()];
-  }, [slots, takenIso]);
-
-  const daySlots = useMemo(
-    () => slots.filter((slot) => slot.dayKey === selectedDay),
-    [slots, selectedDay]
-  );
-
-  const selected = useMemo(
-    () => slots.find((slot) => slot.iso === selectedIso) ?? null,
-    [slots, selectedIso]
-  );
-
-  const zoneOptions = useMemo(() => {
-    const options = TIMEZONE_OPTIONS.map((option) => ({
-      value: option.value,
-      label: `${zoneCity(option.value)} (${zoneOffsetLabel(option.value)})`,
-    }));
-    if (!options.some((option) => option.value === timeZone)) {
-      options.unshift({
-        value: timeZone,
-        label: `${zoneCity(timeZone)} (${zoneOffsetLabel(timeZone)})`,
-      });
-    }
-    return options;
-  }, [timeZone]);
-
-  // A visitor already in Nepal does not need to see the same clock twice.
-  const sameZone = timeZone === BOOKING.teamTimeZone;
+  const sameZone = form.timeZone === BOOKING.teamTimeZone;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -191,8 +114,12 @@ export default function Contact() {
       toast.error("Please fill in your name and email so we can reach you.");
       return;
     }
-    if (!selected) {
-      toast.error("Please choose a time that works for you.");
+    if (!form.date || !form.time) {
+      toast.error("Please choose your preferred date and time.");
+      return;
+    }
+    if (form.date < minDate) {
+      toast.error("Please choose today or a future date.");
       return;
     }
     if (!form.consent) {
@@ -203,7 +130,7 @@ export default function Contact() {
     setSubmitting(true);
     try {
       // Apps Script expects JSON and uses the camel-case `timeZone` field.
-      // `date` and `time` are the visitor's wall clock, and `timeZone` tells the
+      // `date` and `time` are the visitor's wall clock; `timeZone` tells the
       // server how to read them, so the event lands on the exact instant.
       // text/plain keeps this a simple cross-origin request (no preflight), and
       // the endpoint returns Access-Control-Allow-Origin: *, so the browser can
@@ -213,9 +140,9 @@ export default function Contact() {
         email: form.email.trim(),
         company: form.company.trim() || "Not provided",
         service: form.service || "General discovery call",
-        date: selected.date,
-        time: selected.time,
-        timeZone,
+        date: form.date,
+        time: form.time,
+        timeZone: form.timeZone,
         message: form.message.trim() || "No additional message provided.",
       });
 
@@ -238,12 +165,6 @@ export default function Contact() {
       }
 
       if (data && data.success === false) {
-        if (data.code === "SLOT_TAKEN") {
-          toast.error("That time was just taken. Please pick another slot.");
-          setSelectedIso(null);
-          setBusyNonce((value) => value + 1);
-          return;
-        }
         toast.error(
           data.message || `We could not book that slot. Please email ${BRAND.email}.`
         );
@@ -254,21 +175,21 @@ export default function Contact() {
       const startInstant = startIso ? new Date(startIso).getTime() : NaN;
       setConfirmation({
         meetLink: data?.booking?.meetLink,
-        instant: Number.isNaN(startInstant) ? selected.instant : startInstant,
-        timeZone,
+        instant: Number.isNaN(startInstant) ? preview?.instant ?? Date.now() : startInstant,
+        timeZone: form.timeZone,
       });
       setForm({
         name: "",
         email: "",
         company: "",
         service: "",
+        date: "",
+        time: "",
+        timeZone: detectTimeZone(),
         message: "",
         website: "",
         consent: false,
       });
-      setSelectedIso(null);
-      // The slot we just booked is now busy; refresh so it disappears.
-      setBusyNonce((value) => value + 1);
     } catch {
       toast.error(
         `We could not confirm your booking in the browser. Please email ${BRAND.email} and we will book the slot for you.`
@@ -279,7 +200,7 @@ export default function Contact() {
   };
 
   const confirmedEnd = confirmation
-    ? confirmation.instant + BOOKING.slotMinutes * 60 * 1000
+    ? confirmation.instant + BOOKING.callMinutes * 60 * 1000
     : null;
   const calendarLink =
     confirmation && confirmedEnd
@@ -308,9 +229,9 @@ export default function Contact() {
               run themselves.
             </h1>
             <p className="mt-5 text-base lg:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-xl reveal">
-              Pick a 30-minute slot that works for you. We show every time in your timezone
-              and in ours, so the call lands at exactly the right moment. You'll get a Google
-              Calendar invite and a Meet link instantly.
+              Pick a 30-minute slot that works for you. You'll get a Google Calendar invite and a
+              Meet link instantly, and we'll come prepared to talk about your books, your software,
+              and where the time is going.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -461,137 +382,63 @@ export default function Contact() {
                     ))}
                   </select>
                 </label>
+                <label className="block">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Preferred date *</span>
+                  <input
+                    id="date"
+                    name="date"
+                    type="date"
+                    min={minDate}
+                    required
+                    className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian-text)] transition-colors"
+                    value={form.date}
+                    onChange={(e) => setForm({ ...form, date: e.target.value })}
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Preferred time *</span>
+                  <input
+                    id="time"
+                    name="time"
+                    type="time"
+                    required
+                    className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian-text)] transition-colors"
+                    value={form.time}
+                    onChange={(e) => setForm({ ...form, time: e.target.value })}
+                  />
+                </label>
+                <label className="block sm:col-span-2">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Your timezone *</span>
+                  <select
+                    id="timezone"
+                    name="timezone"
+                    required
+                    className="mt-1.5 w-full border border-[var(--input)] bg-white px-3.5 py-2.5 text-sm focus:outline-none focus:border-[var(--meridian-text)] transition-colors"
+                    value={form.timeZone}
+                    onChange={(e) => setForm({ ...form, timeZone: e.target.value })}
+                  >
+                    {!TIMEZONE_OPTIONS.some((zone) => zone.value === form.timeZone) && (
+                      <option value={form.timeZone}>
+                        {zoneCity(form.timeZone)} ({zoneOffsetLabel(form.timeZone)})
+                      </option>
+                    )}
+                    {TIMEZONE_OPTIONS.map((zone) => (
+                      <option key={zone.value} value={zone.value}>
+                        {zoneCity(zone.value)} ({zoneOffsetLabel(zone.value)})
+                      </option>
+                    ))}
+                  </select>
+                </label>
               </div>
 
-              {/* Timezone-aware slot picker */}
-              <fieldset className="mt-6">
-                <legend className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">
-                  Pick a time *
-                </legend>
-
-                <div className="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs text-[var(--muted-foreground)]">
-                  <span>
-                    Times shown in{" "}
-                    <strong className="font-semibold text-[var(--ink)]">
-                      {zoneCity(timeZone)}
-                    </strong>{" "}
-                    ({zoneOffsetLabel(timeZone)})
-                  </span>
-                  <label className="inline-flex items-center gap-1.5">
-                    <span className="sr-only">Change timezone</span>
-                    <select
-                      id="timezone"
-                      name="timezone"
-                      className="border border-[var(--input)] bg-white px-2 py-1 text-xs focus:outline-none focus:border-[var(--meridian-text)] transition-colors"
-                      value={timeZone}
-                      onChange={(e) => setTimeZone(e.target.value)}
-                    >
-                      {zoneOptions.map((zone) => (
-                        <option key={zone.value} value={zone.value}>{zone.label}</option>
-                      ))}
-                    </select>
-                  </label>
-                </div>
-
-                {!ready ? (
-                  <p className="mt-4 flex items-center gap-2 text-sm text-[var(--muted-foreground)]">
-                    <Loader2 className="h-4 w-4 animate-spin" /> Loading available times…
-                  </p>
-                ) : days.length === 0 ? (
-                  <p className="mt-4 text-sm text-[var(--muted-foreground)]">
-                    No times are open in the next three weeks. Email{" "}
-                    <a href={`mailto:${BRAND.email}`} className="underline text-[var(--meridian-text)]">
-                      {BRAND.email}
-                    </a>{" "}
-                    and we'll find a slot for you.
-                  </p>
-                ) : (
-                  <>
-                    <div className="mt-3 -mx-1 flex gap-2 overflow-x-auto px-1 pb-2">
-                      {days.map((day) => {
-                        const active = day.key === selectedDay;
-                        return (
-                          <button
-                            key={day.key}
-                            type="button"
-                            onClick={() => {
-                              setSelectedDay(day.key);
-                              setSelectedIso(null);
-                            }}
-                            aria-pressed={active}
-                            className={`shrink-0 border px-3 py-2 text-left transition-colors ${
-                              active
-                                ? "border-[var(--navy)] bg-[var(--navy)] text-white"
-                                : "border-[var(--input)] bg-white text-[var(--ink)] hover:border-[var(--meridian)]"
-                            }`}
-                          >
-                            <span className="block text-xs font-semibold whitespace-nowrap">
-                              {day.label}
-                            </span>
-                            <span
-                              className={`block text-[0.6875rem] ${
-                                active ? "text-white/70" : "text-[var(--muted-foreground)]"
-                              }`}
-                            >
-                              {day.open > 0 ? `${day.open} open` : "Full"}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                      {daySlots.map((slot) => {
-                        const taken = takenIso.has(slot.iso);
-                        const active = slot.iso === selectedIso;
-                        return (
-                          <button
-                            key={slot.iso}
-                            type="button"
-                            disabled={taken}
-                            onClick={() => setSelectedIso(slot.iso)}
-                            aria-pressed={active}
-                            className={`border px-2.5 py-2 text-left transition-colors ${
-                              taken
-                                ? "cursor-not-allowed border-[var(--border)] bg-[color-mix(in_oklch,var(--navy)_3%,white)] text-[var(--muted-foreground)] line-through"
-                                : active
-                                  ? "border-[var(--navy)] bg-[var(--navy)] text-white"
-                                  : "border-[var(--input)] bg-white text-[var(--ink)] hover:border-[var(--meridian)]"
-                            }`}
-                          >
-                            <span className="block text-sm font-semibold">{slot.label}</span>
-                            <span
-                              className={`block text-[0.6875rem] ${
-                                active ? "text-white/70" : "text-[var(--muted-foreground)]"
-                              }`}
-                            >
-                              {taken
-                                ? "Taken"
-                                : sameZone
-                                  ? "30 min"
-                                  : `${slot.teamLabel} in ${BOOKING.teamCity}`}
-                            </span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </>
-                )}
-
-                {selected && (
-                  <div className="mt-4 border-l-2 border-[var(--meridian)] bg-[color-mix(in_oklch,var(--meridian)_6%,white)] px-4 py-3">
-                    <p className="text-sm font-semibold text-[var(--navy)]">
-                      {formatLongDay(selected.instant, timeZone)},{" "}
-                      {formatTimeWithZone(selected.instant, timeZone)}
-                    </p>
-                    <p className="mt-0.5 text-xs text-[var(--muted-foreground)]">
-                      {sameZone
-                        ? "Both sides get the same calendar event, so nothing has to be converted by hand."
-                        : `That's ${formatTimeWithZone(selected.instant, BOOKING.teamTimeZone)} for us in ${BOOKING.teamCity}. Both sides get the same calendar event.`}
-                    </p>
-                  </div>
-                )}
-              </fieldset>
+              {preview && (
+                <p className="mt-2 text-xs leading-relaxed text-[var(--muted-foreground)]">
+                  {preview.day}, {preview.visitor}
+                  {sameZone
+                    ? ""
+                    : ` — that's ${preview.team} in ${BOOKING.teamCity}`}
+                </p>
+              )}
 
               <label className="block mt-4">
                 <span className="text-xs font-semibold uppercase tracking-wider text-[var(--muted-foreground)]">Anything else?</span>
@@ -641,16 +488,14 @@ export default function Contact() {
 
               <button
                 type="submit"
-                disabled={submitting || !selected}
+                disabled={submitting}
                 className="mt-6 w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 active:scale-[0.97] disabled:opacity-60 hover:bg-[oklch(0.28_0.05_265)]"
                 style={{ background: "var(--navy)" }}
               >
-                {submitting ? "Booking…" : "Confirm Discovery Call"} <Send className="h-4 w-4" />
+                {submitting ? "Sending…" : "Request Discovery Call"} <Send className="h-4 w-4" />
               </button>
               <p className="mt-3 text-xs text-[var(--muted-foreground)] text-center">
-                {selected
-                  ? "You'll get a calendar invite and Google Meet link as soon as you confirm"
-                  : "Choose a time above to continue"}
+                You'll get a calendar invite and Google Meet link as soon as you submit
               </p>
             </form>
             )}

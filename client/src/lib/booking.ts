@@ -1,52 +1,23 @@
 /*
   Booking time helpers.
 
-  Discovery calls are offered during the team's published hours, expressed in a
-  fixed availability timezone (America/New_York by default). Every slot is an
-  exact instant, so:
+  The form asks for the visitor's timezone, date, and time. This module turns
+  that wall clock into an exact instant so the page can show the same moment in
+  the visitor's zone and in Kathmandu, and so the calendar invite is unambiguous.
 
-    - the visitor sees it in their own timezone (auto-detected, overridable),
-    - the team sees the same instant in Kathmandu time,
-    - the calendar invite lands at the correct moment for both.
-
-  No timezone libraries: Intl.DateTimeFormat does the conversion, including DST.
+  The Apps Script endpoint performs the same conversion server-side; nothing here
+  is sent to Google. No timezone library: Intl.DateTimeFormat handles DST.
 */
 
 export const BOOKING = {
-  /** Calls are offered Mon–Fri inside this window, in `availabilityTimeZone`. */
-  availabilityTimeZone: "America/New_York",
-  startHour: 9,
-  endHour: 17,
-  slotMinutes: 30,
-  /** Do not offer a slot less than this far ahead. */
-  leadTimeHours: 12,
-  /** How far ahead the picker looks. */
-  horizonDays: 21,
+  /** Default when the browser will not tell us its zone. */
+  defaultTimeZone: "America/New_York",
   /** Where the team sits, shown next to every selection. */
   teamTimeZone: "Asia/Kathmandu",
   teamCity: "Kathmandu",
+  /** Length of a discovery call, used for the calendar link. */
+  callMinutes: 30,
 } as const;
-
-export interface Slot {
-  /** UTC instant, ISO 8601. */
-  iso: string;
-  /** Epoch milliseconds. */
-  instant: number;
-  /** Visitor-local date, YYYY-MM-DD. */
-  date: string;
-  /** Visitor-local time, HH:mm (24h). */
-  time: string;
-  /** e.g. "9:00 AM" in the visitor's zone. */
-  label: string;
-  /** e.g. "7:45 PM" in Kathmandu. */
-  teamLabel: string;
-  /** e.g. "Mon, Nov 10" in the visitor's zone. */
-  dayLabel: string;
-  /** YYYY-MM-DD in the visitor's zone, used to group slots. */
-  dayKey: string;
-}
-
-const pad = (value: number) => String(value).padStart(2, "0");
 
 const formatters = new Map<string, Intl.DateTimeFormat>();
 
@@ -68,7 +39,7 @@ function partsFormatter(timeZone: string): Intl.DateTimeFormat {
   return formatter;
 }
 
-export function zonedParts(
+function zonedParts(
   instant: number | Date,
   timeZone: string
 ): { year: number; month: number; day: number; hour: number; minute: number; second: number } {
@@ -108,29 +79,12 @@ export function wallTimeToInstant(
   return guess - offsetMs(first, timeZone);
 }
 
-export function formatTime(instant: number, timeZone: string): string {
-  return new Intl.DateTimeFormat("en-US", {
-    timeZone,
-    hour: "numeric",
-    minute: "2-digit",
-  }).format(instant);
-}
-
 export function formatTimeWithZone(instant: number, timeZone: string): string {
   return new Intl.DateTimeFormat("en-US", {
     timeZone,
     hour: "numeric",
     minute: "2-digit",
     timeZoneName: "short",
-  }).format(instant);
-}
-
-export function formatDay(instant: number, timeZone: string): string {
-  return new Intl.DateTimeFormat("en-US", {
-    timeZone,
-    weekday: "short",
-    month: "short",
-    day: "numeric",
   }).format(instant);
 }
 
@@ -151,8 +105,8 @@ export function zoneCity(timeZone: string): string {
 
 /**
  * Some browsers still report legacy IANA names (for example "Asia/Katmandu"
- * instead of "Asia/Kathmandu"). Map them to the modern name so the picker
- * matches the curated list and does not show a duplicate option.
+ * instead of "Asia/Kathmandu"). Map them to the modern name so the dropdown
+ * matches the curated list instead of showing a duplicate option.
  */
 const ZONE_ALIASES: Record<string, string> = {
   "Asia/Katmandu": "Asia/Kathmandu",
@@ -186,127 +140,21 @@ export function detectTimeZone(): string {
   } catch {
     // ignore
   }
-  return BOOKING.availabilityTimeZone;
+  return BOOKING.defaultTimeZone;
 }
 
-export function buildSlots(
-  now: number,
-  visitorTimeZone: string,
-  options: {
-    startHour?: number;
-    endHour?: number;
-    slotMinutes?: number;
-    leadTimeHours?: number;
-    horizonDays?: number;
-    availabilityTimeZone?: string;
-  } = {}
-): Slot[] {
-  const startHour = options.startHour ?? BOOKING.startHour;
-  const endHour = options.endHour ?? BOOKING.endHour;
-  const slotMinutes = options.slotMinutes ?? BOOKING.slotMinutes;
-  const leadTimeHours = options.leadTimeHours ?? BOOKING.leadTimeHours;
-  const horizonDays = options.horizonDays ?? BOOKING.horizonDays;
-  const availabilityTimeZone =
-    options.availabilityTimeZone ?? BOOKING.availabilityTimeZone;
-
-  const earliest = now + leadTimeHours * 60 * 60 * 1000;
-  const latest = now + horizonDays * 24 * 60 * 60 * 1000;
-  const today = zonedParts(now, availabilityTimeZone);
-  const slots: Slot[] = [];
-
-  for (let offset = 0; offset <= horizonDays; offset += 1) {
-    // Normalising through UTC keeps month/year rollover correct.
-    const cursor = new Date(Date.UTC(today.year, today.month - 1, today.day + offset));
-    const year = cursor.getUTCFullYear();
-    const month = cursor.getUTCMonth() + 1;
-    const day = cursor.getUTCDate();
-    const weekday = cursor.getUTCDay();
-    if (weekday === 0 || weekday === 6) continue;
-
-    for (
-      let minutes = startHour * 60;
-      minutes + slotMinutes <= endHour * 60;
-      minutes += slotMinutes
-    ) {
-      const instant = wallTimeToInstant(
-        year,
-        month,
-        day,
-        Math.floor(minutes / 60),
-        minutes % 60,
-        availabilityTimeZone
-      );
-      if (instant < earliest || instant > latest) continue;
-
-      const visitor = zonedParts(instant, visitorTimeZone);
-      slots.push({
-        iso: new Date(instant).toISOString(),
-        instant,
-        date: `${visitor.year}-${pad(visitor.month)}-${pad(visitor.day)}`,
-        time: `${pad(visitor.hour)}:${pad(visitor.minute)}`,
-        label: formatTime(instant, visitorTimeZone),
-        teamLabel: formatTime(instant, BOOKING.teamTimeZone),
-        dayLabel: formatDay(instant, visitorTimeZone),
-        dayKey: `${visitor.year}-${pad(visitor.month)}-${pad(visitor.day)}`,
-      });
-    }
-  }
-
-  return slots;
-}
-
-export interface BusyInterval {
-  /** UTC instant, ISO 8601. */
-  start: string;
-  end: string;
-  /** Epoch milliseconds, parsed once for cheap overlap checks. */
-  startMs: number;
-  endMs: number;
-}
-
-interface AvailabilityResponse {
-  busy?: Array<{ start?: string; end?: string }>;
-}
-
-/**
- * Ask the Apps Script endpoint which windows are already booked.
- * Returns null when the endpoint does not implement availability yet, so the
- * picker degrades gracefully instead of breaking.
- */
-export async function fetchBusySlots(
-  endpoint: string,
-  fromIso: string,
-  toIso: string,
-  signal?: AbortSignal
-): Promise<BusyInterval[] | null> {
-  try {
-    const url = `${endpoint}?action=availability&from=${encodeURIComponent(
-      fromIso
-    )}&to=${encodeURIComponent(toIso)}`;
-    const response = await fetch(url, { signal });
-    if (!response.ok) return null;
-    const text = await response.text();
-    if (!text.trim().startsWith("{")) return null;
-    const data = JSON.parse(text) as AvailabilityResponse;
-    if (!Array.isArray(data.busy)) return null;
-
-    return data.busy
-      .map((entry) => {
-        const start = entry?.start ? new Date(entry.start) : null;
-        const end = entry?.end ? new Date(entry.end) : null;
-        if (!start || !end) return null;
-        const startMs = start.getTime();
-        const endMs = end.getTime();
-        if (Number.isNaN(startMs) || Number.isNaN(endMs)) return null;
-        return {
-          start: start.toISOString(),
-          end: end.toISOString(),
-          startMs,
-          endMs,
-        };
-      })
-      .filter((entry): entry is BusyInterval => entry !== null);
-  } catch {
+/** "2026-11-09" and "09:00" to an instant, or null when the input is incomplete. */
+export function parseWallClock(
+  date: string,
+  time: string,
+  timeZone: string
+): number | null {
+  if (!date || !time) return null;
+  const [year, month, day] = date.split("-").map(Number);
+  const [hour, minute] = time.split(":").map(Number);
+  if (!year || !month || !day || Number.isNaN(hour) || Number.isNaN(minute)) {
     return null;
   }
+  const instant = wallTimeToInstant(year, month, day, hour, minute, timeZone);
+  return Number.isNaN(instant) ? null : instant;
 }
