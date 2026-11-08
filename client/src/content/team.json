@@ -87,13 +87,6 @@
       "photo": "accounting-associate.jpeg",
       "order": 11,
       "published": true
-    },
-    {
-      "name": "NISHAL KHANAL",
-      "role": "digital expertise",
-      "photo": "/assets/team/teamyulsalogo.jpeg",
-      "order": 14,
-      "published": true
     }
   ]
 }
