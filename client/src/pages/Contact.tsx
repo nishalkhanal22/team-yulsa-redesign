@@ -101,8 +101,9 @@ export default function Contact() {
   const today = new Date();
   const minDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
-  // Small one-line preview: shows the same instant in the visitor's zone and in
-  // Kathmandu, without turning the form into a calendar.
+  // Small one-line preview in the visitor's own zone. The team's time is
+  // deliberately not shown here: the visitor only needs their own time, and the
+  // calendar converts it for the team automatically.
   const preview = useMemo(() => {
     const instant = parseWallClock(form.date, form.time, form.timeZone);
     if (instant === null) return null;
@@ -110,11 +111,8 @@ export default function Contact() {
       instant,
       day: formatLongDay(instant, form.timeZone),
       visitor: formatTimeWithZone(instant, form.timeZone),
-      team: formatTimeWithZone(instant, BOOKING.teamTimeZone),
     };
   }, [form.date, form.time, form.timeZone]);
-
-  const sameZone = form.timeZone === BOOKING.teamTimeZone;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -294,12 +292,6 @@ export default function Contact() {
                     {formatLongDay(confirmation.instant, confirmation.timeZone)},{" "}
                     {formatTimeWithZone(confirmation.instant, confirmation.timeZone)}
                   </p>
-                  {confirmation.timeZone !== BOOKING.teamTimeZone && (
-                    <p className="text-sm text-[var(--muted-foreground)]">
-                      That's {formatTimeWithZone(confirmation.instant, BOOKING.teamTimeZone)} for us
-                      in {BOOKING.teamCity}.
-                    </p>
-                  )}
                 </div>
                 <div className="mt-6 flex flex-col gap-3">
                   {confirmation.meetLink && (
@@ -452,9 +444,6 @@ export default function Contact() {
               {preview && (
                 <p className="mt-2 text-xs leading-relaxed text-[var(--muted-foreground)]">
                   {preview.day}, {preview.visitor}
-                  {sameZone
-                    ? ""
-                    : ` — that's ${preview.team} in ${BOOKING.teamCity}`}
                 </p>
               )}
 

@@ -15,7 +15,6 @@
 
 const CALENDAR_ID = "yulsaadvisors@gmail.com";
 const BOOKING_DURATION_MINUTES = 30;
-const TEAM_TIME_ZONE = "Asia/Kathmandu";
 
 /**
  * Simple browser test.
@@ -167,6 +166,10 @@ function createDiscoveryCall(data) {
     const event = {
       summary: "Team Yulsa Discovery Call — " + name,
 
+      // The visitor is an attendee, so they see this text in the invite email.
+      // Show only their own time and zone: the team's time is irrelevant to
+      // them, and Google Calendar already renders the event in each viewer's
+      // own timezone, so the team still sees the correct Nepal time.
       description:
         "Yulsa Discovery Call\n\n" +
         "Name: " + name + "\n" +
@@ -174,9 +177,8 @@ function createDiscoveryCall(data) {
         "Company: " + company + "\n" +
         "Service: " + service + "\n" +
         "Message: " + message + "\n\n" +
-        "Client time: " + describeTime_(startTime, timeZone) + "\n" +
-        "Kathmandu time: " + describeTime_(startTime, TEAM_TIME_ZONE) + "\n" +
-        "Visitor time zone: " + timeZone,
+        "When: " + describeTime_(startTime, timeZone) + "\n" +
+        "Time zone: " + timeZone,
 
       start: {
         dateTime: startTime.toISOString(),

@@ -2,8 +2,8 @@
   Booking time helpers.
 
   The form asks for the visitor's timezone, date, and time. This module turns
-  that wall clock into an exact instant so the page can show the same moment in
-  the visitor's zone and in Kathmandu, and so the calendar invite is unambiguous.
+  that wall clock into an exact instant so the page can show the confirmed time
+  in the visitor's own zone. The team's zone is never shown to the visitor.
 
   The Apps Script endpoint performs the same conversion server-side; nothing here
   is sent to Google. No timezone library: Intl.DateTimeFormat handles DST.
@@ -13,9 +13,6 @@ import { TIMEZONE_OPTIONS } from "./timezones";
 export const BOOKING = {
   /** Default when the browser will not tell us its zone. */
   defaultTimeZone: "America/New_York",
-  /** Where the team sits, shown next to every selection. */
-  teamTimeZone: "Asia/Kathmandu",
-  teamCity: "Kathmandu",
   /** Length of a discovery call, used for the calendar link. */
   callMinutes: 30,
 } as const;
